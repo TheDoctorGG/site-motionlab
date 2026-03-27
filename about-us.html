@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>About Us | Motion Lab</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .blueprint-bg {
+            background-image: radial-gradient(circle at 2px 2px, #c2c6d8 1px, transparent 0);
+            background-size: 40px 40px;
+            background-color: #f9f9fb;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              colors: {
+                "on-background": "#1a1c1d",
+                "outline-variant": "#c2c6d8",
+                "on-tertiary": "#ffffff",
+                "surface-container": "#eeeef0",
+                "secondary-container": "#645efb",
+                "on-secondary-container": "#fffbff",
+                "primary-fixed-dim": "#b3c5ff",
+                "error-container": "#ffdad6",
+                "tertiary-fixed": "#e5e2e1",
+                "surface-variant": "#e2e2e4",
+                "surface-tint": "#0054d6",
+                "tertiary-fixed-dim": "#c8c6c5",
+                "tertiary": "#5a5959",
+                "surface-container-high": "#e8e8ea",
+                "on-secondary-fixed-variant": "#3323cc",
+                "tertiary-container": "#737171",
+                "secondary-fixed": "#e2dfff",
+                "surface-container-low": "#f3f3f5",
+                "primary": "#0050cb",
+                "background": "#f9f9fb",
+                "on-tertiary-fixed-variant": "#474646",
+                "surface-container-lowest": "#ffffff",
+                "surface-dim": "#d9dadc",
+                "secondary": "#4b41e1",
+                "on-primary-container": "#f8f7ff",
+                "surface": "#f9f9fb",
+                "on-error": "#ffffff",
+                "on-primary-fixed-variant": "#003fa4",
+                "surface-bright": "#f9f9fb",
+                "surface-container-highest": "#e2e2e4",
+                "on-tertiary-fixed": "#1c1b1b",
+                "on-primary": "#ffffff",
+                "on-error-container": "#93000a",
+                "outline": "#727687",
+                "secondary-fixed-dim": "#c3c0ff",
+                "primary-fixed": "#dae1ff",
+                "on-surface-variant": "#424656",
+                "on-tertiary-container": "#faf7f6",
+                "on-primary-fixed": "#001849",
+                "on-secondary-fixed": "#0f0069",
+                "on-surface": "#1a1c1d",
+                "error": "#ba1a1a",
+                "on-secondary": "#ffffff",
+                "inverse-primary": "#b3c5ff",
+                "primary-container": "#0066ff",
+                "inverse-surface": "#2f3132",
+                "inverse-on-surface": "#f0f0f2"
+              },
+              fontFamily: {
+                "headline": ["Plus Jakarta Sans"],
+                "body": ["Inter"],
+                "label": ["Inter"]
+              },
+              borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+            },
+          },
+        }
+      </script>
+</head>
+<body class="bg-surface font-body text-on-surface antialiased">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-white/70 backdrop-blur-xl border-b border-zinc-900/10">
+<div class="flex justify-between items-center px-8 py-4 max-w-screen-2xl mx-auto">
+<div class="text-xl font-black tracking-tighter text-zinc-900">Motion Lab</div>
+<div class="hidden md:flex items-center space-x-8 font-headline text-sm tracking-[0.05em] uppercase font-bold">
+    <a class="text-zinc-500 hover:text-zinc-900 transition-colors duration-300 pb-1" href="index.html">Home</a>
+    <a class="text-zinc-500 hover:text-zinc-900 transition-colors duration-300 pb-1" href="trampoapp.html">App (Brazil)</a>
+    <a class="text-zinc-900 border-b-2 border-zinc-900 pb-1" href="about-us.html">About Us</a>
+</div>
+<button class="bg-primary text-on-primary px-5 py-2 text-sm font-bold uppercase tracking-widest scale-95 active:scale-90 transition-transform">
+                Contact Sales
+            </button>
+</div>
+</nav>
+<main>
+<!-- Hero: The Mission -->
+<section class="blueprint-bg min-h-screen flex flex-col justify-center px-8 pt-32 pb-20">
+<div class="max-w-screen-xl mx-auto w-full">
+<div class="mb-6">
+<span class="inline-block h-[2px] w-12 bg-primary mb-4"></span>
+<p class="font-label text-label-sm uppercase tracking-[0.2em] text-on-surface-variant">Strategic Core</p>
+</div>
+<h1 class="font-headline text-[clamp(2.5rem,8vw,5.5rem)] font-extrabold leading-[1.05] tracking-tight max-w-5xl mb-12">
+                    Bridging the gap between human daily actions and the future of artificial intelligence.
+                </h1>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-end">
+<div class="space-y-6">
+<p class="text-lg text-on-surface-variant leading-relaxed max-w-lg">
+                            We operate at the intersection of kinematic data and neural reasoning. Motion Lab isn't just building software; we're architecting the sensory layer of the next industrial revolution.
+                        </p>
+<div class="flex items-center space-x-4 opacity-40">
+<span class="text-xs font-mono tracking-tighter">COORD_X: 45.023</span>
+<span class="text-xs font-mono tracking-tighter">COORD_Y: 12.884</span>
+<span class="text-xs font-mono tracking-tighter">STATUS: STABLE</span>
+</div>
+</div>
+<div class="relative group">
+<div class="absolute -inset-4 bg-primary/5 rounded-xl blur-3xl transition-all duration-700 group-hover:bg-primary/10"></div>
+<img alt="Technical Blueprint" class="relative w-full h-80 object-cover grayscale opacity-80 border border-outline-variant/20 shadow-2xl" data-alt="Monochromatic technical blueprint of a robotic arm with clean white lines on a subtle grey clinical background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBIHj1X0DFywQSneGw1Qz0maSC8IlfkjAwSvM5O6PgZKuCxFEUWaFTtpOpDHAaq21XDv8JTcW_dHbmco85bN2FC11QWGwu2iqFSVVMWFlq_bS2UCU2BZUsvZ1dB8PrFYvJ1aIY80d3oXvByMX3f-zm0ypG-K5pJajnpmGWQWT2CP6cDuMIlPMCHYYT593iH8gIuoxdMpb68vubF7uZgGwQK8uc0CiO3NV--GEESlsw3kLyrf2d5Jdu9cw4RSMD_cE986QV6G2fQB2t6"/>
+</div>
+</div>
+</div>
+</section>
+<!-- Leadership: Gabriel Gil -->
+<section class="bg-surface-container-low py-32 px-8">
+<div class="max-w-screen-xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-16 items-center">
+<div class="md:col-span-5 relative">
+<div class="absolute -top-10 -left-10 text-primary opacity-10">
+<span class="material-symbols-outlined text-[10rem]">architecture</span>
+</div>
+<img alt="Gabriel Gil" class="w-full aspect-[4/5] object-cover grayscale brightness-95 shadow-none border-l-4 border-primary" data-alt="High-end professional black and white portrait of a tech founder with a minimalist aesthetic and sharp lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBAxh0LWDemJFn5lFnc7hMe_PdbFHZ_bAqB1wL5Tkkp3wJvlPJj3jfk6CeSO3c1JPPW8I20751v2ajt1uBiqI4_L8VDQ31xwae_bqHM1jUEO18003XykfswiopY-M_hZRPTN3IpUOn7ibjgeJ5L9dZpQ0rE54F2uzwids5nUOmhI6e72pxl-nL0OkLXBpSkGloIslLTMg-m3bzFrbx17f8C6vaKh-3PUCpSvDbAeSrIlL1sOMMui9tq6a7DzarEYcpLXwTleIqbJiqI"/>
+<div class="mt-8">
+<h3 class="font-headline text-2xl font-bold tracking-tight">Gabriel Gil</h3>
+<p class="font-label text-label-sm uppercase tracking-widest text-primary font-semibold mt-1">CEO &amp; Founder</p>
+</div>
+</div>
+<div class="md:col-span-7 space-y-8">
+<div class="flex items-start">
+<div class="w-1 h-24 bg-surface-container-highest mr-8"></div>
+<div class="space-y-6">
+<h2 class="font-headline text-headline-md font-bold tracking-widest uppercase">Solo-Founder Vision</h2>
+<p class="text-on-surface-variant leading-relaxed text-lg italic">
+                                "In the laboratory of the future, there is no room for decorative inefficiency. We build lean, high-fidelity systems that translate the chaos of human movement into the precision of machine logic."
+                            </p>
+<p class="text-on-surface leading-relaxed">
+                                Under the leadership of Gabriel Gil, Motion Lab has pioneered a tech-first architecture that eliminates the bloat of traditional enterprise AI. By focusing on raw data integrity and clinical execution, the lab has achieved what multi-billion dollar firms could not: seamless human-to-AI motion translation in real-time.
+                            </p>
+<div class="flex space-x-12 pt-4">
+<div>
+<p class="text-3xl font-headline font-black text-on-surface">12k+</p>
+<p class="text-xs uppercase tracking-widest text-zinc-500 font-bold">Hours of R&amp;D</p>
+</div>
+<div>
+<p class="text-3xl font-headline font-black text-on-surface">0.4ms</p>
+<p class="text-xs uppercase tracking-widest text-zinc-500 font-bold">Latency Floor</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Compliance & Metrics -->
+<section class="bg-surface py-32 px-8">
+<div class="max-w-screen-xl mx-auto">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-24">
+<div class="space-y-12">
+<div class="space-y-4">
+<h2 class="font-headline text-headline-md font-bold tracking-widest uppercase">Infrastructure Integrity</h2>
+<p class="text-on-surface-variant max-w-md">Our systems are engineered for zero-failure environments. We treat every data point as a mission-critical asset.</p>
+</div>
+<!-- SOC2 Card -->
+<div class="bg-surface-container-low p-10 border-l-2 border-primary relative overflow-hidden group">
+<div class="absolute right-[-20px] bottom-[-20px] opacity-5 transition-transform duration-700 group-hover:scale-110">
+<span class="material-symbols-outlined text-[120px]">verified_user</span>
+</div>
+<h4 class="font-headline font-bold text-xl mb-2">SOC2 Type II</h4>
+<p class="text-sm text-on-surface-variant mb-6">Audited security protocols ensuring sovereign data isolation and encryption at every node.</p>
+<div class="flex items-center space-x-2 text-primary font-bold text-xs uppercase tracking-widest">
+<span>Certified Active</span>
+<span class="material-symbols-outlined text-sm">check_circle</span>
+</div>
+</div>
+<!-- Data Fidelity Card -->
+<div class="bg-surface-container-low p-10 border-l-2 border-on-background relative overflow-hidden group">
+<h4 class="font-headline font-bold text-xl mb-2">99.9% Data Fidelity</h4>
+<p class="text-sm text-on-surface-variant mb-6">Clinical-grade sensor fusion algorithms that filter environmental noise for absolute signal purity.</p>
+<div class="w-full bg-surface-container-high h-1 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[99.9%]"></div>
+</div>
+</div>
+</div>
+<div class="flex flex-col justify-center">
+<!-- Data Vis Mockup -->
+<div class="glass-panel p-12 shadow-sm border border-outline-variant/20 space-y-10">
+<div class="flex justify-between items-end">
+<div>
+<p class="label-sm text-xs font-bold uppercase tracking-widest text-zinc-400 mb-1">Signal Stability</p>
+<p class="text-4xl font-headline font-black text-primary">STABLE</p>
+</div>
+<div class="flex space-x-1 items-end h-16">
+<div class="w-1.5 h-[60%] bg-primary/20"></div>
+<div class="w-1.5 h-[75%] bg-primary/40"></div>
+<div class="w-1.5 h-[90%] bg-primary/60"></div>
+<div class="w-1.5 h-[85%] bg-primary/80"></div>
+<div class="w-1.5 h-[100%] bg-primary"></div>
+</div>
+</div>
+<div class="pt-10 border-t border-outline-variant/10">
+<div class="grid grid-cols-4 gap-4">
+<div class="h-32 bg-surface-container-low flex items-end">
+<div class="w-full bg-on-background h-[40%] transition-all duration-1000"></div>
+</div>
+<div class="h-32 bg-surface-container-low flex items-end">
+<div class="w-full bg-on-background h-[70%] transition-all duration-1000"></div>
+</div>
+<div class="h-32 bg-surface-container-low flex items-end">
+<div class="w-full bg-primary h-[90%] transition-all duration-1000"></div>
+</div>
+<div class="h-32 bg-surface-container-low flex items-end">
+<div class="w-full bg-on-background h-[55%] transition-all duration-1000"></div>
+</div>
+</div>
+<div class="mt-4 flex justify-between text-[10px] font-bold text-zinc-400 uppercase tracking-tighter">
+<span>Phase 01</span>
+<span>Phase 02</span>
+<span>Phase 03</span>
+<span>Phase 04</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Contact Form: Initiate Transmission -->
+<section class="bg-surface-container-low py-40 px-8 border-t border-outline-variant/10">
+<div class="max-w-screen-md mx-auto text-center space-y-16">
+<div class="space-y-4">
+<h2 class="font-headline text-headline-md font-extrabold tracking-tight">Initiate Transmission</h2>
+<p class="text-on-surface-variant">Request technical documentation or a high-fidelity pilot program.</p>
+</div>
+<form class="text-left space-y-8">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="space-y-2">
+<label class="block text-[10px] font-bold uppercase tracking-widest text-zinc-500">Subject Name</label>
+<input class="w-full bg-white border-b-2 border-transparent focus:border-primary px-4 py-4 text-sm font-medium focus:ring-0 transition-all placeholder:opacity-30" placeholder="GABRIEL GIL" type="text"/>
+</div>
+<div class="space-y-2">
+<label class="block text-[10px] font-bold uppercase tracking-widest text-zinc-500">Secure Email</label>
+<input class="w-full bg-white border-b-2 border-transparent focus:border-primary px-4 py-4 text-sm font-medium focus:ring-0 transition-all placeholder:opacity-30" placeholder="DEPT@MOTIONLAB.IO" type="email"/>
+</div>
+</div>
+<div class="space-y-2">
+<label class="block text-[10px] font-bold uppercase tracking-widest text-zinc-500">Inquiry Payload</label>
+<textarea class="w-full bg-white border-b-2 border-transparent focus:border-primary px-4 py-4 text-sm font-medium focus:ring-0 transition-all placeholder:opacity-30" placeholder="DESCRIBE THE PARAMETERS OF YOUR REQUEST..." rows="4"></textarea>
+</div>
+<button class="w-full bg-on-background text-on-primary py-6 font-headline font-black uppercase tracking-[0.3em] text-sm hover:bg-primary transition-colors duration-500" type="submit">
+                        Initiate Transmission
+                    </button>
+</form>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full py-20 px-8 bg-zinc-50 border-t border-zinc-100">
+<div class="grid grid-cols-2 md:grid-cols-4 gap-12 max-w-screen-xl mx-auto">
+<div class="col-span-2 md:col-span-1 space-y-6">
+<div class="font-plus-jakarta-sans font-bold text-zinc-900">Motion Lab</div>
+<p class="font-inter text-xs tracking-normal text-zinc-500 leading-relaxed">
+                    © 2024 Motion Lab. Precision Engineered. Focused on the convergence of human intent and mechanical execution.
+                </p>
+</div>
+<div class="space-y-6">
+<h5 class="text-xs font-bold uppercase tracking-widest text-zinc-900">Product</h5>
+<ul class="space-y-4 font-inter text-xs tracking-normal text-zinc-500">
+<li class="hover:text-blue-600 transition-colors cursor-pointer">Sensory Layer</li>
+<li class="hover:text-blue-600 transition-colors cursor-pointer">Neural Core</li>
+<li class="hover:text-blue-600 transition-colors cursor-pointer">Documentation</li>
+</ul>
+</div>
+<div class="space-y-6">
+<h5 class="text-xs font-bold uppercase tracking-widest text-zinc-900">Company</h5>
+<ul class="space-y-4 font-inter text-xs tracking-normal text-zinc-500">
+<li class="text-zinc-900 font-semibold">About Us</li>
+<li class="hover:text-blue-600 transition-colors cursor-pointer">Vision</li>
+<li class="hover:text-blue-600 transition-colors cursor-pointer">Contact</li>
+</ul>
+</div>
+<div class="space-y-6">
+<h5 class="text-xs font-bold uppercase tracking-widest text-zinc-900">Legal</h5>
+<ul class="space-y-4 font-inter text-xs tracking-normal text-zinc-500">
+<li class="hover:text-blue-600 transition-colors cursor-pointer">Privacy</li>
+<li class="hover:text-blue-600 transition-colors cursor-pointer">Security</li>
+<li class="hover:text-blue-600 transition-colors cursor-pointer">Terms</li>
+</ul>
+</div>
+</div>
+</footer>
+</body></html>
