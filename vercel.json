@@ -1,4 +1,7 @@
 JSON
 {
-  "cleanUrls": true
+  "rewrites": [
+    { "source": "/trampoapp", "destination": "/trampoapp/index.html" },
+    { "source": "/about-us", "destination": "/about-us/index.html" }
+  ]
 }
