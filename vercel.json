@@ -1,4 +1,3 @@
-JSON
 {
   "rewrites": [
     { "source": "/trampoapp", "destination": "/trampoapp/index.html" },
