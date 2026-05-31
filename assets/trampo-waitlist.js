@@ -4,6 +4,7 @@ import {
   setDoc,
   updateDoc,
   doc,
+  getDoc,
   serverTimestamp
 } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
 
@@ -287,6 +288,34 @@ function updateUI() {
   nextBtn.textContent = currentStep === 4 ? "Finalizar cadastro" : "Continuar";
 }
 
+function prefillExistingLead(data) {
+  if (!data) return;
+
+  const emailInput = document.getElementById("collectorEmail");
+  const phoneOSInput = document.getElementById("collectorPhoneOS");
+  const phoneModelInput = document.getElementById("collectorPhoneModel");
+  const chestMountInput = document.getElementById("collectorChestMount");
+
+  if (emailInput && data.email) emailInput.value = data.email;
+  if (cepInput && data.cep) cepInput.value = data.cep;
+  if (cityInput && data.city) cityInput.value = data.city;
+  if (stateInput && data.state) stateInput.value = data.state;
+  if (birthDateInput && data.birthDate) birthDateInput.value = data.birthDate;
+  if (phoneOSInput && data.phoneOS) phoneOSInput.value = data.phoneOS;
+  if (phoneModelInput && data.phoneModel) phoneModelInput.value = data.phoneModel;
+
+  if (chestMountInput && data.willingChestMount !== undefined && data.willingChestMount !== null) {
+    chestMountInput.value = String(data.willingChestMount);
+  }
+
+  if (Array.isArray(data.availableTasks)) {
+    data.availableTasks.forEach((task) => {
+      const checkbox = document.querySelector(`input[name="collectorTasks"][value="${task}"]`);
+      if (checkbox) checkbox.checked = true;
+    });
+  }
+}
+
 function validateStep(step) {
   if (step === 1) {
     const name = normalizeWhitespace(document.getElementById("collectorName").value);
@@ -400,6 +429,47 @@ async function saveStep1() {
   localStorage.setItem("trampo_collector_doc_id", collectorDocId);
 
   const leadRef = doc(db, "collector_profiles", collectorDocId);
+  const existingLead = await getDoc(leadRef);
+
+  if (existingLead.exists()) {
+    const existingData = existingLead.data();
+
+    if (existingData.status === "completed_waitlist") {
+      showMessage(
+        "success",
+        "Encontramos seu pré-cadastro! Você já está na lista de espera do beta fechado do Trampo."
+      );
+
+      nextBtn.classList.add("hidden");
+      backBtn.classList.add("hidden");
+
+      return {
+        action: "already_completed"
+      };
+    }
+
+    prefillExistingLead(existingData);
+
+    await setDoc(
+      leadRef,
+      {
+        name,
+        whatsapp,
+        updatedAt: serverTimestamp(),
+        lastReturnAt: serverTimestamp(),
+        ...getTrackingParams()
+      },
+      { merge: true }
+    );
+
+    const existingStep = Number(existingData.formStep || 1);
+    const nextStep = Math.min(existingStep + 1, 4);
+
+    return {
+      action: "resume",
+      nextStep
+    };
+  }
 
   await setDoc(
     leadRef,
@@ -415,20 +485,10 @@ async function saveStep1() {
     { merge: true }
   );
 
-  if (!collectorDocId) {
-    const docRef = await addDoc(collection(db, "collector_profiles"), payload);
-    collectorDocId = docRef.id;
-    localStorage.setItem("trampo_collector_doc_id", collectorDocId);
-  } else {
-    await updateDoc(doc(db, "collector_profiles", collectorDocId), {
-      name,
-      whatsapp,
-      status: "incomplete_step_1",
-      formStep: 1,
-      updatedAt: serverTimestamp(),
-      ...getTrackingParams()
-    });
-  }
+  return {
+    action: "new_lead",
+    nextStep: 2
+  };
 }
 
 async function saveStep2() {
@@ -530,7 +590,19 @@ nextBtn.addEventListener("click", async () => {
   nextBtn.textContent = "Salvando...";
 
   try {
-    if (currentStep === 1) await saveStep1();
+    if (currentStep === 1) {
+      const step1Result = await saveStep1();
+
+      if (step1Result.action === "already_completed") {
+        return;
+      }
+
+      currentStep = step1Result.nextStep || 2;
+      updateUI();
+      window.location.hash = "collector-form";
+      return;
+    }
+
     if (currentStep === 2) await saveStep2();
     if (currentStep === 3) await saveStep3();
 
@@ -549,7 +621,12 @@ nextBtn.addEventListener("click", async () => {
     window.location.hash = "collector-form";
   } catch (error) {
     console.error(error);
-    showMessage("error", "Não foi possível salvar agora. Tente novamente em alguns segundos.");
+
+    if (error.code === "permission-denied") {
+      showMessage("error", "Não foi possível continuar com esse número agora. Se você já finalizou o cadastro, talvez ele já esteja na lista de espera.");
+    } else {
+      showMessage("error", "Não foi possível salvar agora. Tente novamente em alguns segundos.");
+    }
   } finally {
     if (currentStep !== 4 || !nextBtn.classList.contains("hidden")) {
       nextBtn.disabled = false;
