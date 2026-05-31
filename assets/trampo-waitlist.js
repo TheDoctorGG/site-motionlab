@@ -1,8 +1,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
 import {
   getFirestore,
-  collection,
-  addDoc,
+  setDoc,
   updateDoc,
   doc,
   serverTimestamp
@@ -397,15 +396,24 @@ async function saveStep1() {
   const name = normalizeWhitespace(document.getElementById("collectorName").value);
   const whatsapp = normalizeWhatsapp(document.getElementById("collectorWhatsapp").value);
 
-  const payload = {
-    name,
-    whatsapp,
-    status: "incomplete_step_1",
-    formStep: 1,
-    createdAt: serverTimestamp(),
-    updatedAt: serverTimestamp(),
-    ...getTrackingParams()
-  };
+  collectorDocId = whatsapp;
+  localStorage.setItem("trampo_collector_doc_id", collectorDocId);
+
+  const leadRef = doc(db, "collector_profiles", collectorDocId);
+
+  await setDoc(
+    leadRef,
+    {
+      name,
+      whatsapp,
+      status: "incomplete_step_1",
+      formStep: 1,
+      createdAt: serverTimestamp(),
+      updatedAt: serverTimestamp(),
+      ...getTrackingParams()
+    },
+    { merge: true }
+  );
 
   if (!collectorDocId) {
     const docRef = await addDoc(collection(db, "collector_profiles"), payload);
