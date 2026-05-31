@@ -90,80 +90,141 @@
 </head>
 <body class="bg-surface font-body text-on-surface antialiased">
 <!-- TopNavBar -->
-<nav class="fixed top-0 w-full z-50 bg-white/70 backdrop-blur-xl border-b border-zinc-900/10">
-<div class="flex justify-between items-center px-8 py-4 max-w-screen-2xl mx-auto">
-<div class="text-xl font-black tracking-tighter text-zinc-900">Motion Lab</div>
-<div class="hidden md:flex items-center space-x-8 font-headline text-sm tracking-[0.05em] uppercase font-bold">
-    <a class="text-zinc-500 hover:text-zinc-900 transition-colors duration-300 pb-1" href="/">Home</a>
-    <a class="text-zinc-500 hover:text-zinc-900 transition-colors duration-300 pb-1" href="/trampoapp">App (Brazil)</a>
-    <a class="text-zinc-900 border-b-2 border-zinc-900 pb-1" href="/about-us">About Us</a>
-</div>
-<button class="bg-primary text-on-primary px-5 py-2 text-sm font-bold uppercase tracking-widest scale-95 active:scale-90 transition-transform">
-                Contact Sales
-            </button>
-</div>
+<nav class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-xl border-b border-zinc-900/10">
+  <div class="max-w-screen-2xl mx-auto px-5 md:px-8">
+    
+    <!-- Main row -->
+    <div class="flex justify-between items-center py-4">
+      <a href="/" class="flex items-center">
+        <img src="/assets/motion-lab-logo.svg" alt="Motion Lab" class="h-8 w-auto" />
+      </a>
+
+      <!-- Desktop nav -->
+      <div class="hidden md:flex items-center gap-8">
+        <a class="text-sm tracking-[0.05em] uppercase font-bold text-zinc-500 hover:text-zinc-900 transition-colors duration-300" href="/">Home</a>
+        <a class="text-sm tracking-[0.05em] uppercase font-bold text-zinc-500 hover:text-zinc-900 transition-colors duration-300" href="/trampoapp">App Brazil</a>
+        <a class="text-sm tracking-[0.05em] uppercase font-bold text-zinc-900 border-b-2 border-zinc-900 pb-1" href="/about-us">About Us</a>
+      </div>
+
+      <a class="scale-95 active:scale-90 transition-transform bg-primary px-4 md:px-5 py-2.5 rounded-lg text-white font-bold text-[10px] md:text-xs uppercase tracking-widest shadow-lg shadow-primary/20" href="/trampoapp">
+        Quero participar
+      </a>
+    </div>
+
+    <!-- Mobile nav -->
+    <div class="flex md:hidden items-center justify-center gap-6 pb-3 overflow-x-auto">
+      <a class="text-xs tracking-[0.08em] uppercase font-bold text-zinc-500 whitespace-nowrap" href="/">Home</a>
+      <a class="text-xs tracking-[0.08em] uppercase font-bold text-zinc-500 whitespace-nowrap" href="/trampoapp">App Brazil</a>
+      <a class="text-xs tracking-[0.08em] uppercase font-bold text-zinc-900 border-b-2 border-zinc-900 pb-1 whitespace-nowrap" href="/about-us">About Us</a>
+    </div>
+
+  </div>
 </nav>
+
+
 <main>
-<!-- Hero: The Mission -->
-<section class="blueprint-bg min-h-screen flex flex-col justify-center px-8 pt-32 pb-20">
+<!-- Hero: Motion Lab Mission -->
+<section class="blueprint-bg min-h-screen flex flex-col justify-center px-5 md:px-8 pt-36 pb-20">
 <div class="max-w-screen-xl mx-auto w-full">
-<div class="mb-6">
+<div class="mb-8">
 <span class="inline-block h-[2px] w-12 bg-primary mb-4"></span>
-<p class="font-label text-label-sm uppercase tracking-[0.2em] text-on-surface-variant">Strategic Core</p>
+<p class="font-label text-xs uppercase tracking-[0.24em] text-on-surface-variant font-bold">About Motion Lab</p>
 </div>
-<h1 class="font-headline text-[clamp(2.5rem,8vw,5.5rem)] font-extrabold leading-[1.05] tracking-tight max-w-5xl mb-12">
-                    Bridging the gap between human daily actions and the future of artificial intelligence.
+
+<h1 class="font-headline text-[clamp(2.6rem,8vw,5.7rem)] font-extrabold leading-[1.05] tracking-tight max-w-6xl mb-10">
+                    We are building the physical-world data acquisition layer for embodied AI in Latin America.
                 </h1>
-<div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-end">
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-start">
 <div class="space-y-6">
-<p class="text-lg text-on-surface-variant leading-relaxed max-w-lg">
-                            We operate at the intersection of kinematic data and neural reasoning. Motion Lab isn't just building software; we're architecting the sensory layer of the next industrial revolution.
+<p class="text-lg md:text-xl text-on-surface-variant leading-relaxed max-w-xl">
+                            Motion Lab creates mobile infrastructure to collect localized, first-person video data from real Brazilian environments — helping robotics, AI, and multimodal model companies understand the physical world beyond generic datasets.
                         </p>
-<div class="flex items-center space-x-4 opacity-40">
-<span class="text-xs font-mono tracking-tighter">COORD_X: 45.023</span>
-<span class="text-xs font-mono tracking-tighter">COORD_Y: 12.884</span>
-<span class="text-xs font-mono tracking-tighter">STATUS: STABLE</span>
+
+<div class="flex flex-wrap gap-4 pt-4">
+<a class="bg-on-background text-white px-8 py-4 font-bold tracking-wide flex items-center gap-3 hover:scale-[0.98] transition-transform" href="mailto:gabriel@motionlab.com.br?subject=Motion%20Lab%20-%20B2B%20Conversation">
+                            Talk to Gabriel
+                            <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+<a class="border border-outline-variant/30 px-8 py-4 font-bold text-on-surface-variant hover:bg-surface-container-low transition-colors" href="/trampoapp">
+                            View Trampo Beta
+                        </a>
 </div>
-</div>
-<div class="relative group">
-<div class="absolute -inset-4 bg-primary/5 rounded-xl blur-3xl transition-all duration-700 group-hover:bg-primary/10"></div>
-<img alt="Technical Blueprint" class="relative w-full h-80 object-cover grayscale opacity-80 border border-outline-variant/20 shadow-2xl" data-alt="Monochromatic technical blueprint of a robotic arm with clean white lines on a subtle grey clinical background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBIHj1X0DFywQSneGw1Qz0maSC8IlfkjAwSvM5O6PgZKuCxFEUWaFTtpOpDHAaq21XDv8JTcW_dHbmco85bN2FC11QWGwu2iqFSVVMWFlq_bS2UCU2BZUsvZ1dB8PrFYvJ1aIY80d3oXvByMX3f-zm0ypG-K5pJajnpmGWQWT2CP6cDuMIlPMCHYYT593iH8gIuoxdMpb68vubF7uZgGwQK8uc0CiO3NV--GEESlsw3kLyrf2d5Jdu9cw4RSMD_cE986QV6G2fQB2t6"/>
 </div>
 </div>
 </div>
 </section>
-<!-- Leadership: Gabriel Gil -->
-<section class="bg-surface-container-low py-32 px-8">
-<div class="max-w-screen-xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-16 items-center">
+
+<!-- Core Thesis Section -->
+<section class="bg-surface py-20 px-5 md:px-8 border-y border-outline-variant/10">
+  <div class="max-w-screen-xl mx-auto">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+      
+      <div class="lg:col-span-4">
+        <span class="inline-block h-[2px] w-12 bg-primary mb-4"></span>
+        <p class="text-primary font-bold text-xs uppercase tracking-[0.2em] mb-4">
+          Core Thesis
+        </p>
+        <h2 class="font-headline text-3xl md:text-5xl font-extrabold tracking-tight leading-tight">
+          Trampo is the acquisition engine.
+        </h2>
+      </div>
+
+      <div class="lg:col-span-8 bg-white rounded-3xl border border-zinc-200 p-8 md:p-12 shadow-sm">
+        <h3 class="font-headline text-2xl md:text-4xl font-extrabold tracking-tight mb-6">
+          The core asset is proprietary physical-world data from Latin America.
+        </h3>
+
+        <p class="text-on-surface-variant text-lg leading-relaxed mb-6">
+          Motion Lab is not positioned as another gig app or SaaS tool. Trampo enables a distributed mobile collection network; Motion Lab builds the data infrastructure behind it.
+        </p>
+
+        <p class="text-on-surface-variant text-lg leading-relaxed">
+          Our goal is to help robotics, AI, and multimodal model companies access localized, consent-based, first-person data from real Brazilian environments.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- Founder: Gabriel Gil -->
+<section class="bg-surface-container-low py-24 md:py-32 px-5 md:px-8">
+<div class="max-w-screen-xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-16 items-center">
 <div class="md:col-span-5 relative">
-<div class="absolute -top-10 -left-10 text-primary opacity-10">
-<span class="material-symbols-outlined text-[10rem]">architecture</span>
-</div>
-<img alt="Gabriel Gil" class="w-full aspect-[4/5] object-cover grayscale brightness-95 shadow-none border-l-4 border-primary" data-alt="High-end professional black and white portrait of a tech founder with a minimalist aesthetic and sharp lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBAxh0LWDemJFn5lFnc7hMe_PdbFHZ_bAqB1wL5Tkkp3wJvlPJj3jfk6CeSO3c1JPPW8I20751v2ajt1uBiqI4_L8VDQ31xwae_bqHM1jUEO18003XykfswiopY-M_hZRPTN3IpUOn7ibjgeJ5L9dZpQ0rE54F2uzwids5nUOmhI6e72pxl-nL0OkLXBpSkGloIslLTMg-m3bzFrbx17f8C6vaKh-3PUCpSvDbAeSrIlL1sOMMui9tq6a7DzarEYcpLXwTleIqbJiqI"/>
+<img alt="Gabriel Gil, founder of Motion Lab" class="w-full aspect-[4/5] object-cover shadow-none" src="/assets/gabriel-gil-founder.png"/>
 <div class="mt-8">
 <h3 class="font-headline text-2xl font-bold tracking-tight">Gabriel Gil</h3>
-<p class="font-label text-label-sm uppercase tracking-widest text-primary font-semibold mt-1">CEO &amp; Founder</p>
+<p class="font-label text-xs uppercase tracking-widest text-primary font-semibold mt-1">Founder &amp; CEO</p>
 </div>
 </div>
+
 <div class="md:col-span-7 space-y-8">
 <div class="flex items-start">
-<div class="w-1 h-24 bg-surface-container-highest mr-8"></div>
+<div class="w-1 h-24 bg-surface-container-highest mr-8 hidden md:block"></div>
 <div class="space-y-6">
-<h2 class="font-headline text-headline-md font-bold tracking-widest uppercase">Solo-Founder Vision</h2>
-<p class="text-on-surface-variant leading-relaxed text-lg italic">
-                                "In the laboratory of the future, there is no room for decorative inefficiency. We build lean, high-fidelity systems that translate the chaos of human movement into the precision of machine logic."
+<p class="text-xs uppercase tracking-[0.2em] text-primary font-bold">Founder-led infrastructure</p>
+<h2 class="font-headline text-4xl md:text-5xl font-extrabold tracking-tight">A Brazilian data layer for physical AI.</h2>
+<p class="text-on-surface-variant leading-relaxed text-lg">
+                                Motion Lab was founded by Gabriel Gil to solve a specific bottleneck in embodied AI: robots and multimodal systems need high-quality, localized data from the real physical world. Most available datasets do not reflect the environments, objects, routines, and constraints of Latin America.
                             </p>
-<p class="text-on-surface leading-relaxed">
-                                Under the leadership of Gabriel Gil, Motion Lab has pioneered a tech-first architecture that eliminates the bloat of traditional enterprise AI. By focusing on raw data integrity and clinical execution, the lab has achieved what multi-billion dollar firms could not: seamless human-to-AI motion translation in real-time.
+<p class="text-on-surface-variant leading-relaxed text-lg">
+                                Our approach combines a mobile collection app, task design, contributor screening, quality validation, and dataset delivery into one acquisition pipeline.
                             </p>
-<div class="flex space-x-12 pt-4">
-<div>
-<p class="text-3xl font-headline font-black text-on-surface">12k+</p>
-<p class="text-xs uppercase tracking-widest text-zinc-500 font-bold">Hours of R&amp;D</p>
+
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4">
+<div class="bg-white p-5 rounded-xl border border-outline-variant/20">
+<p class="text-3xl font-headline font-black text-on-surface">POV</p>
+<p class="text-xs uppercase tracking-widest text-zinc-500 font-bold mt-2">First-person data</p>
 </div>
-<div>
-<p class="text-3xl font-headline font-black text-on-surface">0.4ms</p>
-<p class="text-xs uppercase tracking-widest text-zinc-500 font-bold">Latency Floor</p>
+<div class="bg-white p-5 rounded-xl border border-outline-variant/20">
+<p class="text-3xl font-headline font-black text-on-surface">BR</p>
+<p class="text-xs uppercase tracking-widest text-zinc-500 font-bold mt-2">Localized context</p>
+</div>
+<div class="bg-white p-5 rounded-xl border border-outline-variant/20">
+<p class="text-3xl font-headline font-black text-on-surface">B2B</p>
+<p class="text-xs uppercase tracking-widest text-zinc-500 font-bold mt-2">AI & robotics</p>
 </div>
 </div>
 </div>
@@ -171,141 +232,205 @@
 </div>
 </div>
 </section>
-<!-- Compliance & Metrics -->
-<section class="bg-surface py-32 px-8">
+
+<!-- What We Build -->
+<section class="bg-surface py-24 md:py-32 px-5 md:px-8">
 <div class="max-w-screen-xl mx-auto">
-<div class="grid grid-cols-1 md:grid-cols-2 gap-24">
-<div class="space-y-12">
-<div class="space-y-4">
-<h2 class="font-headline text-headline-md font-bold tracking-widest uppercase">Infrastructure Integrity</h2>
-<p class="text-on-surface-variant max-w-md">Our systems are engineered for zero-failure environments. We treat every data point as a mission-critical asset.</p>
-</div>
-<!-- SOC2 Card -->
-<div class="bg-surface-container-low p-10 border-l-2 border-primary relative overflow-hidden group">
-<div class="absolute right-[-20px] bottom-[-20px] opacity-5 transition-transform duration-700 group-hover:scale-110">
-<span class="material-symbols-outlined text-[120px]">verified_user</span>
-</div>
-<h4 class="font-headline font-bold text-xl mb-2">SOC2 Type II</h4>
-<p class="text-sm text-on-surface-variant mb-6">Audited security protocols ensuring sovereign data isolation and encryption at every node.</p>
-<div class="flex items-center space-x-2 text-primary font-bold text-xs uppercase tracking-widest">
-<span>Certified Active</span>
-<span class="material-symbols-outlined text-sm">check_circle</span>
-</div>
-</div>
-<!-- Data Fidelity Card -->
-<div class="bg-surface-container-low p-10 border-l-2 border-on-background relative overflow-hidden group">
-<h4 class="font-headline font-bold text-xl mb-2">99.9% Data Fidelity</h4>
-<p class="text-sm text-on-surface-variant mb-6">Clinical-grade sensor fusion algorithms that filter environmental noise for absolute signal purity.</p>
-<div class="w-full bg-surface-container-high h-1 rounded-full overflow-hidden">
-<div class="bg-primary h-full w-[99.9%]"></div>
-</div>
-</div>
-</div>
-<div class="flex flex-col justify-center">
-<!-- Data Vis Mockup -->
-<div class="glass-panel p-12 shadow-sm border border-outline-variant/20 space-y-10">
-<div class="flex justify-between items-end">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-16 mb-16">
 <div>
-<p class="label-sm text-xs font-bold uppercase tracking-widest text-zinc-400 mb-1">Signal Stability</p>
-<p class="text-4xl font-headline font-black text-primary">STABLE</p>
+<p class="text-xs uppercase tracking-[0.2em] text-primary font-bold mb-4">What we build</p>
+<h2 class="font-headline text-4xl md:text-5xl font-extrabold tracking-tight">Infrastructure for localized physical-world datasets.</h2>
 </div>
-<div class="flex space-x-1 items-end h-16">
-<div class="w-1.5 h-[60%] bg-primary/20"></div>
-<div class="w-1.5 h-[75%] bg-primary/40"></div>
-<div class="w-1.5 h-[90%] bg-primary/60"></div>
-<div class="w-1.5 h-[85%] bg-primary/80"></div>
-<div class="w-1.5 h-[100%] bg-primary"></div>
+<p class="text-on-surface-variant text-lg leading-relaxed">
+                        Motion Lab is developing the operational layer required to turn everyday smartphone users into structured, consent-based POV data collectors for AI and robotics companies.
+                    </p>
 </div>
+
+<div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+<div class="bg-surface-container-low p-8 rounded-2xl border border-outline-variant/10">
+<span class="material-symbols-outlined text-primary text-3xl mb-6">smartphone</span>
+<h3 class="font-headline font-bold text-xl mb-3">Mobile acquisition</h3>
+<p class="text-on-surface-variant leading-relaxed">
+                            Trampo guides selected contributors through structured recording tasks using smartphones.
+                        </p>
 </div>
-<div class="pt-10 border-t border-outline-variant/10">
-<div class="grid grid-cols-4 gap-4">
-<div class="h-32 bg-surface-container-low flex items-end">
-<div class="w-full bg-on-background h-[40%] transition-all duration-1000"></div>
+
+<div class="bg-zinc-900 text-white p-8 rounded-2xl">
+<span class="material-symbols-outlined text-primary-fixed text-3xl mb-6">fact_check</span>
+<h3 class="font-headline font-bold text-xl mb-3">Quality validation</h3>
+<p class="text-zinc-400 leading-relaxed">
+                            Data is designed to pass through instruction checks, quality rules, and approval workflows before delivery.
+                        </p>
 </div>
-<div class="h-32 bg-surface-container-low flex items-end">
-<div class="w-full bg-on-background h-[70%] transition-all duration-1000"></div>
-</div>
-<div class="h-32 bg-surface-container-low flex items-end">
-<div class="w-full bg-primary h-[90%] transition-all duration-1000"></div>
-</div>
-<div class="h-32 bg-surface-container-low flex items-end">
-<div class="w-full bg-on-background h-[55%] transition-all duration-1000"></div>
-</div>
-</div>
-<div class="mt-4 flex justify-between text-[10px] font-bold text-zinc-400 uppercase tracking-tighter">
-<span>Phase 01</span>
-<span>Phase 02</span>
-<span>Phase 03</span>
-<span>Phase 04</span>
-</div>
-</div>
-</div>
+
+<div class="bg-primary text-white p-8 rounded-2xl">
+<span class="material-symbols-outlined text-white text-3xl mb-6">smart_toy</span>
+<h3 class="font-headline font-bold text-xl mb-3">Embodied AI use cases</h3>
+<p class="text-white/80 leading-relaxed">
+                            Datasets may support robotics, multimodal models, physical AI, simulation, and real-world behavior understanding.
+                        </p>
 </div>
 </div>
 </div>
 </section>
-<!-- Contact Form: Initiate Transmission -->
-<section class="bg-surface-container-low py-40 px-8 border-t border-outline-variant/10">
-<div class="max-w-screen-md mx-auto text-center space-y-16">
-<div class="space-y-4">
-<h2 class="font-headline text-headline-md font-extrabold tracking-tight">Initiate Transmission</h2>
-<p class="text-on-surface-variant">Request technical documentation or a high-fidelity pilot program.</p>
+
+<!-- Operating Principles -->
+<section class="bg-surface-container-low py-24 md:py-32 px-5 md:px-8 border-y border-outline-variant/10">
+<div class="max-w-screen-xl mx-auto">
+<div class="mb-16 text-center max-w-3xl mx-auto">
+<p class="text-xs uppercase tracking-[0.2em] text-primary font-bold mb-4">Operating principles</p>
+<h2 class="font-headline text-4xl md:text-5xl font-extrabold tracking-tight">Built for trust, consent, and useful data.</h2>
 </div>
-<form class="text-left space-y-8">
-<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-<div class="space-y-2">
-<label class="block text-[10px] font-bold uppercase tracking-widest text-zinc-500">Subject Name</label>
-<input class="w-full bg-white border-b-2 border-transparent focus:border-primary px-4 py-4 text-sm font-medium focus:ring-0 transition-all placeholder:opacity-30" placeholder="GABRIEL GIL" type="text"/>
+
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+<div class="bg-white p-7 rounded-2xl border border-outline-variant/10">
+<div class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-bold mb-6">01</div>
+<h4 class="font-bold text-lg mb-3">Consent-first</h4>
+<p class="text-sm text-on-surface-variant leading-relaxed">Participants must understand what they are recording and how approved data may be used.</p>
 </div>
-<div class="space-y-2">
-<label class="block text-[10px] font-bold uppercase tracking-widest text-zinc-500">Secure Email</label>
-<input class="w-full bg-white border-b-2 border-transparent focus:border-primary px-4 py-4 text-sm font-medium focus:ring-0 transition-all placeholder:opacity-30" placeholder="DEPT@MOTIONLAB.IO" type="email"/>
+
+<div class="bg-white p-7 rounded-2xl border border-outline-variant/10">
+<div class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-bold mb-6">02</div>
+<h4 class="font-bold text-lg mb-3">Brazilian context</h4>
+<p class="text-sm text-on-surface-variant leading-relaxed">The environments, objects, homes, routines, and motion patterns reflect local reality.</p>
+</div>
+
+<div class="bg-white p-7 rounded-2xl border border-outline-variant/10">
+<div class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-bold mb-6">03</div>
+<h4 class="font-bold text-lg mb-3">Task structure</h4>
+<p class="text-sm text-on-surface-variant leading-relaxed">Collection is organized around specific physical tasks, instructions, and acceptance criteria.</p>
+</div>
+
+<div class="bg-white p-7 rounded-2xl border border-outline-variant/10">
+<div class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-bold mb-6">04</div>
+<h4 class="font-bold text-lg mb-3">B2B delivery</h4>
+<p class="text-sm text-on-surface-variant leading-relaxed">The goal is to create useful datasets for companies building robotics and AI systems.</p>
 </div>
 </div>
-<div class="space-y-2">
-<label class="block text-[10px] font-bold uppercase tracking-widest text-zinc-500">Inquiry Payload</label>
-<textarea class="w-full bg-white border-b-2 border-transparent focus:border-primary px-4 py-4 text-sm font-medium focus:ring-0 transition-all placeholder:opacity-30" placeholder="DESCRIBE THE PARAMETERS OF YOUR REQUEST..." rows="4"></textarea>
 </div>
-<button class="w-full bg-on-background text-on-primary py-6 font-headline font-black uppercase tracking-[0.3em] text-sm hover:bg-primary transition-colors duration-500" type="submit">
-                        Initiate Transmission
-                    </button>
-</form>
+</section>
+
+<!-- Contact CTA -->
+<section class="bg-surface py-24 md:py-32 px-5 md:px-8">
+<div class="max-w-screen-xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-6">
+<div class="lg:col-span-7 bg-zinc-100 rounded-3xl p-8 md:p-12 border border-zinc-200">
+<p class="text-xs uppercase tracking-[0.2em] text-primary font-bold mb-5">For AI companies, robotics teams, and investors</p>
+<h2 class="font-headline text-4xl md:text-5xl font-extrabold tracking-tight mb-6">Let’s talk about physical-world data from Brazil.</h2>
+<p class="text-on-surface-variant text-lg leading-relaxed max-w-2xl mb-8">
+                        If you are building embodied AI, robotics systems, multimodal models, or data infrastructure, reach out directly to discuss partnerships, pilots, or Motion Lab’s roadmap.
+                    </p>
+
+<div class="flex flex-col sm:flex-row gap-4">
+<a class="inline-flex items-center justify-center gap-3 bg-primary text-white px-7 py-4 rounded-lg font-bold text-sm tracking-widest uppercase shadow-lg shadow-primary/20 transition-transform hover:scale-[1.02] active:scale-95" href="mailto:gabriel@motionlab.com.br?subject=Motion%20Lab%20-%20B2B%20Conversation">
+<span class="material-symbols-outlined">mail</span>
+                        Email Gabriel
+                    </a>
+<a class="inline-flex items-center justify-center gap-3 bg-white text-zinc-900 border border-zinc-200 px-7 py-4 rounded-lg font-bold text-sm tracking-widest uppercase transition-transform hover:scale-[1.02] active:scale-95" href="https://wa.me/5548988405089?text=Hi%20Gabriel%2C%20I%20saw%20Motion%20Lab%20and%20would%20like%20to%20talk%20about%20physical-world%20data%20for%20AI%20and%20robotics." target="_blank">
+<span class="material-symbols-outlined">chat</span>
+                        WhatsApp
+                    </a>
+</div>
+</div>
+
+<div class="lg:col-span-5 bg-primary text-white rounded-3xl p-8 md:p-12 flex flex-col justify-between">
+<div>
+<span class="material-symbols-outlined text-5xl mb-8">rocket_launch</span>
+<h3 class="font-headline text-3xl md:text-4xl font-extrabold tracking-tight mb-6">Brazil is an underrepresented physical-world data market.</h3>
+<p class="text-white/80 leading-relaxed">
+                        Motion Lab is building the infrastructure to make it accessible, structured, and useful for the next generation of AI systems.
+                    </p>
+</div>
+<a class="mt-10 inline-flex items-center gap-2 font-bold text-sm uppercase tracking-widest border-b-2 border-white pb-1 w-fit" href="/trampoapp">
+                        See Trampo Beta
+                        <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                    </a>
+</div>
 </div>
 </section>
 </main>
+
 <!-- Footer -->
-<footer class="w-full py-20 px-8 bg-zinc-50 border-t border-zinc-100">
-<div class="grid grid-cols-2 md:grid-cols-4 gap-12 max-w-screen-xl mx-auto">
-<div class="col-span-2 md:col-span-1 space-y-6">
-<div class="font-plus-jakarta-sans font-bold text-zinc-900">Motion Lab</div>
-<p class="font-inter text-xs tracking-normal text-zinc-500 leading-relaxed">
-                    © 2024 Motion Lab. Precision Engineered. Focused on the convergence of human intent and mechanical execution.
-                </p>
+<footer class="w-full py-16 px-5 md:px-8 bg-zinc-50 border-t border-zinc-200">
+<div class="max-w-screen-xl mx-auto">
+
+<div class="grid grid-cols-1 md:grid-cols-4 gap-10 md:gap-12">
+
+<!-- Brand -->
+<div class="md:col-span-1">
+<div class="font-headline font-extrabold text-zinc-900 mb-4 text-xl">Motion Lab</div>
+<p class="text-sm text-zinc-500 leading-relaxed">
+Motion Lab is building the physical-world data acquisition layer for embodied AI in Latin America.
+</p>
 </div>
-<div class="space-y-6">
-<h5 class="text-xs font-bold uppercase tracking-widest text-zinc-900">Product</h5>
-<ul class="space-y-4 font-inter text-xs tracking-normal text-zinc-500">
-<li class="hover:text-blue-600 transition-colors cursor-pointer">Sensory Layer</li>
-<li class="hover:text-blue-600 transition-colors cursor-pointer">Neural Core</li>
-<li class="hover:text-blue-600 transition-colors cursor-pointer">Documentation</li>
+
+<!-- Pages -->
+<div>
+<h6 class="text-zinc-900 font-bold mb-4 text-xs uppercase tracking-widest">Pages</h6>
+<ul class="space-y-3">
+<li>
+<a class="text-zinc-500 hover:text-primary transition-colors text-sm" href="/">Home</a>
+</li>
+<li>
+<a class="text-zinc-500 hover:text-primary transition-colors text-sm" href="/trampoapp">App Brazil</a>
+</li>
+<li>
+<a class="text-zinc-500 hover:text-primary transition-colors text-sm" href="/about-us">About Us</a>
+</li>
 </ul>
 </div>
-<div class="space-y-6">
-<h5 class="text-xs font-bold uppercase tracking-widest text-zinc-900">Company</h5>
-<ul class="space-y-4 font-inter text-xs tracking-normal text-zinc-500">
-<li class="text-zinc-900 font-semibold">About Us</li>
-<li class="hover:text-blue-600 transition-colors cursor-pointer">Vision</li>
-<li class="hover:text-blue-600 transition-colors cursor-pointer">Contact</li>
+
+<!-- Legal -->
+<div>
+<h6 class="text-zinc-900 font-bold mb-4 text-xs uppercase tracking-widest">Legal</h6>
+<ul class="space-y-3">
+<li>
+<a class="text-zinc-500 hover:text-primary transition-colors text-sm" href="/privacy-policy">Privacy Policy</a>
+</li>
+<li>
+<a class="text-zinc-500 hover:text-primary transition-colors text-sm" href="/terms">Terms of Use</a>
+</li>
+<li>
+<a class="text-zinc-500 hover:text-primary transition-colors text-sm" href="/lgpd-consent">LGPD & Data Consent</a>
+</li>
 </ul>
 </div>
-<div class="space-y-6">
-<h5 class="text-xs font-bold uppercase tracking-widest text-zinc-900">Legal</h5>
-<ul class="space-y-4 font-inter text-xs tracking-normal text-zinc-500">
-<li class="hover:text-blue-600 transition-colors cursor-pointer">Privacy</li>
-<li class="hover:text-blue-600 transition-colors cursor-pointer">Security</li>
-<li class="hover:text-blue-600 transition-colors cursor-pointer">Terms</li>
+
+<!-- Contact -->
+<div>
+<h6 class="text-zinc-900 font-bold mb-4 text-xs uppercase tracking-widest">Contact</h6>
+<ul class="space-y-3">
+<li>
+<a class="text-zinc-500 hover:text-primary transition-colors text-sm" href="mailto:contato@motionlab.com.br">contato@motionlab.com.br</a>
+</li>
+<li>
+<a class="text-zinc-500 hover:text-primary transition-colors text-sm" href="https://wa.me/5548988405089?text=Ol%C3%A1%20Gabriel%2C%20vi%20a%20landing%20page%20da%20Motion%20Lab%20e%20quero%20saber%20mais." target="_blank">
+WhatsApp
+</a>
+</li>
+<li>
+<a class="text-zinc-500 hover:text-primary transition-colors text-sm" href="http://linkedin.com/company/motionlab-ai" target="_blank">
+LinkedIn
+</a>
+</li>
 </ul>
 </div>
+
+</div>
+
+<div class="mt-14 pt-8 border-t border-zinc-200 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+<p class="text-xs text-zinc-500">
+© 2026 Motion Lab. Built in Brazil for the future of physical AI.
+</p>
+
+<div class="flex flex-wrap gap-4 text-xs text-zinc-500">
+<span>Closed beta</span>
+<span>•</span>
+<span>Physical AI data</span>
+<span>•</span>
+<span>Web Summit Rio 2026</span>
+</div>
+</div>
+
 </div>
 </footer>
 </body></html>
