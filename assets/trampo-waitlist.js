@@ -22,7 +22,7 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 let currentStep = 1;
-let collectorDocId = localStorage.getItem("trampo_collector_doc_id") || null;
+let collectorDocId = null;
 let lastFetchedCep = "";
 
 const steps = document.querySelectorAll(".form-step");
@@ -92,9 +92,7 @@ function isValidEmail(value) {
 
 function isValidCity(value) {
   const city = normalizeWhitespace(value);
-
   if (city.length < 2) return false;
-
   return /^[A-Za-zÀ-ÿ\s.'-]+$/.test(city);
 }
 
@@ -104,17 +102,14 @@ function normalizeCep(value) {
 
 function formatCep(value) {
   const digits = normalizeCep(value).slice(0, 8);
-
   if (digits.length <= 5) return digits;
   return `${digits.slice(0, 5)}-${digits.slice(5)}`;
 }
 
 function isValidCep(value) {
   const digits = normalizeCep(value);
-
   if (digits.length !== 8) return false;
   if (/^(\d)\1+$/.test(digits)) return false;
-
   return true;
 }
 
@@ -171,7 +166,6 @@ async function fetchAddressByCep(cepValue) {
 
 function formatBirthDate(value) {
   const digits = value.replace(/\D/g, "").slice(0, 8);
-
   if (digits.length <= 2) return digits;
   if (digits.length <= 4) return `${digits.slice(0, 2)}/${digits.slice(2)}`;
   return `${digits.slice(0, 2)}/${digits.slice(2, 4)}/${digits.slice(4)}`;
@@ -426,7 +420,6 @@ async function saveStep1() {
   const whatsapp = normalizeWhatsapp(document.getElementById("collectorWhatsapp").value);
 
   collectorDocId = whatsapp;
-  localStorage.setItem("trampo_collector_doc_id", collectorDocId);
 
   const leadRef = doc(db, "collector_profiles", collectorDocId);
   const existingLead = await getDocFromServer(leadRef);
@@ -435,7 +428,6 @@ async function saveStep1() {
     const existingData = existingLead.data();
 
     if (existingData.status === "completed_waitlist") {
-      localStorage.removeItem("trampo_collector_doc_id");
       showMessage(
         "success",
         "Encontramos seu pré-cadastro! Você já está na lista de espera do beta fechado do Trampo."
@@ -613,7 +605,6 @@ nextBtn.addEventListener("click", async () => {
       showMessage("success", "Cadastro enviado! Você entrou na lista de espera do beta fechado do Trampo.");
       nextBtn.classList.add("hidden");
       backBtn.classList.add("hidden");
-      localStorage.removeItem("trampo_collector_doc_id");
       return;
     }
 
@@ -624,7 +615,7 @@ nextBtn.addEventListener("click", async () => {
     console.error(error);
 
     if (error.code === "permission-denied") {
-      showMessage("error", "Não foi possível continuar com esse número agora. Se você já finalizou o cadastro, talvez ele já esteja na lista de espera.");
+      showMessage("error", "Não foi possível salvar agora. Verifique se as permissões do banco foram atualizadas e tente novamente.");
     } else {
       showMessage("error", "Não foi possível salvar agora. Tente novamente em alguns segundos.");
     }
