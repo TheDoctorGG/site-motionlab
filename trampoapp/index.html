@@ -143,7 +143,7 @@
                         O Trampo é um app em beta fechado da Motion Lab. Pessoas selecionadas poderão receber recompensas de até R$100 por missões aprovadas, gravando tarefas simples do dia a dia com o celular.
                     </p>
 <div class="flex flex-wrap gap-4">
-<a class="bg-primary text-white px-8 py-4 rounded-lg flex items-center gap-3 transition-transform hover:scale-[1.02] active:scale-95 font-bold text-sm uppercase tracking-widest shadow-lg shadow-primary/20" href="#waitlist">
+<a class="bg-primary text-white px-8 py-4 rounded-lg flex items-center gap-3 transition-transform hover:scale-[1.02] active:scale-95 font-bold text-sm uppercase tracking-widest shadow-lg shadow-primary/20" href="#collector-form">
 <span class="material-symbols-outlined text-2xl">list_alt</span>
 <span>Quero entrar na lista de espera</span>
 </a>
@@ -301,7 +301,7 @@
 </div>
 
 <div class="mt-12 text-center">
-<a class="inline-flex items-center justify-center gap-3 bg-primary text-white px-8 py-4 rounded-lg font-bold text-sm uppercase tracking-widest shadow-lg shadow-primary/20 transition-transform hover:scale-[1.02] active:scale-95" href="#waitlist">
+<a class="inline-flex items-center justify-center gap-3 bg-primary text-white px-8 py-4 rounded-lg font-bold text-sm uppercase tracking-widest shadow-lg shadow-primary/20 transition-transform hover:scale-[1.02] active:scale-95" href="#collector-form">
 <span class="material-symbols-outlined">arrow_downward</span>
                         Entrar na lista de espera
                     </a>
@@ -365,6 +365,202 @@
 </div>
 </div>
 </section>
+
+<!-- Collector Waitlist Form Section -->
+<section id="collector-form" class="py-20 md:py-24 px-5 md:px-8 bg-surface-container-low border-y border-outline-variant/10">
+  <div class="max-w-4xl mx-auto">
+    <div class="text-center mb-12">
+      <span class="inline-block px-4 py-2 bg-emerald-100 text-emerald-800 font-extrabold text-xs uppercase tracking-[0.18em] rounded-full mb-6 border border-emerald-200">
+        Beta fechado
+      </span>
+
+      <h2 class="font-headline text-4xl md:text-5xl font-extrabold tracking-tight mb-5">
+        Entre na lista de espera
+      </h2>
+
+      <p class="text-on-surface-variant text-lg leading-relaxed max-w-2xl mx-auto">
+        Preencha seu pré-cadastro para participar do beta fechado do Trampo. Na primeira etapa, seu nome e WhatsApp já ficam salvos para contato caso você não finalize agora.
+      </p>
+    </div>
+
+    <div class="bg-white rounded-3xl border border-zinc-200 shadow-sm p-6 md:p-10">
+      <div class="mb-8">
+        <div class="flex justify-between text-xs font-bold uppercase tracking-widest text-zinc-400 mb-3">
+          <span id="form-step-label">Etapa 1 de 4</span>
+          <span id="form-status-label">Contato inicial</span>
+        </div>
+        <div class="w-full bg-zinc-100 h-2 rounded-full overflow-hidden">
+          <div id="form-progress" class="bg-primary h-full w-1/4 transition-all duration-300"></div>
+        </div>
+      </div>
+
+      <form id="collectorWaitlistForm" class="space-y-8">
+        <div class="form-step" data-step="1">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-widest text-zinc-500 mb-2">Nome completo</label>
+              <input id="collectorName" type="text" required placeholder="Seu nome" class="w-full rounded-xl border-zinc-200 px-4 py-4 text-sm focus:border-primary focus:ring-primary" />
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-widest text-zinc-500 mb-2">WhatsApp</label>
+              <input id="collectorWhatsapp" type="tel" required placeholder="(48) 99999-9999" class="w-full rounded-xl border-zinc-200 px-4 py-4 text-sm focus:border-primary focus:ring-primary" />
+            </div>
+          </div>
+
+          <p class="mt-4 text-xs text-zinc-500">
+            Ao clicar em continuar, seu nome e WhatsApp já serão salvos para contato sobre o beta fechado.
+          </p>
+        </div>
+
+        <div class="form-step hidden" data-step="2">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-widest text-zinc-500 mb-2">E-mail</label>
+              <input id="collectorEmail" type="email" inputmode="email" autocomplete="email" placeholder="voce@email.com" class="w-full rounded-xl border-zinc-200 px-4 py-4 text-sm focus:border-primary focus:ring-primary" />
+              <p class="mt-2 text-[11px] text-zinc-400">Opcional, mas precisa estar correto se preenchido.</p>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-widest text-zinc-500 mb-2">CEP</label>
+              <input id="collectorCep" type="text" inputmode="numeric" autocomplete="postal-code" placeholder="88000-000" maxlength="9" class="w-full rounded-xl border-zinc-200 px-4 py-4 text-sm focus:border-primary focus:ring-primary" />
+              <p id="cepHelpText" class="mt-2 text-[11px] text-zinc-400">Digite seu CEP para preencher cidade e estado automaticamente.</p>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-widest text-zinc-500 mb-2">Cidade</label>
+              <input id="collectorCity" type="text" autocomplete="address-level2" placeholder="Preenchida pelo CEP" class="w-full rounded-xl border-zinc-200 px-4 py-4 text-sm focus:border-primary focus:ring-primary" />
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-widest text-zinc-500 mb-2">Estado</label>
+              <input id="collectorState" type="text" autocomplete="address-level1" placeholder="Ex: SC" maxlength="2" class="w-full rounded-xl border-zinc-200 px-4 py-4 text-sm uppercase focus:border-primary focus:ring-primary" />
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-widest text-zinc-500 mb-2">Data de nascimento</label>
+              <input id="collectorBirthDate" type="text" inputmode="numeric" maxlength="10" placeholder="DD/MM/AAAA" class="w-full rounded-xl border-zinc-200 px-4 py-4 text-sm focus:border-primary focus:ring-primary" />
+              <p class="mt-2 text-[11px] text-zinc-400">Necessário ter 18 anos ou mais para participar.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-step hidden" data-step="3">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-widest text-zinc-500 mb-2">Seu celular é</label>
+              <select id="collectorPhoneOS" class="w-full rounded-xl border-zinc-200 px-4 py-4 text-sm focus:border-primary focus:ring-primary">
+                <option value="">Selecione</option>
+                <option value="android">Android</option>
+                <option value="iphone">iPhone</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-widest text-zinc-500 mb-2">Modelo do celular</label>
+              <input id="collectorPhoneModel" type="text" placeholder="Ex: iPhone 13, Galaxy S22..." class="w-full rounded-xl border-zinc-200 px-4 py-4 text-sm focus:border-primary focus:ring-primary" />
+            </div>
+          </div>
+
+          <div class="mt-8">
+            <label class="block text-xs font-bold uppercase tracking-widest text-zinc-500 mb-4">Quais tarefas você conseguiria gravar?</label>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <label class="flex items-center gap-3 rounded-xl border border-zinc-200 bg-white px-4 py-4 text-sm text-on-surface-variant hover:border-primary/40 transition-colors">
+                <input type="checkbox" name="collectorTasks" value="gravar_conversa" class="rounded border-zinc-300 text-primary focus:ring-primary" />
+                <span>Gravar conversa</span>
+              </label>
+
+              <label class="flex items-center gap-3 rounded-xl border border-zinc-200 bg-white px-4 py-4 text-sm text-on-surface-variant hover:border-primary/40 transition-colors">
+                <input type="checkbox" name="collectorTasks" value="lavar_louca" class="rounded border-zinc-300 text-primary focus:ring-primary" />
+                <span>Lavar louça</span>
+              </label>
+
+              <label class="flex items-center gap-3 rounded-xl border border-zinc-200 bg-white px-4 py-4 text-sm text-on-surface-variant hover:border-primary/40 transition-colors">
+                <input type="checkbox" name="collectorTasks" value="dobrar_roupa" class="rounded border-zinc-300 text-primary focus:ring-primary" />
+                <span>Dobrar roupa</span>
+              </label>
+
+              <label class="flex items-center gap-3 rounded-xl border border-zinc-200 bg-white px-4 py-4 text-sm text-on-surface-variant hover:border-primary/40 transition-colors">
+                <input type="checkbox" name="collectorTasks" value="organizar_objetos" class="rounded border-zinc-300 text-primary focus:ring-primary" />
+                <span>Organizar objetos</span>
+              </label>
+
+              <label class="flex items-center gap-3 rounded-xl border border-zinc-200 bg-white px-4 py-4 text-sm text-on-surface-variant hover:border-primary/40 transition-colors">
+                <input type="checkbox" name="collectorTasks" value="varrer_chao" class="rounded border-zinc-300 text-primary focus:ring-primary" />
+                <span>Varrer o chão</span>
+              </label>
+
+              <label class="flex items-center gap-3 rounded-xl border border-zinc-200 bg-white px-4 py-4 text-sm text-on-surface-variant hover:border-primary/40 transition-colors">
+                <input type="checkbox" name="collectorTasks" value="limpar_mesa" class="rounded border-zinc-300 text-primary focus:ring-primary" />
+                <span>Limpar mesa/superfície</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="mt-8">
+            <label class="block text-xs font-bold uppercase tracking-widest text-zinc-500 mb-2">Você estaria disposto(a) a gravar usando suporte de peito para celular?</label>
+            <select id="collectorChestMount" class="w-full rounded-xl border-zinc-200 px-4 py-4 text-sm focus:border-primary focus:ring-primary">
+              <option value="">Selecione</option>
+              <option value="true">Sim</option>
+              <option value="false">Não</option>
+              <option value="maybe">Talvez / preciso entender melhor</option>
+            </select>
+            <p class="mt-2 text-[11px] text-zinc-400">Isso ajuda a entender se você conseguiria gravar tarefas em POV com as mãos livres.</p>
+          </div>
+        </div>
+
+        <div class="form-step hidden" data-step="4">
+          <div class="space-y-5">
+            <label class="flex gap-3 items-start">
+              <input id="acceptsContact" type="checkbox" class="mt-1 rounded border-zinc-300 text-primary focus:ring-primary" />
+              <span class="text-sm text-on-surface-variant leading-relaxed">
+                Aceito receber comunicações da Motion Lab sobre o beta fechado do Trampo.
+              </span>
+            </label>
+
+            <label class="flex gap-3 items-start">
+              <input id="understandsApproval" type="checkbox" class="mt-1 rounded border-zinc-300 text-primary focus:ring-primary" />
+              <span class="text-sm text-on-surface-variant leading-relaxed">
+                Entendo que recompensas dependem de seleção, disponibilidade de missões e aprovação de qualidade.
+              </span>
+            </label>
+
+            <label class="flex gap-3 items-start">
+              <input id="acceptsAIUse" type="checkbox" class="mt-1 rounded border-zinc-300 text-primary focus:ring-primary" />
+              <span class="text-sm text-on-surface-variant leading-relaxed">
+                Entendo que futuras missões poderão envolver gravação de vídeos para desenvolvimento de IA, robótica e modelos multimodais, mediante consentimento.
+              </span>
+            </label>
+
+            <label class="flex gap-3 items-start">
+              <input id="acceptsWaitlist" type="checkbox" class="mt-1 rounded border-zinc-300 text-primary focus:ring-primary" />
+              <span class="text-sm text-on-surface-variant leading-relaxed">
+                Aceito entrar em uma lista de espera por região e entendo que isso não garante participação imediata.
+              </span>
+            </label>
+          </div>
+
+          <p class="mt-6 text-xs text-zinc-500">
+            Ao finalizar, você declara que as informações fornecidas são verdadeiras e que leu os termos aplicáveis.
+          </p>
+        </div>
+
+        <div id="collectorFormMessage" class="hidden rounded-xl p-4 text-sm font-medium"></div>
+
+        <div class="flex flex-col sm:flex-row gap-4 justify-between pt-2">
+          <button id="collectorBackBtn" type="button" class="hidden px-6 py-4 rounded-lg border border-zinc-200 font-bold text-sm uppercase tracking-widest text-zinc-600">
+            Voltar
+          </button>
+
+          <button id="collectorNextBtn" type="button" class="ml-auto bg-primary text-white px-8 py-4 rounded-lg font-bold text-sm uppercase tracking-widest shadow-lg shadow-primary/20">
+            Continuar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
 <!-- Final CTA Section -->
 <section class="py-20 md:py-24 px-5 md:px-8 bg-surface">
 <div class="max-w-screen-2xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-5">
@@ -409,7 +605,12 @@
 <!-- Partner CTA -->
 <div id="partners" class="lg:col-span-5 bg-primary-container p-8 md:p-12 rounded-3xl flex flex-col justify-between text-on-primary-container min-h-[420px]">
 <div>
-<span class="material-symbols-outlined text-5xl mb-8">handshake</span>
+<div class="flex items-center gap-4 mb-8">
+<span class="material-symbols-outlined text-5xl">handshake</span>
+<span class="inline-block px-4 py-2 bg-white/15 text-white font-extrabold text-xs uppercase tracking-[0.18em] rounded-full border border-white/25">
+                        Para B2B
+                    </span>
+</div>
 
 <h4 class="text-3xl md:text-4xl font-black mb-5 leading-tight">
                         Investidor, parceiro ou empresa de IA?
@@ -421,15 +622,13 @@
 </div>
 
 <div class="space-y-4">
-<a class="inline-flex items-center justify-center gap-3 bg-white text-primary px-7 py-4 rounded-lg font-bold text-sm tracking-widest uppercase transition-transform hover:scale-[1.02] active:scale-95 w-full" href="https://wa.me/5548988405089?text=Ol%C3%A1%20Gabriel%2C%20vi%20a%20landing%20page%20da%20Motion%20Lab%20e%20quero%20saber%20mais." target="_blank">
+<a class="inline-flex items-center justify-center gap-3 bg-white text-primary px-7 py-4 rounded-lg font-bold text-sm tracking-widest uppercase transition-transform hover:scale-[1.02] active:scale-95 w-full" href="https://wa.me/5548988405089?text=Ol%C3%A1%20Gabriel%2C%20vi%20a%20landing%20page%20da%20Motion%20Lab%20e%20quero%20saber%20mais%20sobre%20parceria%2C%20dados%20ou%20investimento." target="_blank">
 <span class="material-symbols-outlined">chat</span>
                         Falar no WhatsApp
                     </a>
-
-<a class="inline-flex items-center justify-center gap-3 border border-white/40 text-white px-7 py-4 rounded-lg font-bold text-sm tracking-widest uppercase transition-transform hover:scale-[1.02] active:scale-95 w-full" href="#partner-form">
-<span class="material-symbols-outlined">business_center</span>
-                        Sou parceiro/investidor
-                    </a>
+<p class="text-xs text-white/75 leading-relaxed">
+                        Para conversas B2B, investidores e empresas de IA/robótica, o contato direto é mais rápido neste beta inicial.
+                    </p>
 </div>
 </div>
 
@@ -519,4 +718,7 @@ LinkedIn
 
 </div>
 </footer>
+
+<script type="module" src="/assets/trampo-waitlist.js"></script>
+
 </body></html>
