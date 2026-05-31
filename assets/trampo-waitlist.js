@@ -4,7 +4,7 @@ import {
   setDoc,
   updateDoc,
   doc,
-  getDoc,
+  getDocFromServer,
   serverTimestamp
 } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
 
@@ -429,12 +429,13 @@ async function saveStep1() {
   localStorage.setItem("trampo_collector_doc_id", collectorDocId);
 
   const leadRef = doc(db, "collector_profiles", collectorDocId);
-  const existingLead = await getDoc(leadRef);
+  const existingLead = await getDocFromServer(leadRef);
 
   if (existingLead.exists()) {
     const existingData = existingLead.data();
 
     if (existingData.status === "completed_waitlist") {
+      localStorage.removeItem("trampo_collector_doc_id");
       showMessage(
         "success",
         "Encontramos seu pré-cadastro! Você já está na lista de espera do beta fechado do Trampo."
