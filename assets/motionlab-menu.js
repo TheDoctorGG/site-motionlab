@@ -12,24 +12,31 @@
   const CTA_HREF = "/trampoapp/#collector-form";
 
   const CONTACT_LABEL = "Falar no WhatsApp";
-  const CONTACT_HREF = "https://wa.me/5548988405089?text=Olá%20Gabriel%2C%20vi%20a%20landing%20page%20da%20Motion%20Lab%20e%20quero%20saber%20mais.";
+  const CONTACT_HREF = "https://wa.me/5548988405089?text=Ol%C3%A1%20Gabriel%2C%20vi%20o%20site%20da%20Motion%20Lab%20e%20quero%20saber%20mais.";
+
+  const EMAIL_LABEL = "Enviar e-mail";
+  const EMAIL_HREF = "mailto:contato@motionlab.com.br";
 
   function injectStyles() {
+    if (document.getElementById("motionlab-menu-styles")) return;
+
     const style = document.createElement("style");
+    style.id = "motionlab-menu-styles";
 
     style.textContent = `
       .motion-menu-button {
         display: none;
         align-items: center;
         justify-content: center;
-        width: 44px;
-        height: 44px;
+        width: 42px;
+        height: 42px;
         border: 1px solid #e5e7eb;
         border-radius: 12px;
         background: #ffffff;
         cursor: pointer;
         box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
         z-index: 10001;
+        flex-shrink: 0;
       }
 
       .motion-menu-button span {
@@ -198,38 +205,57 @@
           display: inline-flex !important;
         }
 
-        .motion-desktop-nav,
-        .motion-nav-link-to-hide {
+        .motion-old-mobile-nav {
           display: none !important;
         }
 
+        .motion-enhanced-topbar .motion-desktop-nav {
+          display: none !important;
+        }
+
+        .motion-enhanced-topbar .motion-main-row {
+          display: flex !important;
+          align-items: center !important;
+          justify-content: space-between !important;
+          gap: 8px !important;
+          padding-top: 12px !important;
+          padding-bottom: 12px !important;
+          flex-wrap: nowrap !important;
+        }
+
+        .motion-enhanced-topbar .motion-logo-link {
+          flex: 1 1 auto !important;
+          min-width: 0 !important;
+        }
+
         .motion-logo-img {
-          max-width: 215px !important;
+          max-width: 150px !important;
           height: auto !important;
         }
 
         .motion-mobile-cta {
-          font-size: 11px !important;
-          padding: 12px 14px !important;
+          font-size: 9px !important;
+          padding: 10px 11px !important;
           border-radius: 8px !important;
           letter-spacing: 0.08em !important;
           white-space: nowrap !important;
+          flex-shrink: 0 !important;
         }
       }
 
       @media (max-width: 430px) {
         .motion-logo-img {
-          max-width: 185px !important;
+          max-width: 135px !important;
         }
 
         .motion-mobile-cta {
-          font-size: 10px !important;
-          padding: 11px 12px !important;
+          font-size: 8.5px !important;
+          padding: 9px 10px !important;
         }
 
         .motion-menu-button {
-          width: 42px;
-          height: 42px;
+          width: 40px;
+          height: 40px;
         }
       }
 
@@ -245,6 +271,8 @@
   }
 
   function createSidebar() {
+    if (document.querySelector(".motion-sidebar")) return;
+
     const overlay = document.createElement("div");
     overlay.className = "motion-sidebar-overlay";
     overlay.setAttribute("aria-hidden", "true");
@@ -273,6 +301,10 @@
 
       <a class="motion-sidebar-contact" href="${CONTACT_HREF}" target="_blank" rel="noopener">
         ${CONTACT_LABEL}
+      </a>
+
+      <a class="motion-sidebar-contact" href="${EMAIL_HREF}">
+        ${EMAIL_LABEL}
       </a>
 
       <div class="motion-sidebar-footer">
@@ -304,34 +336,52 @@
     document.body.classList.remove("motion-sidebar-open");
   }
 
+  function findTopNav() {
+    return (
+      document.querySelector("nav.fixed.top-0") ||
+      document.querySelector("nav.fixed") ||
+      document.querySelector("body > nav") ||
+      document.querySelector("nav")
+    );
+  }
+
   function enhanceHeader() {
-    const header = document.querySelector("header") || document.querySelector("nav")?.closest("header");
+    const topNav = findTopNav();
 
-    if (!header) return;
+    if (!topNav) return;
 
-    const logoImg = header.querySelector("img");
+    topNav.classList.add("motion-enhanced-topbar");
+
+    const logoImg = topNav.querySelector("img");
     if (logoImg) {
       logoImg.classList.add("motion-logo-img");
+
+      const logoLink = logoImg.closest("a");
+      if (logoLink) logoLink.classList.add("motion-logo-link");
     }
 
-    const headerLinks = Array.from(header.querySelectorAll("a"));
+    const allRows = Array.from(topNav.querySelectorAll("div"));
+
+    allRows.forEach((row) => {
+      const className = row.getAttribute("class") || "";
+
+      if (className.includes("justify-between") && className.includes("items-center")) {
+        row.classList.add("motion-main-row");
+      }
+
+      if (className.includes("md:hidden")) {
+        row.classList.add("motion-old-mobile-nav");
+      }
+
+      if (className.includes("md:flex")) {
+        row.classList.add("motion-desktop-nav");
+      }
+    });
+
+    const headerLinks = Array.from(topNav.querySelectorAll("a"));
 
     headerLinks.forEach((link) => {
       const text = link.textContent.trim().toUpperCase();
-
-      if (
-        text === "HOME" ||
-        text === "APP BRAZIL" ||
-        text === "APP (BRAZIL)" ||
-        text === "ABOUT US"
-      ) {
-        link.classList.add("motion-nav-link-to-hide");
-
-        const nearestNav = link.closest("nav");
-        if (nearestNav) {
-          nearestNav.classList.add("motion-desktop-nav");
-        }
-      }
 
       if (
         text.includes("QUERO PARTICIPAR") ||
@@ -339,10 +389,11 @@
         text.includes("CONTACT")
       ) {
         link.classList.add("motion-mobile-cta");
+        link.setAttribute("href", CTA_HREF);
       }
     });
 
-    const existingButton = header.querySelector(".motion-menu-button");
+    const existingButton = topNav.querySelector(".motion-menu-button");
     if (existingButton) return;
 
     const button = document.createElement("button");
@@ -352,18 +403,25 @@
     button.innerHTML = "<span></span>";
     button.addEventListener("click", openMenu);
 
-    const cta = header.querySelector(".motion-mobile-cta");
+    const cta = topNav.querySelector(".motion-mobile-cta");
 
     if (cta && cta.parentElement) {
       cta.insertAdjacentElement("afterend", button);
     } else {
-      header.appendChild(button);
+      const mainRow = topNav.querySelector(".motion-main-row") || topNav;
+      mainRow.appendChild(button);
     }
   }
 
-  document.addEventListener("DOMContentLoaded", () => {
+  function init() {
     injectStyles();
     createSidebar();
     enhanceHeader();
-  });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init);
+  } else {
+    init();
+  }
 })();
