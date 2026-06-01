@@ -229,33 +229,53 @@
         }
 
         .motion-logo-img {
-          max-width: 150px !important;
+          max-width: 145px !important;
           height: auto !important;
         }
 
         .motion-mobile-cta {
-          font-size: 9px !important;
-          padding: 10px 11px !important;
-          border-radius: 8px !important;
-          letter-spacing: 0.08em !important;
+          font-size: 11px !important;
+          font-weight: 900 !important;
+          padding: 11px 14px !important;
+          border-radius: 9px !important;
+          letter-spacing: 0.09em !important;
           white-space: nowrap !important;
           flex-shrink: 0 !important;
+          line-height: 1 !important;
         }
       }
 
       @media (max-width: 430px) {
         .motion-logo-img {
-          max-width: 135px !important;
+          max-width: 128px !important;
         }
 
         .motion-mobile-cta {
-          font-size: 8.5px !important;
-          padding: 9px 10px !important;
+          font-size: 10px !important;
+          font-weight: 900 !important;
+          padding: 10px 12px !important;
+          letter-spacing: 0.08em !important;
         }
 
         .motion-menu-button {
           width: 40px;
           height: 40px;
+        }
+      }
+
+      @media (max-width: 380px) {
+        .motion-logo-img {
+          max-width: 118px !important;
+        }
+
+        .motion-mobile-cta {
+          font-size: 9.5px !important;
+          padding: 9px 10px !important;
+        }
+
+        .motion-menu-button {
+          width: 38px;
+          height: 38px;
         }
       }
 
