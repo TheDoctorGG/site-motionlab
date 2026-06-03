@@ -89,6 +89,130 @@
         width: 100%;
         position: absolute;
       }
+
+
+      /* Motion Lab scrolling ecosystem strip */
+.motion-logo-strip {
+  width: 100%;
+  overflow: hidden;
+  background: #ffffff;
+  border-top: 1px solid rgba(15, 23, 42, 0.06);
+  border-bottom: 1px solid rgba(15, 23, 42, 0.06);
+  padding: 26px 0;
+}
+
+.motion-logo-strip-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.motion-logo-strip-label {
+  text-align: center;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #64748b;
+  margin-bottom: 18px;
+}
+
+.motion-logo-marquee {
+  position: relative;
+  display: flex;
+  overflow: hidden;
+  user-select: none;
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 12%,
+    black 88%,
+    transparent
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 12%,
+    black 88%,
+    transparent
+  );
+}
+
+.motion-logo-track {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  min-width: max-content;
+  animation: motionLogoScroll 28s linear infinite;
+}
+
+.motion-logo-item {
+  min-width: 150px;
+  height: 58px;
+  padding: 0 24px;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 16px;
+  background: #f8fafc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #111827;
+  white-space: nowrap;
+}
+
+.motion-logo-item.blue {
+  color: #0050cb;
+}
+
+.motion-logo-item.green {
+  color: #009739;
+}
+
+.motion-logo-item.dark {
+  background: #111827;
+  color: #ffffff;
+}
+
+.motion-logo-marquee:hover .motion-logo-track {
+  animation-play-state: paused;
+}
+
+@keyframes motionLogoScroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (max-width: 768px) {
+  .motion-logo-strip {
+    padding: 22px 0;
+  }
+
+  .motion-logo-strip-label {
+    font-size: 10px;
+    margin-bottom: 14px;
+  }
+
+  .motion-logo-track {
+    gap: 12px;
+    animation-duration: 22s;
+  }
+
+  .motion-logo-item {
+    min-width: 132px;
+    height: 50px;
+    padding: 0 18px;
+    font-size: 11px;
+    border-radius: 14px;
+  }
+}
     </style>
 </head>
 <body class="bg-background font-body text-on-surface selection:bg-primary-fixed selection:text-on-primary-fixed">
@@ -214,6 +338,40 @@
 </div>
 </div>
 </section>
+
+
+<!-- Ecosystem / Data Buyers Strip -->
+<section class="motion-logo-strip" aria-label="Motion Lab ecosystem">
+  <div class="motion-logo-strip-inner">
+    <div class="motion-logo-strip-label">
+      Dados para IA física, robótica e modelos multimodais
+    </div>
+
+    <div class="motion-logo-marquee">
+      <div class="motion-logo-track">
+        <div class="motion-logo-item dark">Physical AI</div>
+        <div class="motion-logo-item blue">Humanoid Robots</div>
+        <div class="motion-logo-item">Multimodal AI</div>
+        <div class="motion-logo-item green">Brazil Data</div>
+        <div class="motion-logo-item">POV Datasets</div>
+        <div class="motion-logo-item blue">Robotics Labs</div>
+        <div class="motion-logo-item">AI Companies</div>
+        <div class="motion-logo-item green">LatAm Context</div>
+
+        <div class="motion-logo-item dark">Physical AI</div>
+        <div class="motion-logo-item blue">Humanoid Robots</div>
+        <div class="motion-logo-item">Multimodal AI</div>
+        <div class="motion-logo-item green">Brazil Data</div>
+        <div class="motion-logo-item">POV Datasets</div>
+        <div class="motion-logo-item blue">Robotics Labs</div>
+        <div class="motion-logo-item">AI Companies</div>
+        <div class="motion-logo-item green">LatAm Context</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
 <!-- Waitlist Process Section -->
 <section id="how-it-works" class="py-16 md:py-24 px-5 md:px-8 bg-surface-container-low">
 <div class="max-w-screen-2xl mx-auto">
