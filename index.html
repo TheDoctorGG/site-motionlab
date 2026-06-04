@@ -105,6 +105,226 @@
         background: linear-gradient(90deg, #009739 0%, #fedd00 50%, #002776 100%);
         opacity: 0.3;
       }
+      .motion-canvas-shell {
+        position: relative;
+        min-height: min(650px, 62vw);
+        border-radius: 24px;
+        border: 1px solid rgba(15, 23, 42, 0.12);
+        background:
+          radial-gradient(circle at center, rgba(0,102,255,0.18), transparent 56%),
+          linear-gradient(135deg, #05070c 0%, #0b1220 48%, #07172d 100%);
+        overflow: hidden;
+        box-shadow: 0 40px 100px rgba(15, 23, 42, 0.24);
+      }
+      .motion-canvas-shell::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image: radial-gradient(rgba(255,255,255,0.18) 1px, transparent 1px);
+        background-size: 34px 34px;
+        opacity: 0.12;
+        pointer-events: none;
+        z-index: 1;
+      }
+      #motionThreeGlobe {
+        position: relative;
+        z-index: 2;
+        width: 100%;
+        height: 100%;
+        min-height: min(650px, 62vw);
+        display: block;
+        cursor: grab;
+      }
+      #motionThreeGlobe:active {
+        cursor: grabbing;
+      }
+      .motion-credit {
+        position: absolute;
+        top: 22px;
+        left: 24px;
+        color: rgba(255,255,255,0.46);
+        font-size: 10px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        pointer-events: none;
+        z-index: 5;
+      }
+      .motion-tooltip {
+        position: absolute;
+        top: 22px;
+        right: 24px;
+        padding: 10px 13px;
+        background: rgba(255,255,255,0.10);
+        border: 1px solid rgba(255,255,255,0.16);
+        border-radius: 999px;
+        color: rgba(255,255,255,0.72);
+        font-size: 11px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.10em;
+        backdrop-filter: blur(16px);
+        z-index: 5;
+        pointer-events: none;
+      }
+      .motion-hud {
+        position: absolute;
+        left: 24px;
+        right: 24px;
+        bottom: 24px;
+        z-index: 5;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        border: 1px solid rgba(255,255,255,0.14);
+        border-radius: 16px;
+        overflow: hidden;
+        background: rgba(5,7,12,0.52);
+        backdrop-filter: blur(18px);
+        pointer-events: none;
+      }
+      .motion-hud-item {
+        padding: 16px;
+        border-right: 1px solid rgba(255,255,255,0.12);
+      }
+      .motion-hud-item:last-child {
+        border-right: 0;
+      }
+      .motion-hud-item strong {
+        display: block;
+        font-size: 12px;
+        font-weight: 950;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        margin-bottom: 7px;
+        color: #ffffff;
+      }
+      .motion-hud-item span {
+        color: rgba(255,255,255,0.60);
+        line-height: 1.35;
+        font-size: 12px;
+      }
+      @media (max-width: 1024px) {
+        .motion-canvas-shell,
+        #motionThreeGlobe {
+          min-height: 520px;
+        }
+      }
+      @media (max-width: 640px) {
+        .motion-canvas-shell {
+          min-height: 500px;
+          border-radius: 18px;
+        }
+        #motionThreeGlobe {
+          min-height: 500px;
+        }
+        .motion-tooltip {
+          display: none;
+        }
+        .motion-hud {
+          left: 16px;
+          right: 16px;
+          bottom: 16px;
+          grid-template-columns: 1fr;
+        }
+        .motion-hud-item {
+          padding: 12px 14px;
+          border-right: 0;
+          border-bottom: 1px solid rgba(255,255,255,0.12);
+        }
+        .motion-hud-item:last-child {
+          border-bottom: 0;
+        }
+      }
+      .dataset-carousel {
+        position: relative;
+        overflow: hidden;
+        margin-inline: -2rem;
+        padding: 0 2rem;
+      }
+      .dataset-carousel::before,
+      .dataset-carousel::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: min(120px, 14vw);
+        z-index: 3;
+        pointer-events: none;
+      }
+      .dataset-carousel::before {
+        left: 0;
+        background: linear-gradient(90deg, #f3f3f5, transparent);
+      }
+      .dataset-carousel::after {
+        right: 0;
+        background: linear-gradient(270deg, #f3f3f5, transparent);
+      }
+      .dataset-track {
+        display: flex;
+        width: max-content;
+        gap: 2rem;
+        animation: datasetScroll 42s linear infinite;
+      }
+      .dataset-carousel:hover .dataset-track,
+      .dataset-carousel:focus-within .dataset-track {
+        animation-play-state: paused;
+      }
+      .dataset-card {
+        width: min(420px, calc(100vw - 4rem));
+        flex: 0 0 auto;
+        background: #ffffff;
+        border-radius: 0.5rem;
+        padding: 0.25rem;
+        transition: transform 0.35s ease, box-shadow 0.35s ease;
+      }
+      .dataset-card:hover,
+      .dataset-card:focus-within {
+        transform: translateY(-8px);
+        box-shadow: 0 28px 70px rgba(0, 80, 203, 0.10);
+      }
+      .dataset-card img {
+        filter: grayscale(1);
+        opacity: 0.68;
+        transition: filter 0.7s ease, opacity 0.7s ease, transform 0.7s ease;
+      }
+      .dataset-card:hover img,
+      .dataset-card:focus-within img {
+        filter: grayscale(0);
+        opacity: 1;
+        transform: scale(1.05);
+      }
+      @keyframes datasetScroll {
+        from { transform: translateX(0); }
+        to { transform: translateX(calc(-50% - 1rem)); }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .dataset-track {
+          animation: none;
+        }
+      }
+      @media (max-width: 768px) {
+        .dataset-carousel {
+          overflow-x: auto;
+          scroll-snap-type: x mandatory;
+          margin-inline: -1.25rem;
+          padding: 0 1.25rem 1rem;
+        }
+        .dataset-carousel::before,
+        .dataset-carousel::after {
+          display: none;
+        }
+        .dataset-track {
+          animation: none;
+          width: max-content;
+          gap: 1rem;
+        }
+        .dataset-card {
+          width: min(340px, calc(100vw - 2.5rem));
+          scroll-snap-align: center;
+        }
+        .dataset-track [aria-hidden="true"] {
+          display: none;
+        }
+      }
     </style>
 </head>
 <body class="bg-background text-on-background font-body selection:bg-primary-fixed selection:text-on-primary-fixed">
@@ -169,17 +389,14 @@
 </div>
 </div>
 <div class="relative block mt-12 lg:mt-0">
-<div class="aspect-square bg-surface-container-low rounded-lg p-12 relative overflow-hidden group">
-<div class="absolute inset-0 bg-gradient-to-br from-surface-container via-surface-container-low to-surface-container opacity-50"></div>
-<img class="w-full h-full object-contain mix-blend-multiply opacity-80" data-alt="Technical 3D wireframe of a humanoid robot hand interacting with a household object, minimalist blueprint style with clean silver and white aesthetics" src="/assets/robot-hand.png"/>
-<!-- Floating HUD Elements -->
-<div class="absolute top-8 left-8 p-4 bg-white/70 backdrop-blur-md border border-white/30 shadow-sm rounded-lg">
-<div class="text-[10px] text-zinc-400 font-mono uppercase">Node: São Paulo</div>
-<div class="text-sm font-bold text-primary">60FPS PRECISION</div>
-</div>
-<div class="absolute bottom-8 right-8 p-4 bg-white/70 backdrop-blur-md border border-white/30 shadow-sm rounded-lg">
-<div class="text-[10px] text-zinc-400 font-mono uppercase">Geo_Latency</div>
-<div class="text-sm font-bold text-secondary">0.002ms DATA JITTER</div>
+<div class="motion-canvas-shell" aria-label="Interactive globe showing Brazil data routes to global AI and robotics hubs">
+<div class="motion-credit">Three.js Earth data network</div>
+<div class="motion-tooltip">Drag to rotate</div>
+<canvas id="motionThreeGlobe"></canvas>
+<div class="motion-hud">
+<div class="motion-hud-item"><strong>Sao Paulo node</strong><span>Brazilian physical-world data acquisition.</span></div>
+<div class="motion-hud-item"><strong>Global delivery</strong><span>Structured datasets for AI and robotics teams.</span></div>
+<div class="motion-hud-item"><strong>Consent-first</strong><span>Collector screening, task approval, and validation.</span></div>
 </div>
 </div>
 </div>
@@ -201,11 +418,11 @@
                         Localized egocentric data from everyday Brazilian environments, designed for AI, robotics, and multimodal model development.
                     </p>
 </div>
-<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-<!-- Card 1 -->
-<div class="group bg-surface-container-lowest p-1 rounded-lg hover:shadow-2xl hover:shadow-primary/5 transition-all duration-500">
+<div class="dataset-carousel">
+<div class="dataset-track">
+<article class="group dataset-card">
 <div class="relative overflow-hidden aspect-[4/5] bg-surface-container mb-6 rounded-md">
-<img class="w-full h-full object-cover grayscale opacity-60 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700" data-alt="POV shot of human hands washing a white ceramic plate in a clean, modern kitchen with soft natural morning light" src="/assets/washing-dishes.png"/>
+<img class="w-full h-full object-cover" alt="POV shot of human hands washing a white ceramic plate in a Brazilian kitchen" src="/assets/washing-dishes-ai.png"/>
 <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
 <div class="absolute top-4 left-4">
 <span class="bg-white/90 backdrop-blur px-3 py-1 text-[10px] font-bold rounded-sm uppercase tracking-tighter flex items-center gap-2">
@@ -222,11 +439,11 @@
 <span class="material-symbols-outlined text-zinc-300 group-hover:text-primary transition-colors">add_circle</span>
 </div>
 </div>
-</div>
-<!-- Card 2 -->
-<div class="group bg-surface-container-lowest p-1 rounded-lg hover:shadow-2xl hover:shadow-primary/5 transition-all duration-500">
+</article>
+
+<article class="group dataset-card">
 <div class="relative overflow-hidden aspect-[4/5] bg-surface-container mb-6 rounded-md">
-<img class="w-full h-full object-cover grayscale opacity-60 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700" data-alt="POV close-up of hands folding a soft gray cotton sweater on a clean white table surface, precise textile deformation visible" src="/assets/folding-clothes.png"/>
+<img class="w-full h-full object-cover" alt="POV close-up of hands folding a soft shirt in a Brazilian apartment" src="/assets/folding-clothes-ai.png"/>
 <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
 <div class="absolute top-4 left-4">
 <span class="bg-white/90 backdrop-blur px-3 py-1 text-[10px] font-bold rounded-sm uppercase tracking-tighter flex items-center gap-2">
@@ -243,11 +460,11 @@
 <span class="material-symbols-outlined text-zinc-300 group-hover:text-primary transition-colors">add_circle</span>
 </div>
 </div>
-</div>
-<!-- Card 3 -->
-<div class="group bg-surface-container-lowest p-1 rounded-lg hover:shadow-2xl hover:shadow-primary/5 transition-all duration-500">
+</article>
+
+<article class="group dataset-card">
 <div class="relative overflow-hidden aspect-[4/5] bg-surface-container mb-6 rounded-md">
-<img class="w-full h-full object-cover grayscale opacity-60 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700" data-alt="Action view of someone sweeping dust on a hardwood floor with a modern broom, focus on hand motion and tool contact points" src="/assets/sweep-the-floor.png"/>
+<img class="w-full h-full object-cover" alt="Action view of someone sweeping dust on a Brazilian apartment floor with a broom" src="/assets/sweep-the-floor-ai.png"/>
 <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
 <div class="absolute top-4 left-4">
 <span class="bg-white/90 backdrop-blur px-3 py-1 text-[10px] font-bold rounded-sm uppercase tracking-tighter flex items-center gap-2">
@@ -263,6 +480,91 @@
 <span class="text-[10px] font-mono text-zinc-400">BETA DATA CATEGORY</span>
 <span class="material-symbols-outlined text-zinc-300 group-hover:text-primary transition-colors">add_circle</span>
 </div>
+</div>
+</article>
+
+<article class="group dataset-card">
+<div class="relative overflow-hidden aspect-[4/5] bg-surface-container mb-6 rounded-md">
+<img class="w-full h-full object-cover" alt="POV hands arranging everyday household objects on a clean table" src="/assets/arranging-objects.png"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+<div class="absolute top-4 left-4">
+<span class="bg-white/90 backdrop-blur px-3 py-1 text-[10px] font-bold rounded-sm uppercase tracking-tighter flex items-center gap-2">
+                                    Objects_BR_07
+                                    <span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+</span>
+</div>
+</div>
+<div class="px-6 pb-8 space-y-3">
+<h3 class="text-xl font-bold">Arranging Objects</h3>
+<p class="text-sm text-on-surface-variant leading-relaxed">Spatial reasoning data from sorting, grouping, aligning, and repositioning everyday household objects.</p>
+<div class="pt-4 flex items-center justify-between">
+<span class="text-[10px] font-mono text-zinc-400">BETA DATA CATEGORY</span>
+<span class="material-symbols-outlined text-zinc-300 group-hover:text-primary transition-colors">add_circle</span>
+</div>
+</div>
+</article>
+
+<article class="group dataset-card">
+<div class="relative overflow-hidden aspect-[4/5] bg-surface-container mb-6 rounded-md">
+<img class="w-full h-full object-cover" alt="First-person conversation scene at a home table for AI training data" src="/assets/conversation-training-ai.png"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+<div class="absolute top-4 left-4">
+<span class="bg-white/90 backdrop-blur px-3 py-1 text-[10px] font-bold rounded-sm uppercase tracking-tighter flex items-center gap-2">
+                                    Social_BR_03
+                                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
+</span>
+</div>
+</div>
+<div class="px-6 pb-8 space-y-3">
+<h3 class="text-xl font-bold">Conversation Data</h3>
+<p class="text-sm text-on-surface-variant leading-relaxed">Multimodal interaction data for speech, gestures, turn-taking, gaze, and real domestic social context.</p>
+<div class="pt-4 flex items-center justify-between">
+<span class="text-[10px] font-mono text-zinc-400">BETA DATA CATEGORY</span>
+<span class="material-symbols-outlined text-zinc-300 group-hover:text-primary transition-colors">add_circle</span>
+</div>
+</div>
+</article>
+
+<article class="group dataset-card" aria-hidden="true">
+<div class="relative overflow-hidden aspect-[4/5] bg-surface-container mb-6 rounded-md">
+<img class="w-full h-full object-cover" alt="" src="/assets/washing-dishes-ai.png"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+<div class="absolute top-4 left-4"><span class="bg-white/90 backdrop-blur px-3 py-1 text-[10px] font-bold rounded-sm uppercase tracking-tighter flex items-center gap-2">Kitchen_BR_01<span class="w-1.5 h-1.5 rounded-full bg-brazil-green"></span></span></div>
+</div>
+<div class="px-6 pb-8 space-y-3"><h3 class="text-xl font-bold">Washing Dishes</h3><p class="text-sm text-on-surface-variant leading-relaxed">Multi-object manipulation including glassware, cutlery, and local ceramic textures under varying suds conditions.</p><div class="pt-4 flex items-center justify-between"><span class="text-[10px] font-mono text-zinc-400">BETA DATA CATEGORY</span><span class="material-symbols-outlined text-zinc-300 group-hover:text-primary transition-colors">add_circle</span></div></div>
+</article>
+<article class="group dataset-card" aria-hidden="true">
+<div class="relative overflow-hidden aspect-[4/5] bg-surface-container mb-6 rounded-md">
+<img class="w-full h-full object-cover" alt="" src="/assets/folding-clothes-ai.png"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+<div class="absolute top-4 left-4"><span class="bg-white/90 backdrop-blur px-3 py-1 text-[10px] font-bold rounded-sm uppercase tracking-tighter flex items-center gap-2">Laundry_BR_04<span class="w-1.5 h-1.5 rounded-full bg-brazil-yellow"></span></span></div>
+</div>
+<div class="px-6 pb-8 space-y-3"><h3 class="text-xl font-bold">Folding Clothes</h3><p class="text-sm text-on-surface-variant leading-relaxed">Deformable object manipulation focusing on edge alignment and textile interaction physics in domestic settings.</p><div class="pt-4 flex items-center justify-between"><span class="text-[10px] font-mono text-zinc-400">BETA DATA CATEGORY</span><span class="material-symbols-outlined text-zinc-300 group-hover:text-primary transition-colors">add_circle</span></div></div>
+</article>
+<article class="group dataset-card" aria-hidden="true">
+<div class="relative overflow-hidden aspect-[4/5] bg-surface-container mb-6 rounded-md">
+<img class="w-full h-full object-cover" alt="" src="/assets/sweep-the-floor-ai.png"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+<div class="absolute top-4 left-4"><span class="bg-white/90 backdrop-blur px-3 py-1 text-[10px] font-bold rounded-sm uppercase tracking-tighter flex items-center gap-2">Surface_BR_02<span class="w-1.5 h-1.5 rounded-full bg-blue-600"></span></span></div>
+</div>
+<div class="px-6 pb-8 space-y-3"><h3 class="text-xl font-bold">Sweeping the Floor</h3><p class="text-sm text-on-surface-variant leading-relaxed">Large-scale workspace interaction and reach-trajectory data across common Brazilian floor materials.</p><div class="pt-4 flex items-center justify-between"><span class="text-[10px] font-mono text-zinc-400">BETA DATA CATEGORY</span><span class="material-symbols-outlined text-zinc-300 group-hover:text-primary transition-colors">add_circle</span></div></div>
+</article>
+<article class="group dataset-card" aria-hidden="true">
+<div class="relative overflow-hidden aspect-[4/5] bg-surface-container mb-6 rounded-md">
+<img class="w-full h-full object-cover" alt="" src="/assets/arranging-objects.png"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+<div class="absolute top-4 left-4"><span class="bg-white/90 backdrop-blur px-3 py-1 text-[10px] font-bold rounded-sm uppercase tracking-tighter flex items-center gap-2">Objects_BR_07<span class="w-1.5 h-1.5 rounded-full bg-primary"></span></span></div>
+</div>
+<div class="px-6 pb-8 space-y-3"><h3 class="text-xl font-bold">Arranging Objects</h3><p class="text-sm text-on-surface-variant leading-relaxed">Spatial reasoning data from sorting, grouping, aligning, and repositioning everyday household objects.</p><div class="pt-4 flex items-center justify-between"><span class="text-[10px] font-mono text-zinc-400">BETA DATA CATEGORY</span><span class="material-symbols-outlined text-zinc-300 group-hover:text-primary transition-colors">add_circle</span></div></div>
+</article>
+<article class="group dataset-card" aria-hidden="true">
+<div class="relative overflow-hidden aspect-[4/5] bg-surface-container mb-6 rounded-md">
+<img class="w-full h-full object-cover" alt="" src="/assets/conversation-training-ai.png"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+<div class="absolute top-4 left-4"><span class="bg-white/90 backdrop-blur px-3 py-1 text-[10px] font-bold rounded-sm uppercase tracking-tighter flex items-center gap-2">Social_BR_03<span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span></span></div>
+</div>
+<div class="px-6 pb-8 space-y-3"><h3 class="text-xl font-bold">Conversation Data</h3><p class="text-sm text-on-surface-variant leading-relaxed">Multimodal interaction data for speech, gestures, turn-taking, gaze, and real domestic social context.</p><div class="pt-4 flex items-center justify-between"><span class="text-[10px] font-mono text-zinc-400">BETA DATA CATEGORY</span><span class="material-symbols-outlined text-zinc-300 group-hover:text-primary transition-colors">add_circle</span></div></div>
+</article>
 </div>
 </div>
 </div>
@@ -453,4 +755,344 @@ LinkedIn
 
 </div>
 </footer>
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+const canvas = document.getElementById('motionThreeGlobe');
+
+if (canvas) {
+  const shell = canvas.closest('.motion-canvas-shell');
+  const scene = new THREE.Scene();
+  scene.fog = new THREE.FogExp2(0x05070c, 0.035);
+
+  const camera = new THREE.PerspectiveCamera(42, 1, 0.1, 100);
+  camera.position.set(0, 1.05, 6.2);
+
+  const renderer = new THREE.WebGLRenderer({
+    canvas,
+    antialias: true,
+    alpha: true,
+    powerPreference: 'high-performance'
+  });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
+  renderer.outputColorSpace = THREE.SRGBColorSpace;
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 1.12;
+
+  const controls = new OrbitControls(camera, renderer.domElement);
+  controls.enableDamping = true;
+  controls.dampingFactor = 0.055;
+  controls.enablePan = false;
+  controls.minDistance = 4.3;
+  controls.maxDistance = 8.2;
+  controls.rotateSpeed = 0.42;
+  controls.autoRotate = true;
+  controls.autoRotateSpeed = 0.45;
+
+  scene.add(new THREE.AmbientLight(0xb6d4ff, 0.45));
+
+  const keyLight = new THREE.DirectionalLight(0xffffff, 2.4);
+  keyLight.position.set(4.5, 2.8, 4.4);
+  scene.add(keyLight);
+
+  const rimLight = new THREE.DirectionalLight(0x0066ff, 1.6);
+  rimLight.position.set(-4.5, 2.0, -2.6);
+  scene.add(rimLight);
+
+  const earthGroup = new THREE.Group();
+  earthGroup.rotation.set(0.08, -0.15, -0.03);
+  scene.add(earthGroup);
+
+  const radius = 2.15;
+  const textureLoader = new THREE.TextureLoader();
+  textureLoader.setCrossOrigin('anonymous');
+
+  const earthMap = textureLoader.load('https://cdn.jsdelivr.net/gh/mrdoob/three.js@r160/examples/textures/planets/earth_atmos_2048.jpg');
+  earthMap.colorSpace = THREE.SRGBColorSpace;
+  earthMap.anisotropy = 8;
+
+  const normalMap = textureLoader.load('https://cdn.jsdelivr.net/gh/mrdoob/three.js@r160/examples/textures/planets/earth_normal_2048.jpg');
+  normalMap.anisotropy = 8;
+
+  const specMap = textureLoader.load('https://cdn.jsdelivr.net/gh/mrdoob/three.js@r160/examples/textures/planets/earth_specular_2048.jpg');
+  specMap.anisotropy = 8;
+
+  const cloudMap = textureLoader.load('https://cdn.jsdelivr.net/gh/mrdoob/three.js@r160/examples/textures/planets/earth_clouds_1024.png');
+  cloudMap.colorSpace = THREE.SRGBColorSpace;
+  cloudMap.anisotropy = 8;
+
+  const earth = new THREE.Mesh(
+    new THREE.SphereGeometry(radius, 112, 112),
+    new THREE.MeshPhongMaterial({
+      map: earthMap,
+      normalMap,
+      normalScale: new THREE.Vector2(0.55, 0.55),
+      specularMap: specMap,
+      specular: new THREE.Color(0x244566),
+      shininess: 22
+    })
+  );
+  earthGroup.add(earth);
+
+  const clouds = new THREE.Mesh(
+    new THREE.SphereGeometry(radius * 1.012, 96, 96),
+    new THREE.MeshLambertMaterial({
+      map: cloudMap,
+      transparent: true,
+      opacity: 0.30,
+      depthWrite: false
+    })
+  );
+  earthGroup.add(clouds);
+
+  const wire = new THREE.Mesh(
+    new THREE.SphereGeometry(radius * 1.018, 40, 20),
+    new THREE.MeshBasicMaterial({
+      color: 0x56a8ff,
+      wireframe: true,
+      transparent: true,
+      opacity: 0.055
+    })
+  );
+  earthGroup.add(wire);
+
+  const atmosphere = new THREE.Mesh(
+    new THREE.SphereGeometry(radius * 1.09, 96, 96),
+    new THREE.ShaderMaterial({
+      transparent: true,
+      blending: THREE.AdditiveBlending,
+      side: THREE.BackSide,
+      vertexShader: `
+        varying vec3 vNormal;
+        void main() {
+          vNormal = normalize(normalMatrix * normal);
+          gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+        }
+      `,
+      fragmentShader: `
+        varying vec3 vNormal;
+        void main() {
+          float intensity = pow(0.72 - dot(vNormal, vec3(0.0, 0.0, 1.0)), 2.4);
+          gl_FragColor = vec4(0.0, 0.42, 1.0, intensity * 0.56);
+        }
+      `
+    })
+  );
+  earthGroup.add(atmosphere);
+
+  const starGeometry = new THREE.BufferGeometry();
+  const starCount = 900;
+  const positions = new Float32Array(starCount * 3);
+  for (let i = 0; i < starCount; i += 1) {
+    const starRadius = 18 + Math.random() * 18;
+    const theta = Math.random() * Math.PI * 2;
+    const phi = Math.acos(2 * Math.random() - 1);
+    positions[i * 3] = starRadius * Math.sin(phi) * Math.cos(theta);
+    positions[i * 3 + 1] = starRadius * Math.cos(phi);
+    positions[i * 3 + 2] = starRadius * Math.sin(phi) * Math.sin(theta);
+  }
+  starGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+  scene.add(new THREE.Points(
+    starGeometry,
+    new THREE.PointsMaterial({ color: 0xffffff, size: 0.018, transparent: true, opacity: 0.42 })
+  ));
+
+  function latLonToVector3(lat, lon, pointRadius = radius) {
+    const phi = THREE.MathUtils.degToRad(90 - lat);
+    const theta = THREE.MathUtils.degToRad(lon + 180);
+    return new THREE.Vector3(
+      -pointRadius * Math.sin(phi) * Math.cos(theta),
+      pointRadius * Math.cos(phi),
+      pointRadius * Math.sin(phi) * Math.sin(theta)
+    );
+  }
+
+  const hubs = [
+    { name: 'Sao Paulo', lat: -22.9, lon: -47.2, brazil: true },
+    { name: 'San Francisco', lat: 37.77, lon: -122.42 },
+    { name: 'Boston', lat: 42.36, lon: -71.05 },
+    { name: 'London', lat: 51.50, lon: -0.12 },
+    { name: 'Tokyo', lat: 35.68, lon: 139.69 },
+    { name: 'Seoul', lat: 37.56, lon: 126.97 },
+    { name: 'Munich', lat: 48.13, lon: 11.58 }
+  ];
+
+  const brazil = hubs[0];
+
+  function sphericalPointBetween(a, b, t) {
+    const dot = THREE.MathUtils.clamp(a.dot(b), -1, 1);
+    const theta = Math.acos(dot) * t;
+    const relative = b.clone().sub(a.clone().multiplyScalar(dot)).normalize();
+
+    return a.clone()
+      .multiplyScalar(Math.cos(theta))
+      .add(relative.multiplyScalar(Math.sin(theta)))
+      .normalize();
+  }
+
+  function makeArc(from, to, color = 0x00e676) {
+    const startNormal = latLonToVector3(from.lat, from.lon, 1).normalize();
+    const endNormal = latLonToVector3(to.lat, to.lon, 1).normalize();
+    const distanceAngle = startNormal.angleTo(endNormal);
+    const arcHeight = THREE.MathUtils.clamp(distanceAngle * 0.42, 0.55, 1.22);
+    const points = [];
+    const segments = 128;
+
+    for (let i = 0; i <= segments; i += 1) {
+      const progress = i / segments;
+      const normal = sphericalPointBetween(startNormal, endNormal, progress);
+      const lift = Math.sin(Math.PI * progress) * arcHeight;
+      points.push(normal.multiplyScalar(radius * 1.07 + lift));
+    }
+
+    const curve = new THREE.CatmullRomCurve3(points);
+    const line = new THREE.Line(
+      new THREE.BufferGeometry().setFromPoints(points),
+      new THREE.LineBasicMaterial({
+        color,
+        transparent: true,
+        opacity: 0.64,
+        depthTest: true,
+        depthWrite: false
+      })
+    );
+    earthGroup.add(line);
+
+    const pulse = new THREE.Mesh(
+      new THREE.SphereGeometry(0.027, 12, 12),
+      new THREE.MeshBasicMaterial({
+        color,
+        transparent: true,
+        opacity: 0.95,
+        depthTest: true,
+        depthWrite: false
+      })
+    );
+    earthGroup.add(pulse);
+
+    return { curve, pulse, speed: 0.0016 + Math.random() * 0.0012, offset: Math.random() };
+  }
+
+  const arcs = hubs.slice(1).map((hub, index) => makeArc(brazil, hub, index % 2 ? 0x0066ff : 0x00d26a));
+
+  function createMarker(isBrazil = false) {
+    const group = new THREE.Group();
+    const markerMaterial = new THREE.MeshStandardMaterial({
+      color: isBrazil ? 0x00d26a : 0x0066ff,
+      emissive: isBrazil ? 0x009739 : 0x003fa4,
+      emissiveIntensity: 0.45
+    });
+    group.add(new THREE.Mesh(new THREE.SphereGeometry(isBrazil ? 0.09 : 0.055, 24, 24), markerMaterial));
+    group.add(new THREE.Mesh(
+      new THREE.TorusGeometry(isBrazil ? 0.16 : 0.10, 0.006, 8, 48),
+      new THREE.MeshBasicMaterial({
+        color: isBrazil ? 0xfedd00 : 0xffffff,
+        transparent: true,
+        opacity: 0.72
+      })
+    ));
+    return group;
+  }
+
+  function roundRect(ctx, x, y, width, height, rectRadius) {
+    ctx.beginPath();
+    ctx.moveTo(x + rectRadius, y);
+    ctx.lineTo(x + width - rectRadius, y);
+    ctx.quadraticCurveTo(x + width, y, x + width, y + rectRadius);
+    ctx.lineTo(x + width, y + height - rectRadius);
+    ctx.quadraticCurveTo(x + width, y + height, x + width - rectRadius, y + height);
+    ctx.lineTo(x + rectRadius, y + height);
+    ctx.quadraticCurveTo(x, y + height, x, y + height - rectRadius);
+    ctx.lineTo(x, y + rectRadius);
+    ctx.quadraticCurveTo(x, y, x + rectRadius, y);
+    ctx.closePath();
+  }
+
+  function placeMarker(hub) {
+    const normal = latLonToVector3(hub.lat, hub.lon, 1).normalize();
+    const marker = createMarker(hub.brazil);
+    marker.position.copy(normal.clone().multiplyScalar(radius * 1.075));
+    marker.quaternion.setFromUnitVectors(new THREE.Vector3(0, 0, 1), normal);
+    marker.scale.setScalar(hub.brazil ? 1.55 : 0.92);
+    earthGroup.add(marker);
+
+    const labelCanvas = document.createElement('canvas');
+    labelCanvas.width = 512;
+    labelCanvas.height = 128;
+    const ctx = labelCanvas.getContext('2d');
+    ctx.clearRect(0, 0, 512, 128);
+    ctx.fillStyle = 'rgba(5,7,12,0.72)';
+    ctx.strokeStyle = hub.brazil ? 'rgba(254,221,0,0.8)' : 'rgba(255,255,255,0.22)';
+    ctx.lineWidth = 2;
+    roundRect(ctx, 12, 22, 488, 82, 18);
+    ctx.fill();
+    ctx.stroke();
+    ctx.fillStyle = hub.brazil ? '#fedd00' : '#ffffff';
+    ctx.font = '900 28px Inter, Arial';
+    ctx.fillText(hub.name, 36, 74);
+    ctx.fillStyle = 'rgba(255,255,255,0.58)';
+    ctx.font = '700 14px Inter, Arial';
+    ctx.fillText(hub.brazil ? 'MOTION LAB NODE' : 'AI / ROBOTICS HUB', 36, 98);
+
+    const texture = new THREE.CanvasTexture(labelCanvas);
+    texture.colorSpace = THREE.SRGBColorSpace;
+    const sprite = new THREE.Sprite(new THREE.SpriteMaterial({
+      map: texture,
+      transparent: true,
+      opacity: hub.brazil ? 1 : 0.76
+    }));
+    sprite.position.copy(normal.clone().multiplyScalar(radius * (hub.brazil ? 1.42 : 1.32)));
+    sprite.scale.set(hub.brazil ? 0.88 : 0.62, hub.brazil ? 0.22 : 0.16, 1);
+    earthGroup.add(sprite);
+  }
+
+  hubs.forEach(placeMarker);
+
+  function resize() {
+    const rect = shell.getBoundingClientRect();
+    renderer.setSize(rect.width, rect.height, false);
+    camera.aspect = rect.width / rect.height;
+    camera.updateProjectionMatrix();
+  }
+
+  window.addEventListener('resize', resize);
+  resize();
+
+  let isInteracting = false;
+  controls.addEventListener('start', () => {
+    isInteracting = true;
+  });
+  controls.addEventListener('end', () => {
+    isInteracting = false;
+  });
+
+  function animate() {
+    requestAnimationFrame(animate);
+
+    if (!isInteracting) {
+      earthGroup.rotation.y += 0.00065;
+    }
+
+    clouds.rotation.y += 0.00022;
+    arcs.forEach((arc) => {
+      arc.offset = (arc.offset + arc.speed) % 1;
+      arc.pulse.position.copy(arc.curve.getPoint(arc.offset));
+    });
+
+    controls.update();
+    renderer.render(scene, camera);
+  }
+
+  animate();
+}
+</script>
 </body></html>
