@@ -259,6 +259,7 @@
         background: linear-gradient(270deg, #f3f3f5, transparent);
       }
       .dataset-track {
+        --dataset-loop-offset: 1rem;
         display: flex;
         width: max-content;
         gap: 2rem;
@@ -294,7 +295,7 @@
       }
       @keyframes datasetScroll {
         from { transform: translateX(0); }
-        to { transform: translateX(calc(-50% - 1rem)); }
+        to { transform: translateX(calc(-50% - var(--dataset-loop-offset))); }
       }
       @media (prefers-reduced-motion: reduce) {
         .dataset-track {
@@ -303,26 +304,28 @@
       }
       @media (max-width: 768px) {
         .dataset-carousel {
-          overflow-x: auto;
-          scroll-snap-type: x mandatory;
+          overflow: hidden;
           margin-inline: -1.25rem;
-          padding: 0 1.25rem 1rem;
+          padding: 0 1.25rem 0.75rem;
         }
         .dataset-carousel::before,
         .dataset-carousel::after {
           display: none;
         }
         .dataset-track {
-          animation: none;
+          --dataset-loop-offset: 0.5rem;
           width: max-content;
           gap: 1rem;
+          animation-duration: 34s;
         }
         .dataset-card {
           width: min(340px, calc(100vw - 2.5rem));
-          scroll-snap-align: center;
         }
-        .dataset-track [aria-hidden="true"] {
-          display: none;
+      }
+      @media (hover: none) and (pointer: coarse) {
+        .dataset-carousel:hover .dataset-track,
+        .dataset-carousel:focus-within .dataset-track {
+          animation-play-state: running;
         }
       }
     </style>
