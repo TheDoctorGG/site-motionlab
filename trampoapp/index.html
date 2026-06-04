@@ -213,6 +213,51 @@
     border-radius: 14px;
   }
 }
+
+html {
+  scroll-behavior: smooth;
+}
+
+.scroll-pop {
+  opacity: 0;
+  transform: translate3d(0, 28px, 0) scale(0.985);
+  filter: blur(5px);
+  transition:
+    opacity 680ms ease,
+    transform 820ms cubic-bezier(0.16, 1, 0.3, 1),
+    filter 680ms ease;
+  transition-delay: var(--pop-delay, 0ms);
+  will-change: opacity, transform, filter;
+}
+
+.scroll-pop.scroll-pop-card {
+  transform: translate3d(0, 34px, 0) scale(0.97);
+  transform-origin: center bottom;
+}
+
+.scroll-pop.is-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0) scale(1);
+  filter: blur(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .motion-logo-track {
+    animation: none;
+  }
+
+  .scroll-pop,
+  .scroll-pop.scroll-pop-card {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    transition: none;
+  }
+}
     </style>
 </head>
 <body class="bg-background font-body text-on-surface selection:bg-primary-fixed selection:text-on-primary-fixed">
@@ -877,6 +922,82 @@ LinkedIn
 
 </div>
 </footer>
+
+<script>
+  (() => {
+    const main = document.querySelector('main');
+    if (!main) return;
+
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const animated = new Map();
+
+    const add = (selector, type = 'text') => {
+      main.querySelectorAll(selector).forEach((element) => {
+        if (animated.get(element) === 'card') return;
+        animated.set(element, type);
+      });
+    };
+
+    add('section:first-of-type .z-10 > span, section:first-of-type .z-10 > h1, section:first-of-type .z-10 > p, section:first-of-type .z-10 > .flex');
+    add('section:first-of-type [class*="max-w-[450px]"]', 'card');
+    add('.motion-logo-strip-inner', 'card');
+    add('section > div > div[class*="text-center"] > span, section > div > div[class*="text-center"] > h2, section > div > div[class*="text-center"] > p');
+    add('section .grid > .group, section .grid > div[class*="rounded-2xl"], section .grid > div[class*="rounded-3xl"]', 'card');
+    add('#collector-form .max-w-4xl > .bg-white, #waitlist, #partners', 'card');
+
+    const counters = new WeakMap();
+    const revealItems = [...animated.entries()].map(([element, type]) => {
+      const section = element.closest('section') || main;
+      const order = counters.get(section) || 0;
+      counters.set(section, order + 1);
+      const delay = Math.min(order * 85, type === 'card' ? 260 : 210);
+
+      return { element, type, delay };
+    });
+
+    if (prefersReducedMotion) {
+      revealItems.forEach(({ element }) => element.classList.add('is-visible'));
+      return;
+    }
+
+    revealItems.forEach(({ element, type, delay }) => {
+      element.style.setProperty('--pop-delay', `${delay}ms`);
+      element.classList.add('scroll-pop');
+      if (type === 'card') element.classList.add('scroll-pop-card');
+    });
+
+    const reveal = ({ element, delay }) => {
+      requestAnimationFrame(() => {
+        element.classList.add('is-visible');
+
+        window.setTimeout(() => {
+          element.classList.remove('scroll-pop', 'scroll-pop-card', 'is-visible');
+          element.style.removeProperty('--pop-delay');
+        }, delay + 950);
+      });
+    };
+
+    if (!('IntersectionObserver' in window)) {
+      revealItems.forEach(reveal);
+      return;
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+
+        const item = revealItems.find(({ element }) => element === entry.target);
+        if (item) reveal(item);
+        observer.unobserve(entry.target);
+      });
+    }, {
+      rootMargin: '0px 0px -12% 0px',
+      threshold: 0.12,
+    });
+
+    revealItems.forEach(({ element }) => observer.observe(element));
+  })();
+</script>
 
 <script type="module" src="/assets/trampo-waitlist.js"></script>
 
