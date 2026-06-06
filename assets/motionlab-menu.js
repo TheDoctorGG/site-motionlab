@@ -1,21 +1,87 @@
 (function () {
-  const MENU_ITEMS = [
-    { label: "Home", href: "/" },
-    { label: "App Brazil", href: "/trampoapp/" },
-    { label: "About Us", href: "/about-us/" },
-    { label: "Privacy Policy", href: "/privacy-policy/" },
-    { label: "Terms of Use", href: "/terms/" },
-    { label: "LGPD & Data Consent", href: "/lgpd-consent/" }
-  ];
+  const MENU_ITEMS = {
+    en: [
+      { key: "nav.home", label: "Home", href: "/" },
+      { key: "nav.trampo", label: "App Brazil", href: "/trampoapp/" },
+      { key: "nav.about", label: "About Us", href: "/about-us/" },
+      { key: "nav.privacy", label: "Privacy Policy", href: "/privacy-policy/" },
+      { key: "nav.terms", label: "Terms of Use", href: "/terms/" },
+      { key: "nav.lgpd", label: "LGPD & Data Consent", href: "/lgpd-consent/" }
+    ],
+    pt: [
+      { key: "nav.home", label: "Início", href: "/" },
+      { key: "nav.trampo", label: "App Brasil", href: "/trampoapp/" },
+      { key: "nav.about", label: "Sobre nós", href: "/about-us/" },
+      { key: "nav.privacy", label: "Política de Privacidade", href: "/privacy-policy/" },
+      { key: "nav.terms", label: "Termos de Uso", href: "/terms/" },
+      { key: "nav.lgpd", label: "LGPD e Consentimento de Dados", href: "/lgpd-consent/" }
+    ]
+  };
 
-  const CTA_LABEL = "Quero participar";
-  const CTA_HREF = "/trampoapp/#collector-form";
-
-  const CONTACT_LABEL = "Falar no WhatsApp";
+  const CONTACT_LABEL = {
+    en: "WhatsApp",
+    pt: "Falar no WhatsApp"
+  };
   const CONTACT_HREF = "https://wa.me/5548988405089?text=Ol%C3%A1%20Gabriel%2C%20vi%20o%20site%20da%20Motion%20Lab%20e%20quero%20saber%20mais.";
 
-  const EMAIL_LABEL = "Enviar e-mail";
+  const EMAIL_LABEL = {
+    en: "Email",
+    pt: "Enviar e-mail"
+  };
   const EMAIL_HREF = "mailto:contato@motionlab.com.br";
+
+  function getPageKind() {
+    const path = window.location.pathname.replace(/\/index\.html$/, "/");
+
+    if (path === "/" || path === "/about-us/") return "b2b";
+    if (path === "/trampoapp/") return "trampo";
+    if (path === "/privacy-policy/" || path === "/terms/" || path === "/lgpd-consent/") return "legal";
+
+    return "b2b";
+  }
+
+  function getDefaultLanguage() {
+    const params = new URLSearchParams(window.location.search);
+    const requested = params.get("lang");
+
+    if (requested === "en" || requested === "pt") return requested;
+
+    try {
+      const stored = window.localStorage.getItem("motionlab_language");
+      if (stored === "en" || stored === "pt") return stored;
+    } catch (error) {
+      // Ignore storage availability issues.
+    }
+
+    return getPageKind() === "b2b" ? "en" : "pt";
+  }
+
+  function getHeaderCtaLabel(language) {
+    const pageKind = getPageKind();
+
+    if (pageKind === "b2b") return language === "pt" ? "Ver Trampo Beta" : "APP Beta";
+    if (pageKind === "trampo") return language === "pt" ? "Quero participar" : "Join waitlist";
+
+    return language === "pt" ? "Quero participar" : "Join waitlist";
+  }
+
+  function getSidebarCtaLabel(language) {
+    const pageKind = getPageKind();
+
+    if (pageKind === "b2b") return language === "pt" ? "Ver Trampo Beta" : "View Trampo Beta";
+    if (pageKind === "trampo") return language === "pt" ? "Quero participar" : "Join waitlist";
+
+    return language === "pt" ? "Quero participar" : "Join waitlist";
+  }
+
+  function getCtaHref() {
+    const pageKind = getPageKind();
+
+    if (pageKind === "b2b") return "/trampoapp/";
+    if (pageKind === "trampo") return "#collector-form";
+
+    return "/trampoapp/#collector-form";
+  }
 
   function injectStyles() {
     if (document.getElementById("motionlab-menu-styles")) return;
@@ -200,6 +266,36 @@
         transform: translateX(0);
       }
 
+      @media (min-width: 769px) {
+        .motion-enhanced-topbar .motion-main-row {
+          display: grid !important;
+          grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) !important;
+          align-items: center !important;
+          gap: 24px !important;
+        }
+
+        .motion-enhanced-topbar .motion-logo-link {
+          grid-column: 1 !important;
+          justify-self: start !important;
+          min-width: 0 !important;
+        }
+
+        .motion-enhanced-topbar .motion-desktop-nav {
+          grid-column: 2 !important;
+          justify-self: center !important;
+        }
+
+        .motion-enhanced-topbar .motion-header-actions {
+          grid-column: 3 !important;
+          justify-self: end !important;
+          display: flex !important;
+          align-items: center !important;
+          justify-content: flex-end !important;
+          gap: 12px !important;
+          min-width: 0 !important;
+        }
+      }
+
       @media (max-width: 768px) {
         .motion-menu-button {
           display: inline-flex !important;
@@ -226,6 +322,13 @@
         .motion-enhanced-topbar .motion-logo-link {
           flex: 1 1 auto !important;
           min-width: 0 !important;
+        }
+
+        .motion-enhanced-topbar .motion-header-actions {
+          display: flex !important;
+          align-items: center !important;
+          gap: 8px !important;
+          flex-shrink: 0 !important;
         }
 
         .motion-logo-img {
@@ -301,8 +404,9 @@
     sidebar.className = "motion-sidebar";
     sidebar.setAttribute("aria-label", "Menu lateral Motion Lab");
 
-    const navLinks = MENU_ITEMS.map((item) => {
-      return `<a href="${item.href}">${item.label}</a>`;
+    const language = getDefaultLanguage();
+    const navLinks = MENU_ITEMS[language].map((item) => {
+      return `<a href="${item.href}" data-motion-nav="${item.key}">${item.label}</a>`;
     }).join("");
 
     sidebar.innerHTML = `
@@ -315,20 +419,20 @@
         ${navLinks}
       </nav>
 
-      <a class="motion-sidebar-cta" href="${CTA_HREF}">
-        ${CTA_LABEL}
+      <a class="motion-sidebar-cta" href="${getCtaHref()}" data-motion-cta="sidebar">
+        ${getSidebarCtaLabel(language)}
       </a>
 
       <a class="motion-sidebar-contact" href="${CONTACT_HREF}" target="_blank" rel="noopener">
-        ${CONTACT_LABEL}
+        ${CONTACT_LABEL[language]}
       </a>
 
       <a class="motion-sidebar-contact" href="${EMAIL_HREF}">
-        ${EMAIL_LABEL}
+        ${EMAIL_LABEL[language]}
       </a>
 
-      <div class="motion-sidebar-footer">
-        Physical-world data acquisition layer for embodied AI in Latin America.
+      <div class="motion-sidebar-footer" data-motion-sidebar-description>
+        ${language === "pt" ? "Camada de aquisição de dados físicos para IA física na América Latina." : "Physical-world data acquisition layer for embodied AI in Latin America."}
       </div>
     `;
 
@@ -405,13 +509,30 @@
 
       if (
         text.includes("QUERO PARTICIPAR") ||
+        text.includes("APP BETA") ||
+        text.includes("VIEW TRAMPO BETA") ||
+        text.includes("VER TRAMPO BETA") ||
+        text.includes("JOIN WAITLIST") ||
         text.includes("TALK TO GABRIEL") ||
         text.includes("CONTACT")
       ) {
         link.classList.add("motion-mobile-cta");
-        link.setAttribute("href", CTA_HREF);
+        link.setAttribute("href", getCtaHref());
+        link.setAttribute("data-motion-cta", "top");
+        link.textContent = getHeaderCtaLabel(getDefaultLanguage());
       }
     });
+
+    const mainRow = topNav.querySelector(".motion-main-row") || topNav;
+    const cta = topNav.querySelector(".motion-mobile-cta");
+    let actions = topNav.querySelector(".motion-header-actions");
+
+    if (cta && !actions) {
+      actions = document.createElement("div");
+      actions.className = "motion-header-actions";
+      cta.insertAdjacentElement("beforebegin", actions);
+      actions.appendChild(cta);
+    }
 
     const existingButton = topNav.querySelector(".motion-menu-button");
     if (existingButton) return;
@@ -423,12 +544,11 @@
     button.innerHTML = "<span></span>";
     button.addEventListener("click", openMenu);
 
-    const cta = topNav.querySelector(".motion-mobile-cta");
-
     if (cta && cta.parentElement) {
       cta.insertAdjacentElement("afterend", button);
+    } else if (actions) {
+      actions.appendChild(button);
     } else {
-      const mainRow = topNav.querySelector(".motion-main-row") || topNav;
       mainRow.appendChild(button);
     }
   }
@@ -437,6 +557,7 @@
     injectStyles();
     createSidebar();
     enhanceHeader();
+    window.dispatchEvent(new CustomEvent("motionlab:menu-ready"));
   }
 
   if (document.readyState === "loading") {
