@@ -836,9 +836,34 @@
     switcher.setAttribute("role", "group");
     switcher.setAttribute("aria-label", "Language");
     switcher.innerHTML = `
-      <button type="button" data-motion-lang="en">EN</button>
-      <span aria-hidden="true">|</span>
-      <button type="button" data-motion-lang="pt">PT-BR</button>
+      <button type="button" data-motion-lang="en">
+        <svg class="motion-language-flag" viewBox="0 0 24 16" aria-hidden="true" focusable="false">
+          <clipPath id="${id}-flag-us-clip"><rect width="24" height="16" rx="2"></rect></clipPath>
+          <g clip-path="url(#${id}-flag-us-clip)">
+            <rect width="24" height="16" fill="#ffffff"></rect>
+            <path d="M0 0h24v1.23H0zm0 2.46h24v1.23H0zm0 2.46h24v1.23H0zm0 2.46h24v1.23H0zm0 2.46h24v1.23H0zm0 2.46h24v1.23H0zm0 2.46h24V16H0z" fill="#b22234"></path>
+            <rect width="10.5" height="8.62" fill="#3c3b6e"></rect>
+            <g fill="#ffffff">
+              <circle cx="1.3" cy="1.1" r=".35"></circle><circle cx="3.1" cy="1.1" r=".35"></circle><circle cx="4.9" cy="1.1" r=".35"></circle><circle cx="6.7" cy="1.1" r=".35"></circle><circle cx="8.5" cy="1.1" r=".35"></circle>
+              <circle cx="2.2" cy="2.4" r=".35"></circle><circle cx="4" cy="2.4" r=".35"></circle><circle cx="5.8" cy="2.4" r=".35"></circle><circle cx="7.6" cy="2.4" r=".35"></circle><circle cx="9.4" cy="2.4" r=".35"></circle>
+              <circle cx="1.3" cy="3.7" r=".35"></circle><circle cx="3.1" cy="3.7" r=".35"></circle><circle cx="4.9" cy="3.7" r=".35"></circle><circle cx="6.7" cy="3.7" r=".35"></circle><circle cx="8.5" cy="3.7" r=".35"></circle>
+              <circle cx="2.2" cy="5" r=".35"></circle><circle cx="4" cy="5" r=".35"></circle><circle cx="5.8" cy="5" r=".35"></circle><circle cx="7.6" cy="5" r=".35"></circle><circle cx="9.4" cy="5" r=".35"></circle>
+              <circle cx="1.3" cy="6.3" r=".35"></circle><circle cx="3.1" cy="6.3" r=".35"></circle><circle cx="4.9" cy="6.3" r=".35"></circle><circle cx="6.7" cy="6.3" r=".35"></circle><circle cx="8.5" cy="6.3" r=".35"></circle>
+            </g>
+          </g>
+        </svg>
+        <span>EN</span>
+      </button>
+      <span class="motion-language-separator" aria-hidden="true">|</span>
+      <button type="button" data-motion-lang="pt">
+        <svg class="motion-language-flag" viewBox="0 0 24 16" aria-hidden="true" focusable="false">
+          <rect width="24" height="16" rx="2" fill="#009b3a"></rect>
+          <path d="M12 2.1 22 8l-10 5.9L2 8z" fill="#ffdf00"></path>
+          <circle cx="12" cy="8" r="3.4" fill="#002776"></circle>
+          <path d="M8.7 7.2c2.4-.4 4.6.1 6.7 1.6" fill="none" stroke="#ffffff" stroke-width=".75"></path>
+        </svg>
+        <span>PT-BR</span>
+      </button>
     `;
 
     switcher.querySelectorAll("button").forEach((button) => {
@@ -872,11 +897,14 @@
       }
 
       .motion-language-switcher button {
+        align-items: center;
         border: 0;
         border-radius: 999px;
         background: transparent;
         color: #64748b;
         cursor: pointer;
+        display: inline-flex;
+        gap: 6px;
         font: inherit;
         font-size: 11px;
         font-weight: 900;
@@ -886,7 +914,20 @@
         text-transform: uppercase;
       }
 
-      .motion-language-switcher span {
+      .motion-language-flag {
+        display: block;
+        width: 18px;
+        height: 12px;
+        flex: 0 0 auto;
+        border-radius: 2px;
+        box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.10);
+      }
+
+      .motion-language-switcher button span {
+        color: inherit;
+      }
+
+      .motion-language-separator {
         color: #cbd5e1;
         font-size: 11px;
         font-weight: 800;
