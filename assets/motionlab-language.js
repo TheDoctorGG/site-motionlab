@@ -231,9 +231,21 @@
       pt: 'Ganhe até <span class="text-emerald-600"> R$100/h </span> gravando tarefas simples para <br><span class="text-primary italic">treinar robôs.</span>'
     },
     "trampo.hero.text": {
-      en: "Trampo is a closed beta app from Motion Lab. Selected people may receive rewards of up to R$100 for approved missions by recording simple everyday tasks with a phone.",
-      pt: "O Trampo é um app em beta fechado da Motion Lab. Pessoas selecionadas poderão receber recompensas de até R$100 por missões aprovadas, gravando tarefas simples do dia a dia com o celular."
+      en: "We are opening only 100 spots in the first closed beta batch of Trampo. Join the waitlist before the end of Web Summit Rio and apply for paid missions to record simple tasks with your phone and help train robots and AI models.",
+      pt: "Estamos liberando apenas 100 vagas no lote inicial do beta fechado do Trampo. Entre na lista antes do fim do Web Summit Rio e concorra a missões pagas para gravar tarefas simples com o celular e ajudar a treinar robôs e modelos de IA."
     },
+    "trampo.urgency.badge": { en: "🔥 Only 100 spots in the first batch", pt: "🔥 Apenas 100 vagas no lote inicial" },
+    "trampo.countdown.label": { en: "Time left to join the priority batch:", pt: "Tempo restante para entrar no lote prioritário:" },
+    "trampo.countdown.days": { en: "days", pt: "dias" },
+    "trampo.countdown.hours": { en: "h", pt: "h" },
+    "trampo.countdown.minutes": { en: "min", pt: "min" },
+    "trampo.countdown.seconds": { en: "s", pt: "s" },
+    "trampo.countdown.ended": { en: "The Web Summit priority batch has ended.", pt: "O lote prioritário do Web Summit foi encerrado." },
+    "trampo.urgency.note": {
+      en: "Registration is subject to selection, mission availability, and quality approval.",
+      pt: "Cadastro sujeito à seleção, disponibilidade de missões e aprovação de qualidade."
+    },
+    "trampo.cta.helper": { en: "Takes less than 2 minutes to join the list.", pt: "Leva menos de 2 minutos para entrar na lista." },
     "trampo.phone.earnings": { en: "Total Earnings", pt: "Ganhos totais" },
     "trampo.phone.grocery": { en: "Grocery Scan", pt: "Registro de compras" },
     "trampo.phone.time": { en: "2 mins remaining", pt: "2 min restantes" },

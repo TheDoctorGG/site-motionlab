@@ -91,6 +91,109 @@
         position: absolute;
       }
 
+      .trampo-urgency-card {
+        max-width: 560px;
+        border: 1px solid rgba(255, 90, 31, 0.22);
+        border-radius: 18px;
+        background:
+          radial-gradient(circle at 12% 0%, rgba(255, 90, 31, 0.16), transparent 34%),
+          linear-gradient(135deg, rgba(255, 255, 255, 0.92), rgba(255, 247, 237, 0.72));
+        box-shadow: 0 18px 44px rgba(255, 90, 31, 0.11);
+      }
+
+      .trampo-spots-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
+        width: fit-content;
+        border: 1px solid rgba(255, 90, 31, 0.26);
+        border-radius: 999px;
+        background: rgba(255, 90, 31, 0.1);
+        color: #b9380c;
+        font-size: 12px;
+        font-weight: 900;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .trampo-spots-badge::before {
+        content: "";
+        width: 8px;
+        height: 8px;
+        border-radius: 999px;
+        background: #ff5a1f;
+        box-shadow: 0 0 0 6px rgba(255, 90, 31, 0.12);
+        animation: trampoUrgencyPulse 1.9s ease-in-out infinite;
+      }
+
+      .trampo-countdown-label {
+        color: #374151;
+        font-size: 12px;
+        font-weight: 800;
+      }
+
+      .trampo-countdown-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 8px;
+      }
+
+      .trampo-countdown-item {
+        border: 1px solid rgba(17, 24, 39, 0.08);
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.76);
+        padding: 10px 8px;
+        text-align: center;
+      }
+
+      .trampo-countdown-number {
+        display: block;
+        color: #111827;
+        font-family: "Plus Jakarta Sans", sans-serif;
+        font-size: clamp(1.35rem, 3vw, 2rem);
+        font-weight: 900;
+        line-height: 1;
+      }
+
+      .trampo-countdown-unit {
+        display: block;
+        margin-top: 5px;
+        color: #6b7280;
+        font-size: 10px;
+        font-weight: 900;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      .trampo-urgency-note,
+      .trampo-cta-helper {
+        color: #6b7280;
+        font-size: 12px;
+        line-height: 1.5;
+      }
+
+      .trampo-countdown-ended {
+        display: none;
+        color: #b9380c;
+        font-size: 14px;
+        font-weight: 800;
+        line-height: 1.5;
+      }
+
+      .trampo-urgency-card.is-ended .trampo-countdown-label,
+      .trampo-urgency-card.is-ended .trampo-countdown-grid {
+        display: none;
+      }
+
+      .trampo-urgency-card.is-ended .trampo-countdown-ended {
+        display: block;
+      }
+
+      @keyframes trampoUrgencyPulse {
+        0%, 100% { transform: scale(1); opacity: 0.74; }
+        50% { transform: scale(1.22); opacity: 1; }
+      }
+
       .websummit-booth-section {
         position: relative;
         overflow: hidden;
@@ -420,6 +523,18 @@
     width: min(92vw, 330px);
   }
 
+  .trampo-urgency-card {
+    max-width: none;
+  }
+
+  .trampo-countdown-grid {
+    gap: 6px;
+  }
+
+  .trampo-countdown-item {
+    padding: 9px 5px;
+  }
+
   .motion-logo-strip {
     padding: 22px 0;
   }
@@ -483,7 +598,8 @@ html {
   .websummit-rail.bottom::before,
   .websummit-robot-arm,
   .websummit-robot-hand,
-  .websummit-status-dot {
+  .websummit-status-dot,
+  .trampo-spots-badge::before {
     animation: none;
   }
 
@@ -546,9 +662,40 @@ html {
 <h1 class="font-headline text-5xl md:text-7xl font-extrabold text-on-background leading-[1.1] tracking-[-0.03em] mb-8">
                         Ganhe até <span class="text-emerald-600"> R$100/h </span> gravando tarefas simples para <br/><span class="text-primary italic">treinar robôs.</span>
 </h1>
-<p class="text-lg text-on-surface-variant max-w-lg mb-12 leading-relaxed">
-                        O Trampo é um app em beta fechado da Motion Lab. Pessoas selecionadas poderão receber recompensas de até R$100 por missões aprovadas, gravando tarefas simples do dia a dia com o celular.
+<p class="text-lg text-on-surface-variant max-w-xl mb-6 leading-relaxed" data-i18n="trampo.hero.text">
+                        Estamos liberando apenas 100 vagas no lote inicial do beta fechado do Trampo. Entre na lista antes do fim do Web Summit Rio e concorra a missões pagas para gravar tarefas simples com o celular e ajudar a treinar robôs e modelos de IA.
                     </p>
+
+<div class="trampo-urgency-card p-4 md:p-5 mb-8" data-countdown-deadline="2026-06-12T23:59:00-03:00">
+<div class="trampo-spots-badge px-4 py-2 mb-4" data-i18n="trampo.urgency.badge">🔥 Apenas 100 vagas no lote inicial</div>
+
+<div class="trampo-countdown">
+<p class="trampo-countdown-label mb-3" data-i18n="trampo.countdown.label">Tempo restante para entrar no lote prioritário:</p>
+<div class="trampo-countdown-grid" aria-live="polite">
+<div class="trampo-countdown-item">
+<span class="trampo-countdown-number" data-countdown-days>00</span>
+<span class="trampo-countdown-unit" data-i18n="trampo.countdown.days">dias</span>
+</div>
+<div class="trampo-countdown-item">
+<span class="trampo-countdown-number" data-countdown-hours>00</span>
+<span class="trampo-countdown-unit" data-i18n="trampo.countdown.hours">h</span>
+</div>
+<div class="trampo-countdown-item">
+<span class="trampo-countdown-number" data-countdown-minutes>00</span>
+<span class="trampo-countdown-unit" data-i18n="trampo.countdown.minutes">min</span>
+</div>
+<div class="trampo-countdown-item">
+<span class="trampo-countdown-number" data-countdown-seconds>00</span>
+<span class="trampo-countdown-unit" data-i18n="trampo.countdown.seconds">s</span>
+</div>
+</div>
+<p class="trampo-countdown-ended" data-i18n="trampo.countdown.ended">O lote prioritário do Web Summit foi encerrado.</p>
+</div>
+
+<p class="trampo-urgency-note mt-3" data-i18n="trampo.urgency.note">Cadastro sujeito à seleção, disponibilidade de missões e aprovação de qualidade.</p>
+</div>
+
+<p class="trampo-cta-helper mb-4" data-i18n="trampo.cta.helper">Leva menos de 2 minutos para entrar na lista.</p>
 <div class="flex flex-wrap gap-4">
 <a class="bg-primary text-white px-8 py-4 rounded-lg flex items-center gap-3 transition-transform hover:scale-[1.02] active:scale-95 font-bold text-sm uppercase tracking-widest shadow-lg shadow-primary/20" href="#collector-form">
 <span class="material-symbols-outlined text-2xl">list_alt</span>
@@ -1289,7 +1436,7 @@ LinkedIn
       });
     };
 
-    add('section:first-of-type .z-10 > span, section:first-of-type .z-10 > h1, section:first-of-type .z-10 > p, section:first-of-type .z-10 > .flex');
+    add('section:first-of-type .z-10 > span, section:first-of-type .z-10 > h1, section:first-of-type .z-10 > p, section:first-of-type .z-10 > .flex, .trampo-urgency-card');
     add('section:first-of-type [class*="max-w-[450px]"]', 'card');
     add('.websummit-booth-copy > *, .websummit-robot-wrap');
     add('.websummit-booth-card', 'card');
@@ -1349,6 +1496,52 @@ LinkedIn
     });
 
     revealItems.forEach(({ element }) => observer.observe(element));
+  })();
+</script>
+
+<script>
+  (() => {
+    const countdown = document.querySelector('[data-countdown-deadline]');
+    if (!countdown) return;
+
+    const deadline = new Date(countdown.getAttribute('data-countdown-deadline'));
+    const values = {
+      days: countdown.querySelector('[data-countdown-days]'),
+      hours: countdown.querySelector('[data-countdown-hours]'),
+      minutes: countdown.querySelector('[data-countdown-minutes]'),
+      seconds: countdown.querySelector('[data-countdown-seconds]')
+    };
+
+    if (Number.isNaN(deadline.getTime()) || Object.values(values).some((element) => !element)) return;
+
+    const pad = (value) => String(value).padStart(2, '0');
+
+    function renderCountdown() {
+      const remaining = deadline.getTime() - Date.now();
+
+      if (remaining <= 0) {
+        countdown.classList.add('is-ended');
+        values.days.textContent = '00';
+        values.hours.textContent = '00';
+        values.minutes.textContent = '00';
+        values.seconds.textContent = '00';
+        return;
+      }
+
+      const totalSeconds = Math.floor(remaining / 1000);
+      const days = Math.floor(totalSeconds / 86400);
+      const hours = Math.floor((totalSeconds % 86400) / 3600);
+      const minutes = Math.floor((totalSeconds % 3600) / 60);
+      const seconds = totalSeconds % 60;
+
+      values.days.textContent = pad(days);
+      values.hours.textContent = pad(hours);
+      values.minutes.textContent = pad(minutes);
+      values.seconds.textContent = pad(seconds);
+    }
+
+    renderCountdown();
+    window.setInterval(renderCountdown, 1000);
   })();
 </script>
 
