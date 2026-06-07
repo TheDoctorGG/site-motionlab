@@ -182,7 +182,7 @@
     "about.founder.proof.founder.text": { en: "CEO of Motion Lab since 2024", pt: "CEO da Motion Lab desde 2024" },
     "about.founder.proof.qa.title": { en: "Product QA", pt: "QA de Produto" },
     "about.founder.proof.qa.text": { en: "AAA game playtesting and product feedback", pt: "Testes de jogos AAA e feedback de produto" },
-    "about.founder.proof.marketing.title": { en: "Marketing Analytics", pt: "Marketing Analytics" },
+    "about.founder.proof.marketing.title": { en: "Digital Marketing", pt: "Marketing Digital" },
     "about.founder.proof.marketing.text": { en: "AAS in Social Media Marketing • 3.96 GPA", pt: "AAS em Social Media Marketing • GPA 3.96" },
     "about.founder.proof.technical.title": { en: "Technical Foundation", pt: "Base Técnica" },
     "about.founder.proof.technical.text": {
