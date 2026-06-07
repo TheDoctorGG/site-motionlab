@@ -163,8 +163,8 @@
     "about.founder.label": { en: "Founder-led infrastructure", pt: "Infraestrutura liderada pelo fundador" },
     "about.founder.title": { en: "A Brazilian data layer for physical AI.", pt: "Uma camada brasileira de dados para IA física." },
     "about.founder.text1": {
-      en: "Motion Lab was founded by Gabriel Gil to solve a specific bottleneck in embodied AI: robots and multimodal systems need high-quality, localized data from the real physical world. Most available datasets do not reflect the environments, objects, routines, and constraints of Latin America.",
-      pt: "A Motion Lab foi fundada por Gabriel Gil para resolver um gargalo específico em IA incorporada: robôs e sistemas multimodais precisam de dados localizados e de alta qualidade do mundo físico real. A maioria dos datasets disponíveis não reflete os ambientes, objetos, rotinas e restrições da América Latina."
+      en: "Motion Lab was founded by Gabriel Gil to solve a specific bottleneck in embodied AI: robots and multimodal systems need high-quality, localized data from the real physical world. Gabriel’s background combines product testing, marketing analytics, technical education, and startup execution — a practical mix for building a data acquisition layer from Brazil to the global AI and robotics market.",
+      pt: "A Motion Lab foi fundada por Gabriel Gil para resolver um gargalo específico da IA incorporada: robôs e sistemas multimodais precisam de dados localizados e de alta qualidade do mundo físico real. A trajetória de Gabriel combina testes de produto, marketing analytics, formação técnica e execução de startup — uma mistura prática para construir uma camada de aquisição de dados do Brasil para o mercado global de IA e robótica."
     },
     "about.founder.text2": {
       en: "Our approach combines a mobile collection app, task design, contributor screening, quality validation, and dataset delivery into one acquisition pipeline.",
@@ -173,6 +173,23 @@
     "about.metric.pov": { en: "First-person data", pt: "Dados em primeira pessoa" },
     "about.metric.br": { en: "Localized context", pt: "Contexto localizado" },
     "about.metric.b2b": { en: "AI & robotics", pt: "IA e robótica" },
+    "about.founder.background.title": { en: "Founder background", pt: "Trajetória do fundador" },
+    "about.founder.background.text": {
+      en: "Gabriel brings a mix of product testing, marketing analytics, technical education, and startup execution to Motion Lab’s physical-world data mission.",
+      pt: "Gabriel combina experiência em testes de produto, marketing analytics, formação técnica e execução de startup para construir a missão de dados físicos da Motion Lab."
+    },
+    "about.founder.proof.founder.title": { en: "Founder-led", pt: "Founder-led" },
+    "about.founder.proof.founder.text": { en: "CEO of Motion Lab since 2024", pt: "CEO da Motion Lab desde 2024" },
+    "about.founder.proof.qa.title": { en: "Product QA", pt: "QA de Produto" },
+    "about.founder.proof.qa.text": { en: "AAA game playtesting and product feedback", pt: "Testes de jogos AAA e feedback de produto" },
+    "about.founder.proof.marketing.title": { en: "Marketing Analytics", pt: "Marketing Analytics" },
+    "about.founder.proof.marketing.text": { en: "AAS in Social Media Marketing • 3.96 GPA", pt: "AAS em Social Media Marketing • GPA 3.96" },
+    "about.founder.proof.technical.title": { en: "Technical Foundation", pt: "Base Técnica" },
+    "about.founder.proof.technical.text": {
+      en: "Computer technician, web design, and game development",
+      pt: "Técnico em informática, web design e game development"
+    },
+    "about.founder.linkedin": { en: "Want to know more? View LinkedIn", pt: "Quer saber mais? Ver LinkedIn" },
     "about.build.label": { en: "What we build", pt: "O que construímos" },
     "about.build.title": {
       en: "Infrastructure for localized physical-world datasets.",
