@@ -263,6 +263,7 @@
       .websummit-robot-wrap {
         position: relative;
         z-index: 1;
+        min-width: 0;
       }
 
       .websummit-booth-eyebrow {
@@ -499,19 +500,49 @@
     grid-template-columns: 1fr;
     gap: 24px;
     border-radius: 22px;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .websummit-details-grid {
     grid-template-columns: 1fr;
+    width: 100%;
+    max-width: 420px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .websummit-detail {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .websummit-profile-link {
+    display: flex;
+    justify-content: center;
+    max-width: 420px;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .websummit-booth-actions,
   .websummit-booth-actions a {
     width: 100%;
+    max-width: 420px;
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
   }
 
   .websummit-booth-actions a {
     justify-content: center;
+    text-align: center;
+    white-space: normal;
+  }
+
+  .websummit-booth-actions a span:not(.material-symbols-outlined) {
+    min-width: 0;
   }
 
   .websummit-robot-wrap {
