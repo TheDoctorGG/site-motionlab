@@ -91,6 +91,206 @@
         position: absolute;
       }
 
+      .websummit-booth-section {
+        position: relative;
+        overflow: hidden;
+        background:
+          radial-gradient(circle at 10% 10%, rgba(255, 106, 31, 0.18), transparent 28%),
+          radial-gradient(circle at 86% 20%, rgba(0, 80, 203, 0.22), transparent 26%),
+          linear-gradient(135deg, #060913 0%, #0d1322 48%, #05070d 100%);
+        color: #ffffff;
+      }
+
+      .websummit-rail {
+        position: relative;
+        height: 42px;
+        overflow: hidden;
+        background:
+          linear-gradient(90deg, rgba(255, 255, 255, 0.16) 0 1px, transparent 1px 38px),
+          linear-gradient(135deg, #ff6a1f, #ff8a35);
+        border-block: 1px solid rgba(255, 255, 255, 0.16);
+      }
+
+      .websummit-rail::before {
+        content: "WEB SUMMIT RIO 2026 • ALPHA 1 • BOOTH A1-67 • MOTION LAB • ";
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        white-space: nowrap;
+        color: rgba(10, 12, 18, 0.88);
+        font-size: 11px;
+        font-weight: 900;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        animation: websummitRail 24s linear infinite;
+      }
+
+      .websummit-rail.bottom::before {
+        animation-direction: reverse;
+      }
+
+      .websummit-booth-card {
+        position: relative;
+        overflow: hidden;
+        display: grid;
+        grid-template-columns: minmax(0, 1.08fr) minmax(300px, 0.72fr);
+        gap: 34px;
+        align-items: center;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 28px;
+        background:
+          radial-gradient(circle at 26px 26px, rgba(255, 255, 255, 0.1) 1px, transparent 1.5px) 0 0 / 26px 26px,
+          linear-gradient(145deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.035));
+        box-shadow: 0 34px 90px rgba(0, 0, 0, 0.36);
+      }
+
+      .websummit-booth-card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        background:
+          linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.07), transparent),
+          repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.035) 0 1px, transparent 1px 9px);
+        opacity: 0.48;
+      }
+
+      .websummit-booth-copy,
+      .websummit-robot-wrap {
+        position: relative;
+        z-index: 1;
+      }
+
+      .websummit-booth-eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        border: 1px solid rgba(255, 106, 31, 0.42);
+        border-radius: 999px;
+        background: rgba(255, 106, 31, 0.12);
+        color: #ffb27a;
+        font-size: 11px;
+        font-weight: 900;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+      }
+
+      .websummit-booth-eyebrow::before {
+        content: "";
+        width: 8px;
+        height: 8px;
+        border-radius: 999px;
+        background: #ff6a1f;
+        box-shadow: 0 0 20px rgba(255, 106, 31, 0.85);
+      }
+
+      .websummit-booth-title {
+        color: #ffffff;
+        letter-spacing: -0.04em;
+      }
+
+      .websummit-booth-text {
+        color: rgba(255, 255, 255, 0.76);
+      }
+
+      .websummit-details-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+      }
+
+      .websummit-detail {
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.075);
+        padding: 16px;
+      }
+
+      .websummit-detail span {
+        display: block;
+        color: rgba(255, 255, 255, 0.52);
+        font-size: 10px;
+        font-weight: 900;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+      }
+
+      .websummit-detail strong {
+        display: block;
+        margin-top: 6px;
+        color: #ffffff;
+        font-size: 14px;
+        line-height: 1.35;
+      }
+
+      .websummit-profile-link {
+        display: inline-flex;
+        width: fit-content;
+        align-items: center;
+        gap: 8px;
+        color: #ffb27a;
+        font-size: 12px;
+        font-weight: 900;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .websummit-booth-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+
+      .websummit-booth-actions a {
+        min-height: 52px;
+      }
+
+      .websummit-robot-wrap {
+        display: grid;
+        place-items: center;
+        min-height: 360px;
+      }
+
+      .websummit-robot {
+        width: min(100%, 390px);
+        filter: drop-shadow(0 30px 36px rgba(0, 0, 0, 0.34));
+      }
+
+      .websummit-robot-arm {
+        transform-origin: 236px 150px;
+        animation: websummitWave 2.9s ease-in-out infinite;
+      }
+
+      .websummit-robot-hand {
+        transform-origin: 306px 93px;
+        animation: websummitHand 2.9s ease-in-out infinite;
+      }
+
+      .websummit-status-dot {
+        animation: websummitPulse 1.8s ease-in-out infinite;
+      }
+
+      @keyframes websummitRail {
+        from { transform: translateX(0); }
+        to { transform: translateX(-420px); }
+      }
+
+      @keyframes websummitWave {
+        0%, 100% { transform: rotate(-4deg); }
+        50% { transform: rotate(12deg); }
+      }
+
+      @keyframes websummitHand {
+        0%, 100% { transform: rotate(-8deg); }
+        50% { transform: rotate(16deg); }
+      }
+
+      @keyframes websummitPulse {
+        0%, 100% { opacity: 0.55; transform: scale(1); }
+        50% { opacity: 1; transform: scale(1.22); }
+      }
+
 
       /* Motion Lab scrolling ecosystem strip */
 .motion-logo-strip {
@@ -192,6 +392,34 @@
 }
 
 @media (max-width: 768px) {
+  .websummit-booth-card {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    border-radius: 22px;
+  }
+
+  .websummit-details-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .websummit-booth-actions,
+  .websummit-booth-actions a {
+    width: 100%;
+  }
+
+  .websummit-booth-actions a {
+    justify-content: center;
+  }
+
+  .websummit-robot-wrap {
+    min-height: 260px;
+    margin-top: -6px;
+  }
+
+  .websummit-robot {
+    width: min(92vw, 330px);
+  }
+
   .motion-logo-strip {
     padding: 22px 0;
   }
@@ -251,6 +479,14 @@ html {
     animation: none;
   }
 
+  .websummit-rail::before,
+  .websummit-rail.bottom::before,
+  .websummit-robot-arm,
+  .websummit-robot-hand,
+  .websummit-status-dot {
+    animation: none;
+  }
+
   .scroll-pop,
   .scroll-pop.scroll-pop-card {
     opacity: 1;
@@ -275,8 +511,8 @@ html {
       <!-- Desktop nav -->
       <div class="hidden md:flex items-center gap-8">
         <a class="text-sm tracking-[0.05em] uppercase font-bold text-zinc-500 hover:text-zinc-900 transition-colors duration-300" href="/">Home</a>
-        <a class="text-sm tracking-[0.05em] uppercase font-bold text-zinc-900 border-b-2 border-zinc-900 pb-1" href="/trampoapp">App Brazil</a>
-        <a class="text-sm tracking-[0.05em] uppercase font-bold text-zinc-500 hover:text-zinc-900 transition-colors duration-300" href="/about-us">About Us</a>
+        <a class="text-sm tracking-[0.05em] uppercase font-bold text-zinc-900 border-b-2 border-zinc-900 pb-1" href="/trampoapp/">App Brazil</a>
+        <a class="text-sm tracking-[0.05em] uppercase font-bold text-zinc-500 hover:text-zinc-900 transition-colors duration-300" href="/about-us/">About Us</a>
       </div>
 
       <a class="scale-95 active:scale-90 transition-transform bg-primary px-4 md:px-5 py-2.5 rounded-lg text-white font-bold text-[10px] md:text-xs uppercase tracking-widest shadow-lg shadow-primary/20" href="#collector-form">
@@ -287,8 +523,8 @@ html {
     <!-- Mobile nav -->
     <div class="flex md:hidden items-center justify-center gap-6 pb-3 overflow-x-auto">
       <a class="text-xs tracking-[0.08em] uppercase font-bold text-zinc-500 whitespace-nowrap" href="/">Home</a>
-      <a class="text-xs tracking-[0.08em] uppercase font-bold text-zinc-900 border-b-2 border-zinc-900 pb-1 whitespace-nowrap" href="/trampoapp">App Brazil</a>
-      <a class="text-xs tracking-[0.08em] uppercase font-bold text-zinc-500 whitespace-nowrap" href="/about-us">About Us</a>
+      <a class="text-xs tracking-[0.08em] uppercase font-bold text-zinc-900 border-b-2 border-zinc-900 pb-1 whitespace-nowrap" href="/trampoapp/">App Brazil</a>
+      <a class="text-xs tracking-[0.08em] uppercase font-bold text-zinc-500 whitespace-nowrap" href="/about-us/">About Us</a>
     </div>
 
   </div>
@@ -383,6 +619,120 @@ html {
 </div>
 </div>
 </div>
+</section>
+
+
+<!-- Web Summit Rio 2026 Booth Section -->
+<section class="websummit-booth-section" aria-label="Web Summit Rio 2026 booth">
+<div class="websummit-rail" aria-hidden="true"></div>
+
+<div class="max-w-screen-2xl mx-auto px-5 md:px-8 py-12 md:py-16">
+<div class="websummit-booth-card p-6 md:p-10 lg:p-12">
+<div class="websummit-booth-copy">
+<p class="websummit-booth-eyebrow px-4 py-2 mb-6" data-i18n="trampo.websummit.eyebrow">NO WEB SUMMIT RIO 2026</p>
+
+<h2 class="websummit-booth-title font-headline text-4xl md:text-6xl font-extrabold leading-[1.02] mb-6" data-i18n="trampo.websummit.title">
+                        Conheça a Motion Lab no ALPHA 1.
+                    </h2>
+
+<p class="websummit-booth-text text-base md:text-lg leading-relaxed max-w-3xl mb-8" data-i18n="trampo.websummit.text">
+                        Estaremos expondo o Trampo — nossa camada de aquisição de dados via smartphone para IA física, robótica e modelos multimodais. Se você estiver no Web Summit Rio, visite nosso stand para conhecer como dados POV reais do Brasil podem apoiar a próxima geração de IA incorporada.
+                    </p>
+
+<div class="websummit-details-grid mb-5">
+<div class="websummit-detail">
+<span data-i18n="trampo.websummit.date.label">Data</span>
+<strong data-i18n="trampo.websummit.date.value">quinta-feira, 11 de junho de 2026</strong>
+</div>
+<div class="websummit-detail">
+<span data-i18n="trampo.websummit.booth.label">Stand</span>
+<strong data-i18n="trampo.websummit.booth.value">A1-67</strong>
+</div>
+<div class="websummit-detail">
+<span data-i18n="trampo.websummit.area.label">Área</span>
+<strong data-i18n="trampo.websummit.area.value">ALPHA 1</strong>
+</div>
+<div class="websummit-detail">
+<span data-i18n="trampo.websummit.map.label">Mapa do evento</span>
+<strong data-i18n="trampo.websummit.map.value">disponível no local</strong>
+</div>
+</div>
+
+<p class="text-sm text-white/58 leading-relaxed mb-5" data-i18n="trampo.websummit.location">
+                        A localização exata do stand pode ser confirmada ao chegar no evento.
+                    </p>
+
+<a class="websummit-profile-link mb-8" href="https://rio.websummit.com/pt-br/appearances/rio26/51c9d9e5-cde5-4aa4-9c1a-93aa8bb3e353/motion-lab/?utm_source=sharing&amp;utm_campaign=social-cards&amp;utm_medium=url" target="_blank" rel="noopener noreferrer">
+<span class="material-symbols-outlined text-base" aria-hidden="true">verified</span>
+<span data-i18n="trampo.websummit.profile">Ver Motion Lab no Web Summit</span>
+</a>
+
+<div class="websummit-booth-actions">
+<a class="inline-flex items-center gap-3 bg-white text-zinc-950 px-7 py-4 rounded-lg font-bold text-sm uppercase tracking-widest shadow-lg shadow-black/20 transition-transform hover:scale-[1.02] active:scale-95" href="#collector-form" data-motion-action-key="trampo.websummit.cta.waitlist">
+<span class="material-symbols-outlined text-xl" aria-hidden="true">list_alt</span>
+<span data-i18n="trampo.websummit.cta.waitlist">Entrar na lista de espera</span>
+</a>
+
+<a class="inline-flex items-center gap-3 border border-white/18 bg-white/8 text-white px-7 py-4 rounded-lg font-bold text-sm uppercase tracking-widest transition-colors hover:bg-white/14" href="https://wa.me/5548988405089?text=Ol%C3%A1%20Gabriel%2C%20vi%20a%20Motion%20Lab%20no%20Web%20Summit%20Rio%202026%20e%20quero%20conversar." target="_blank" rel="noopener noreferrer" data-motion-action-key="trampo.websummit.cta.talk">
+<span class="material-symbols-outlined text-xl" aria-hidden="true">chat</span>
+<span data-i18n="trampo.websummit.cta.talk">Falar com a Motion Lab</span>
+</a>
+</div>
+</div>
+
+<div class="websummit-robot-wrap" aria-hidden="true">
+<svg class="websummit-robot" viewBox="0 0 380 360" role="img">
+<defs>
+<linearGradient id="websummit-robot-metal" x1="0" x2="1" y1="0" y2="1">
+<stop offset="0" stop-color="#ffffff"/>
+<stop offset="0.55" stop-color="#cbd5e1"/>
+<stop offset="1" stop-color="#7c8798"/>
+</linearGradient>
+<linearGradient id="websummit-robot-orange" x1="0" x2="1">
+<stop offset="0" stop-color="#ff6a1f"/>
+<stop offset="1" stop-color="#ffb36b"/>
+</linearGradient>
+<filter id="websummit-robot-glow" x="-40%" y="-40%" width="180%" height="180%">
+<feGaussianBlur stdDeviation="8" result="blur"/>
+<feMerge>
+<feMergeNode in="blur"/>
+<feMergeNode in="SourceGraphic"/>
+</feMerge>
+</filter>
+</defs>
+
+<path d="M52 300 C92 250 86 206 138 190 C186 174 226 202 262 176 C304 145 308 92 342 68" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="3" stroke-dasharray="8 12"/>
+<ellipse cx="190" cy="314" rx="116" ry="20" fill="rgba(0,0,0,0.28)"/>
+
+<g class="websummit-robot-arm">
+<path d="M229 154 C253 134 264 111 275 91" fill="none" stroke="url(#websummit-robot-metal)" stroke-width="26" stroke-linecap="round"/>
+<path d="M229 154 C253 134 264 111 275 91" fill="none" stroke="#ff6a1f" stroke-width="6" stroke-linecap="round"/>
+<circle cx="229" cy="154" r="18" fill="#111827" stroke="#ff8a35" stroke-width="5"/>
+<g class="websummit-robot-hand">
+<circle cx="284" cy="78" r="15" fill="url(#websummit-robot-orange)"/>
+<path d="M283 65 V39 M295 72 L314 51 M298 87 L326 88 M274 71 L257 50" fill="none" stroke="#fff7ed" stroke-width="7" stroke-linecap="round"/>
+</g>
+</g>
+
+<rect x="92" y="132" width="148" height="148" rx="34" fill="url(#websummit-robot-metal)"/>
+<rect x="108" y="150" width="116" height="58" rx="18" fill="#07111f"/>
+<circle cx="139" cy="179" r="8" fill="#38bdf8" filter="url(#websummit-robot-glow)"/>
+<circle cx="193" cy="179" r="8" fill="#38bdf8" filter="url(#websummit-robot-glow)"/>
+<path d="M143 232 Q166 248 190 232" fill="none" stroke="#111827" stroke-width="7" stroke-linecap="round"/>
+<circle class="websummit-status-dot" cx="218" cy="132" r="8" fill="#ff6a1f" filter="url(#websummit-robot-glow)"/>
+
+<rect x="92" y="260" width="148" height="34" rx="14" fill="#111827"/>
+<text x="166" y="282" text-anchor="middle" fill="#ffb36b" font-size="13" font-weight="900" letter-spacing="1.5">BOOTH A1-67</text>
+
+<rect x="34" y="74" width="112" height="54" rx="16" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.18)"/>
+<text x="90" y="99" text-anchor="middle" fill="#ffffff" font-size="12" font-weight="900" letter-spacing="1.2">HELLO RIO</text>
+<text x="90" y="116" text-anchor="middle" fill="#ffb36b" font-size="9" font-weight="900" letter-spacing="1">ALPHA 1</text>
+</svg>
+</div>
+</div>
+</div>
+
+<div class="websummit-rail bottom" aria-hidden="true"></div>
 </section>
 
 
@@ -524,7 +874,7 @@ html {
 <span class="inline-block px-4 py-2 bg-emerald-100 text-emerald-800 font-extrabold text-xs uppercase tracking-[0.18em] rounded-full mb-6 border border-emerald-200">
                         Dados para IA física
                     </span>
-<h2 class="font-headline text-4xl md:text-5xl font-extrabold tracking-tight mb-6">
+<h2 class="font-headline text-4xl md:text-5xl font-extrabold tracking-tight mb-6" data-i18n-html="trampo.data.title">
                         Por que gravar <br class="hidden md:block"/>tarefas simples?
                     </h2>
 <div class="h-1 w-24 bg-primary"></div>
@@ -861,10 +1211,10 @@ A Motion Lab está criando a camada de aquisição de dados físicos da América
 <a class="text-zinc-500 hover:text-primary transition-colors text-sm" href="/">Início</a>
 </li>
 <li>
-<a class="text-zinc-500 hover:text-primary transition-colors text-sm" href="/trampoapp">App Brasil</a>
+<a class="text-zinc-500 hover:text-primary transition-colors text-sm" href="/trampoapp/">App Brasil</a>
 </li>
 <li>
-<a class="text-zinc-500 hover:text-primary transition-colors text-sm" href="/about-us">Sobre nós</a>
+<a class="text-zinc-500 hover:text-primary transition-colors text-sm" href="/about-us/">Sobre nós</a>
 </li>
 </ul>
 </div>
@@ -874,13 +1224,13 @@ A Motion Lab está criando a camada de aquisição de dados físicos da América
 <h6 class="text-zinc-900 font-bold mb-4 text-xs uppercase tracking-widest">LEGAL</h6>
 <ul class="space-y-3">
 <li>
-<a class="text-zinc-500 hover:text-primary transition-colors text-sm" href="/privacy-policy">Política de Privacidade</a>
+<a class="text-zinc-500 hover:text-primary transition-colors text-sm" href="/privacy-policy/">Política de Privacidade</a>
 </li>
 <li>
-<a class="text-zinc-500 hover:text-primary transition-colors text-sm" href="/terms">Termos de Uso</a>
+<a class="text-zinc-500 hover:text-primary transition-colors text-sm" href="/terms/">Termos de Uso</a>
 </li>
 <li>
-<a class="text-zinc-500 hover:text-primary transition-colors text-sm" href="/lgpd-consent">LGPD e Consentimento de Dados</a>
+<a class="text-zinc-500 hover:text-primary transition-colors text-sm" href="/lgpd-consent/">LGPD e Consentimento de Dados</a>
 </li>
 </ul>
 </div>
@@ -941,6 +1291,8 @@ LinkedIn
 
     add('section:first-of-type .z-10 > span, section:first-of-type .z-10 > h1, section:first-of-type .z-10 > p, section:first-of-type .z-10 > .flex');
     add('section:first-of-type [class*="max-w-[450px]"]', 'card');
+    add('.websummit-booth-copy > *, .websummit-robot-wrap');
+    add('.websummit-booth-card', 'card');
     add('.motion-logo-strip-inner', 'card');
     add('section > div > div[class*="text-center"] > span, section > div > div[class*="text-center"] > h2, section > div > div[class*="text-center"] > p');
     add('section .grid > .group, section .grid > div[class*="rounded-2xl"], section .grid > div[class*="rounded-3xl"]', 'card');

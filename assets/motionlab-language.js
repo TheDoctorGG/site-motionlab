@@ -239,6 +239,27 @@
     "trampo.phone.time": { en: "2 mins remaining", pt: "2 min restantes" },
     "trampo.phone.commute": { en: "Commute POV", pt: "POV no trajeto" },
     "trampo.phone.available": { en: "Available now", pt: "Disponível agora" },
+    "trampo.websummit.eyebrow": { en: "LIVE AT WEB SUMMIT RIO 2026", pt: "NO WEB SUMMIT RIO 2026" },
+    "trampo.websummit.title": { en: "Meet Motion Lab at ALPHA 1.", pt: "Conheça a Motion Lab no ALPHA 1." },
+    "trampo.websummit.text": {
+      en: "We will be exhibiting Trampo — our smartphone-based data acquisition layer for physical AI, robotics, and multimodal models. If you are at Web Summit Rio, visit our booth to see how Brazilian real-world POV data can support the next generation of embodied AI.",
+      pt: "Estaremos expondo o Trampo — nossa camada de aquisição de dados via smartphone para IA física, robótica e modelos multimodais. Se você estiver no Web Summit Rio, visite nosso stand para conhecer como dados POV reais do Brasil podem apoiar a próxima geração de IA incorporada."
+    },
+    "trampo.websummit.date.label": { en: "Date", pt: "Data" },
+    "trampo.websummit.date.value": { en: "Thursday, June 11, 2026", pt: "quinta-feira, 11 de junho de 2026" },
+    "trampo.websummit.booth.label": { en: "Booth", pt: "Stand" },
+    "trampo.websummit.booth.value": { en: "A1-67", pt: "A1-67" },
+    "trampo.websummit.area.label": { en: "Area", pt: "Área" },
+    "trampo.websummit.area.value": { en: "ALPHA 1", pt: "ALPHA 1" },
+    "trampo.websummit.map.label": { en: "Venue map", pt: "Mapa do evento" },
+    "trampo.websummit.map.value": { en: "available at the event", pt: "disponível no local" },
+    "trampo.websummit.location": {
+      en: "Exact booth locations can be confirmed when arriving at the venue.",
+      pt: "A localização exata do stand pode ser confirmada ao chegar no evento."
+    },
+    "trampo.websummit.profile": { en: "View Motion Lab on Web Summit", pt: "Ver Motion Lab no Web Summit" },
+    "trampo.websummit.cta.waitlist": { en: "Join Trampo waitlist", pt: "Entrar na lista de espera" },
+    "trampo.websummit.cta.talk": { en: "Talk to Motion Lab", pt: "Falar com a Motion Lab" },
     "trampo.strip.label": { en: "Data for physical AI, robotics, and multimodal models", pt: "Dados para IA física, robótica e modelos multimodais" },
     "trampo.strip.robotics": { en: "Humanoid Robots", pt: "Robôs humanoides" },
     "trampo.strip.multimodal": { en: "Multimodal AI", pt: "IA multimodal" },
@@ -431,7 +452,7 @@
     ],
     trampo: [
       ["section:first-of-type h1", "trampo.hero.title"],
-      ["main section:nth-of-type(4) h2", "trampo.data.title"]
+      ["[data-i18n-html='trampo.data.title']", "trampo.data.title"]
     ]
   };
 
@@ -667,15 +688,10 @@
   function updateCommonLinks(language) {
     const labels = {
       "/": "nav.home",
-      "/trampoapp": "nav.trampo",
       "/trampoapp/": "nav.trampo",
-      "/about-us": "nav.about",
       "/about-us/": "nav.about",
-      "/privacy-policy": "nav.privacy",
       "/privacy-policy/": "nav.privacy",
-      "/terms": "nav.terms",
       "/terms/": "nav.terms",
-      "/lgpd-consent": "nav.lgpd",
       "/lgpd-consent/": "nav.lgpd"
     };
 

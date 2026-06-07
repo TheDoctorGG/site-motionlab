@@ -1,4 +1,31 @@
 {
+  "redirects": [
+    {
+      "source": "/trampoapp",
+      "destination": "/trampoapp/",
+      "permanent": true
+    },
+    {
+      "source": "/about-us",
+      "destination": "/about-us/",
+      "permanent": true
+    },
+    {
+      "source": "/privacy-policy",
+      "destination": "/privacy-policy/",
+      "permanent": true
+    },
+    {
+      "source": "/terms",
+      "destination": "/terms/",
+      "permanent": true
+    },
+    {
+      "source": "/lgpd-consent",
+      "destination": "/lgpd-consent/",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     { "source": "/trampoapp", "destination": "/trampoapp/index.html" },
     { "source": "/about-us", "destination": "/about-us/index.html" }
