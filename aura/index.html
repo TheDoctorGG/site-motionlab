@@ -1,0 +1,735 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,follow">
+  <title>Motion Lab Aura | AI coaching for the way you train</title>
+  <meta name="description" content="Motion Lab Aura is an AI-assisted fitness coaching product in development. Upload a training set, get focused coaching, and build a record of your progress.">
+  <link rel="icon" href="/assets/motion-lab-logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@700;800&amp;display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #17191b;
+      --muted: #62686e;
+      --subtle: #8b9299;
+      --blue: #0054d6;
+      --aura: #6657e8;
+      --aura-dark: #4e40cf;
+      --aura-soft: #eeecff;
+      --line: #dce1e6;
+      --line-dark: #30343d;
+      --paper: #f5f7f9;
+      --white: #fff;
+      --dark: #111318;
+      --shell: 1440px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      overflow-x: hidden;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: "Inter", Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    a:focus-visible {
+      outline: 3px solid var(--aura);
+      outline-offset: 4px;
+      border-radius: 2px;
+    }
+    img { display: block; max-width: 100%; }
+    h1, h2, h3, p { margin-top: 0; }
+    h1, h2, h3 { font-family: "Plus Jakarta Sans", Arial, sans-serif; }
+    .shell { width: min(calc(100% - 64px), var(--shell)); margin-inline: auto; }
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 0 0 26px;
+      color: var(--aura-dark);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+    }
+    .eyebrow::before { width: 30px; height: 1px; background: currentColor; content: ""; }
+    .technical-label {
+      color: var(--subtle);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+
+    .site-header {
+      position: relative;
+      z-index: 20;
+      border-bottom: 1px solid var(--line);
+      background: rgba(255,255,255,.94);
+      backdrop-filter: blur(18px);
+    }
+    .header-row {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 32px;
+    }
+    .brand img { width: auto; height: 31px; }
+    .site-nav { display: flex; align-items: center; gap: 34px; }
+    .site-nav a {
+      position: relative;
+      padding: 10px 0;
+      color: #4f5458;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+    .site-nav a::after {
+      position: absolute;
+      right: 0;
+      bottom: 4px;
+      left: 0;
+      height: 1px;
+      background: var(--aura);
+      content: "";
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 180ms ease;
+    }
+    .site-nav a:hover { color: var(--ink); }
+    .site-nav a:hover::after,
+    .site-nav .is-current::after { transform: scaleX(1); transform-origin: left; }
+    .site-nav .is-current { color: var(--ink); }
+
+    .hero {
+      position: relative;
+      isolation: isolate;
+      min-height: 790px;
+      border-bottom: 1px solid var(--line);
+      background: var(--white);
+      overflow: hidden;
+    }
+    .hero::before {
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      background-image:
+        linear-gradient(rgba(23,25,27,.046) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(23,25,27,.046) 1px, transparent 1px);
+      background-size: 48px 48px;
+      content: "";
+      mask-image: linear-gradient(to bottom, black 0%, transparent 94%);
+    }
+    .hero::after {
+      position: absolute;
+      top: -250px;
+      right: -150px;
+      z-index: -1;
+      width: min(60vw, 890px);
+      aspect-ratio: 1;
+      border: 1px solid rgba(102,87,232,.14);
+      border-radius: 50%;
+      box-shadow: 0 0 0 110px rgba(102,87,232,.025), 0 0 0 220px rgba(102,87,232,.015);
+      content: "";
+    }
+    .hero-layout {
+      min-height: 790px;
+      display: grid;
+      grid-template-columns: minmax(0,1.08fr) minmax(410px,.92fr);
+      align-items: center;
+      gap: clamp(64px,8vw,138px);
+      padding-block: 92px 102px;
+    }
+    h1 {
+      max-width: 900px;
+      margin-bottom: 30px;
+      font-size: clamp(58px,7vw,106px);
+      font-weight: 800;
+      letter-spacing: -.066em;
+      line-height: .93;
+    }
+    .hero-accent { color: var(--aura); }
+    .hero-copy {
+      max-width: 620px;
+      margin-bottom: 38px;
+      color: var(--muted);
+      font-size: clamp(17px,1.6vw,21px);
+      line-height: 1.65;
+    }
+    .hero-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 22px; }
+    .anchor-link {
+      min-height: 50px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      border: 1px solid var(--ink);
+      background: var(--ink);
+      color: var(--white);
+      padding: 0 20px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      transition: background 180ms ease, border-color 180ms ease;
+    }
+    .anchor-link::after { font-size: 16px; content: "↓"; }
+    .anchor-link:hover { border-color: var(--aura); background: var(--aura); }
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+      color: var(--aura-dark);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .17em;
+      text-transform: uppercase;
+    }
+    .status-badge::before {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--aura);
+      box-shadow: 0 0 0 6px var(--aura-soft);
+      content: "";
+    }
+    .aura-orbit {
+      position: relative;
+      min-height: 500px;
+      border: 1px solid #cfd4da;
+      background:
+        linear-gradient(rgba(102,87,232,.065) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(102,87,232,.065) 1px, transparent 1px),
+        rgba(248,249,251,.92);
+      background-size: 34px 34px;
+      box-shadow: 0 28px 72px rgba(24,28,40,.09);
+      overflow: hidden;
+    }
+    .orbit-bar {
+      position: relative;
+      z-index: 5;
+      height: 47px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #cfd4da;
+      background: var(--white);
+      padding: 0 16px;
+    }
+    .concept-chip { color: var(--aura-dark); }
+    .orbit-stage { position: absolute; inset: 47px 0 0; }
+    .orbit-ring {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      border: 1px solid rgba(102,87,232,.3);
+      border-radius: 50%;
+      transform: translate(-50%,-50%);
+    }
+    .ring-one { width: 210px; height: 210px; border-style: dashed; animation: orbit 18s linear infinite; }
+    .ring-two { width: 330px; height: 330px; }
+    .ring-three { width: 430px; height: 430px; opacity: .45; }
+    .aura-core {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      z-index: 3;
+      width: 118px;
+      height: 118px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--aura-dark);
+      border-radius: 50%;
+      background: var(--aura);
+      color: var(--white);
+      font: 800 31px/1 "Plus Jakarta Sans", sans-serif;
+      letter-spacing: -.06em;
+      transform: translate(-50%,-50%);
+      box-shadow: 0 20px 54px rgba(102,87,232,.28);
+    }
+    .orbit-note {
+      position: absolute;
+      z-index: 4;
+      min-width: 142px;
+      border: 1px solid #cfd4da;
+      background: rgba(255,255,255,.93);
+      padding: 13px 14px;
+      box-shadow: 0 10px 28px rgba(24,28,40,.07);
+    }
+    .orbit-note strong, .orbit-note span { display: block; }
+    .orbit-note strong {
+      margin-bottom: 6px;
+      font-size: 10px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+    .orbit-note span { color: var(--subtle); font-size: 8px; font-weight: 700; letter-spacing: .11em; text-transform: uppercase; }
+    .note-one { top: 14%; left: 7%; }
+    .note-two { top: 21%; right: 6%; }
+    .note-three { right: 8%; bottom: 12%; }
+    .note-four { bottom: 10%; left: 7%; }
+    .orbit-caption { position: absolute; bottom: 14px; left: 16px; color: var(--subtle); }
+
+    .workflow { padding-block: 126px; }
+    .workflow-heading {
+      display: grid;
+      grid-template-columns: minmax(0,1fr) minmax(300px,430px);
+      align-items: end;
+      gap: 52px;
+      margin-bottom: 58px;
+    }
+    .workflow-heading h2 {
+      max-width: 760px;
+      margin-bottom: 0;
+      font-size: clamp(42px,5.6vw,76px);
+      font-weight: 800;
+      letter-spacing: -.058em;
+      line-height: 1;
+    }
+    .workflow-heading > p {
+      margin-bottom: 4px;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.7;
+    }
+    .concept-window {
+      border: 1px solid var(--line-dark);
+      background: var(--dark);
+      color: var(--white);
+      box-shadow: 0 32px 80px rgba(17,19,24,.14);
+    }
+    .concept-bar {
+      min-height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      border-bottom: 1px solid var(--line-dark);
+      padding: 12px 18px;
+    }
+    .concept-bar .technical-label { color: #9299a5; }
+    .preview-state { color: #bcb5ff; }
+    .concept-body { display: grid; grid-template-columns: minmax(300px,.78fr) minmax(0,1.22fr); }
+    .movement-frame {
+      position: relative;
+      min-height: 490px;
+      border-right: 1px solid var(--line-dark);
+      background:
+        linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px),
+        linear-gradient(90deg,rgba(255,255,255,.045) 1px, transparent 1px),
+        #0d0f13;
+      background-size: 32px 32px;
+      overflow: hidden;
+    }
+    .frame-label { position: absolute; top: 18px; left: 18px; color: #9299a5; }
+    .floor-line { position: absolute; right: 10%; bottom: 69px; left: 10%; height: 1px; background: #4a4f5b; }
+    .pose {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 180px;
+      height: 230px;
+      transform: translate(-50%,-45%);
+    }
+    .pose span { position: absolute; display: block; background: #bcb5ff; transform-origin: left center; }
+    .pose .head { top: 3px; left: 77px; width: 29px; height: 29px; border: 2px solid #bcb5ff; border-radius: 50%; background: transparent; }
+    .pose .torso { top: 38px; left: 92px; width: 72px; height: 2px; transform: rotate(91deg); }
+    .pose .arm-a { top: 55px; left: 92px; width: 67px; height: 2px; transform: rotate(154deg); }
+    .pose .arm-b { top: 55px; left: 92px; width: 68px; height: 2px; transform: rotate(27deg); }
+    .pose .thigh-a { top: 109px; left: 91px; width: 82px; height: 2px; transform: rotate(154deg); }
+    .pose .thigh-b { top: 109px; left: 91px; width: 82px; height: 2px; transform: rotate(26deg); }
+    .pose .shin-a { top: 143px; left: 19px; width: 77px; height: 2px; transform: rotate(77deg); }
+    .pose .shin-b { top: 144px; left: 164px; width: 77px; height: 2px; transform: rotate(103deg); }
+    .joint { position: absolute; width: 8px; height: 8px; border: 2px solid var(--aura); border-radius: 50%; background: var(--dark); }
+    .joint-one { top: 105px; left: 87px; }
+    .joint-two { top: 138px; left: 14px; }
+    .joint-three { top: 138px; right: 10px; }
+    .movement-tag {
+      position: absolute;
+      right: 18px;
+      bottom: 18px;
+      left: 18px;
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      color: #9299a5;
+      font-size: 8px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+    .analysis-stack { display: grid; grid-template-rows: repeat(4,1fr); }
+    .analysis-step {
+      min-height: 122px;
+      display: grid;
+      grid-template-columns: 88px minmax(0,1fr) auto;
+      align-items: center;
+      gap: 22px;
+      border-bottom: 1px solid var(--line-dark);
+      padding: 24px 28px;
+    }
+    .analysis-step:last-child { border-bottom: 0; }
+    .step-index { color: #7167ca; font-size: 10px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
+    .analysis-step h3 { margin-bottom: 7px; font-size: 18px; letter-spacing: -.02em; }
+    .analysis-step p { margin-bottom: 0; color: #969da7; font-size: 13px; line-height: 1.55; }
+    .step-status {
+      border: 1px solid #3a3f4a;
+      color: #aaa2ff;
+      padding: 8px 10px;
+      font-size: 8px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .concept-note {
+      margin: 16px 0 0;
+      color: var(--subtle);
+      font-size: 11px;
+      line-height: 1.6;
+    }
+
+    .pillars { border-top: 1px solid var(--line); background: var(--white); padding-block: 116px; }
+    .pillars-head { max-width: 760px; margin-bottom: 52px; }
+    .pillars-head h2 {
+      margin-bottom: 0;
+      font-size: clamp(40px,5vw,68px);
+      font-weight: 800;
+      letter-spacing: -.055em;
+      line-height: 1;
+    }
+    .pillar-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); border: 1px solid var(--line); }
+    .pillar {
+      min-height: 310px;
+      display: flex;
+      flex-direction: column;
+      border-right: 1px solid var(--line);
+      padding: clamp(30px,3.5vw,50px);
+    }
+    .pillar:last-child { border-right: 0; }
+    .pillar-index { margin-bottom: 78px; color: var(--aura-dark); }
+    .pillar h3 { margin-bottom: 16px; font-size: clamp(23px,2.4vw,34px); letter-spacing: -.035em; }
+    .pillar p { max-width: 350px; margin-bottom: 0; color: var(--muted); font-size: 15px; line-height: 1.68; }
+
+    .status-section { position: relative; background: var(--aura); color: var(--white); overflow: hidden; }
+    .status-section::before {
+      position: absolute;
+      top: 50%;
+      right: -130px;
+      width: 520px;
+      height: 520px;
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: 50%;
+      box-shadow: 0 0 0 85px rgba(255,255,255,.045), 0 0 0 170px rgba(255,255,255,.025);
+      content: "";
+      transform: translateY(-50%);
+    }
+    .status-layout {
+      position: relative;
+      z-index: 2;
+      min-height: 520px;
+      display: grid;
+      grid-template-columns: minmax(0,.72fr) minmax(0,1.28fr);
+      align-items: center;
+      gap: 72px;
+      padding-block: 98px;
+    }
+    .status-wordmark span { display: block; }
+    .status-wordmark .technical-label { margin-bottom: 18px; color: #d4d0ff; }
+    .status-wordmark strong { font: 800 clamp(64px,9vw,132px)/.82 "Plus Jakarta Sans",sans-serif; letter-spacing: -.075em; }
+    .status-copy { max-width: 670px; }
+    .status-copy .eyebrow { color: #dedaff; }
+    .status-copy h2 {
+      margin-bottom: 24px;
+      font-size: clamp(46px,6vw,84px);
+      font-weight: 800;
+      letter-spacing: -.058em;
+      line-height: .98;
+    }
+    .status-copy p { max-width: 590px; margin-bottom: 0; color: #e8e6ff; font-size: 17px; line-height: 1.7; }
+
+    .site-footer { border-top: 1px solid var(--line); background: var(--paper); }
+    .footer-row {
+      min-height: 118px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 32px;
+    }
+    .footer-brand { font-family: "Plus Jakarta Sans",Arial,sans-serif; font-size: 16px; font-weight: 800; }
+    .footer-meta, .footer-links { color: #767c81; font-size: 9px; font-weight: 700; letter-spacing: .11em; text-transform: uppercase; }
+    .footer-links { display: flex; flex-wrap: wrap; gap: 24px; }
+    .footer-links a:hover { color: var(--aura-dark); }
+
+    @keyframes orbit { to { transform: translate(-50%,-50%) rotate(360deg); } }
+
+    @media (max-width: 1040px) {
+      .hero-layout { grid-template-columns: minmax(0,1fr) minmax(360px,.84fr); gap: 52px; }
+      .aura-orbit { min-height: 460px; }
+      .ring-three { width: 390px; height: 390px; }
+      .concept-body { grid-template-columns: minmax(270px,.72fr) minmax(0,1.28fr); }
+      .analysis-step { grid-template-columns: 62px minmax(0,1fr); }
+      .step-status { display: none; }
+    }
+
+    @media (max-width: 820px) {
+      .shell { width: min(calc(100% - 40px),var(--shell)); }
+      .header-row { min-height: 70px; }
+      .site-nav { gap: 24px; }
+      .hero, .hero-layout { min-height: auto; }
+      .hero-layout { grid-template-columns: 1fr; gap: 64px; padding-block: 88px 82px; }
+      .hero::after { top: 270px; right: -250px; width: 680px; }
+      h1 { max-width: 720px; font-size: clamp(58px,11vw,86px); }
+      .aura-orbit { width: 100%; min-height: 520px; }
+      .workflow { padding-block: 98px; }
+      .workflow-heading { grid-template-columns: 1fr; gap: 24px; }
+      .concept-body { grid-template-columns: 1fr; }
+      .movement-frame { min-height: 440px; border-right: 0; border-bottom: 1px solid var(--line-dark); }
+      .analysis-step { grid-template-columns: 78px minmax(0,1fr) auto; }
+      .step-status { display: block; }
+      .pillars { padding-block: 96px; }
+      .pillar-grid { grid-template-columns: 1fr; }
+      .pillar { min-height: 230px; border-right: 0; border-bottom: 1px solid var(--line); }
+      .pillar:last-child { border-bottom: 0; }
+      .pillar-index { margin-bottom: 50px; }
+      .status-layout { grid-template-columns: 1fr; gap: 60px; }
+      .status-wordmark strong { font-size: clamp(88px,18vw,130px); }
+    }
+
+    @media (max-width: 680px) {
+      .shell { width: min(calc(100% - 32px),var(--shell)); }
+      .header-row { min-height: 68px; gap: 18px; }
+      .brand img { height: 25px; }
+      .site-nav { gap: 15px; }
+      .site-nav a { font-size: 8px; letter-spacing: .1em; }
+      .site-nav a:first-child { display: none; }
+      .hero-layout { padding-block: 70px 76px; gap: 52px; }
+      h1 { margin-bottom: 26px; font-size: clamp(48px,15vw,68px); line-height: .95; }
+      .hero-copy { font-size: 16px; }
+      .hero-actions { align-items: flex-start; flex-direction: column; }
+      .anchor-link { width: 100%; }
+      .aura-orbit { min-height: 430px; }
+      .ring-one { width: 160px; height: 160px; }
+      .ring-two { width: 260px; height: 260px; }
+      .ring-three { width: 350px; height: 350px; }
+      .aura-core { width: 94px; height: 94px; font-size: 26px; }
+      .orbit-note { min-width: 114px; padding: 10px; }
+      .orbit-note strong { font-size: 8px; }
+      .orbit-note span { font-size: 7px; }
+      .note-one { top: 11%; left: 4%; }
+      .note-two { top: 16%; right: 3%; }
+      .note-three { right: 4%; bottom: 10%; }
+      .note-four { bottom: 8%; left: 4%; }
+      .workflow { padding-block: 82px; }
+      .workflow-heading { margin-bottom: 42px; }
+      .workflow-heading h2, .pillars-head h2 { font-size: 40px; }
+      .concept-bar { align-items: flex-start; flex-direction: column; gap: 7px; }
+      .movement-frame { min-height: 370px; }
+      .analysis-step { min-height: 140px; grid-template-columns: 46px minmax(0,1fr); gap: 14px; padding: 22px 18px; }
+      .step-status { display: none; }
+      .pillars { padding-block: 82px; }
+      .pillar { min-height: 220px; padding: 28px; }
+      .pillar-index { margin-bottom: 42px; }
+      .status-section::before { right: -310px; }
+      .status-layout { min-height: auto; gap: 52px; padding-block: 82px; }
+      .status-copy h2 { font-size: 50px; }
+      .footer-row { align-items: flex-start; flex-direction: column; justify-content: center; min-height: 170px; }
+      .footer-meta { display: none; }
+    }
+
+    @media (max-width: 390px) {
+      .shell { width: calc(100% - 28px); }
+      .site-nav { gap: 12px; }
+      .site-nav a { letter-spacing: .08em; }
+      .aura-orbit { min-height: 400px; }
+      .orbit-bar { padding-inline: 10px; }
+      .orbit-caption { max-width: 150px; line-height: 1.5; }
+      .movement-tag span:last-child { display: none; }
+      .pose { transform: translate(-50%,-45%) scale(.9); }
+      .status-wordmark strong { font-size: 82px; }
+      .footer-links { gap: 18px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="shell header-row">
+      <a class="brand" href="/" aria-label="Motion Lab home">
+        <img src="/assets/motion-lab-logo.svg" alt="Motion Lab">
+      </a>
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="/">Motion Lab</a>
+        <a href="/trends/">Trends</a>
+        <a href="/robotics/">Robotics</a>
+        <a class="is-current" href="/aura/" aria-current="page">Aura</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="shell hero-layout">
+        <div class="hero-content">
+          <p class="eyebrow">Motion Lab / Aura</p>
+          <h1 id="hero-title">AI coaching for the way you <span class="hero-accent">actually train.</span></h1>
+          <p class="hero-copy">Upload a training set. Get focused coaching. Build a record of your progress. Aura is a new human-performance product currently in development.</p>
+          <div class="hero-actions">
+            <a class="anchor-link" href="#workflow">See how Aura will work</a>
+            <span class="status-badge">Coming soon</span>
+          </div>
+        </div>
+
+        <div class="aura-orbit" aria-hidden="true">
+          <div class="orbit-bar">
+            <span class="technical-label">ML / Training intelligence</span>
+            <span class="technical-label concept-chip">Concept preview</span>
+          </div>
+          <div class="orbit-stage">
+            <span class="orbit-ring ring-one"></span>
+            <span class="orbit-ring ring-two"></span>
+            <span class="orbit-ring ring-three"></span>
+            <div class="aura-core">AU</div>
+            <div class="orbit-note note-one"><strong>Record</strong><span>Training set</span></div>
+            <div class="orbit-note note-two"><strong>Analyze</strong><span>Movement signal</span></div>
+            <div class="orbit-note note-three"><strong>Coach</strong><span>Focused insight</span></div>
+            <div class="orbit-note note-four"><strong>Remember</strong><span>Progress over time</span></div>
+            <span class="technical-label orbit-caption">Illustrative product system</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="workflow" id="workflow" aria-labelledby="workflow-title">
+      <div class="shell">
+        <div class="workflow-heading">
+          <div>
+            <p class="eyebrow">Future workflow / 01—04</p>
+            <h2 id="workflow-title">From one set to a clearer next step.</h2>
+          </div>
+          <p>Aura is being designed to turn workout video into concise feedback, then connect each session to the training that came before it.</p>
+        </div>
+
+        <div class="concept-window" aria-label="Illustrative Aura product workflow preview">
+          <div class="concept-bar">
+            <span class="technical-label">Aura / Set review</span>
+            <span class="technical-label preview-state">Product concept — not live analysis</span>
+          </div>
+          <div class="concept-body">
+            <div class="movement-frame" aria-hidden="true">
+              <span class="technical-label frame-label">Movement frame / Preview</span>
+              <div class="pose">
+                <span class="head"></span>
+                <span class="torso"></span>
+                <span class="arm-a"></span>
+                <span class="arm-b"></span>
+                <span class="thigh-a"></span>
+                <span class="thigh-b"></span>
+                <span class="shin-a"></span>
+                <span class="shin-b"></span>
+                <i class="joint joint-one"></i>
+                <i class="joint joint-two"></i>
+                <i class="joint joint-three"></i>
+              </div>
+              <span class="floor-line"></span>
+              <div class="movement-tag"><span>Illustrative frame mapping</span><span>No user video</span></div>
+            </div>
+            <div class="analysis-stack">
+              <article class="analysis-step">
+                <span class="step-index">01 / Input</span>
+                <div><h3>Record or upload</h3><p>Bring a set into a future Aura review.</p></div>
+                <span class="step-status">Concept</span>
+              </article>
+              <article class="analysis-step">
+                <span class="step-index">02 / Read</span>
+                <div><h3>Analyze the movement</h3><p>Translate the set into a useful movement view.</p></div>
+                <span class="step-status">Concept</span>
+              </article>
+              <article class="analysis-step">
+                <span class="step-index">03 / Act</span>
+                <div><h3>Focus the coaching</h3><p>Surface one clear form priority for the next set.</p></div>
+                <span class="step-status">Concept</span>
+              </article>
+              <article class="analysis-step">
+                <span class="step-index">04 / Learn</span>
+                <div><h3>Track the progress</h3><p>Compare the session with previous training and milestones.</p></div>
+                <span class="step-status">Concept</span>
+              </article>
+            </div>
+          </div>
+        </div>
+        <p class="concept-note">Illustrative interface only. Aura is in development; video analysis, coaching, and progress tracking are not currently available on this site.</p>
+      </div>
+    </section>
+
+    <section class="pillars" aria-labelledby="pillars-title">
+      <div class="shell">
+        <div class="pillars-head">
+          <p class="eyebrow">Product direction / Three priorities</p>
+          <h2 id="pillars-title">Less noise. More useful training context.</h2>
+        </div>
+        <div class="pillar-grid">
+          <article class="pillar">
+            <span class="technical-label pillar-index">01 / Coaching</span>
+            <h3>Focused feedback.</h3>
+            <p>Prioritize one meaningful adjustment instead of overwhelming analysis.</p>
+          </article>
+          <article class="pillar">
+            <span class="technical-label pillar-index">02 / Progress memory</span>
+            <h3>Training with context.</h3>
+            <p>Understand how today’s performance relates to previous sessions.</p>
+          </article>
+          <article class="pillar">
+            <span class="technical-label pillar-index">03 / Performance</span>
+            <h3>Improvement made visible.</h3>
+            <p>Recognize milestones, personal records, and meaningful change over time.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="status-section" aria-labelledby="status-title">
+      <div class="shell status-layout">
+        <div class="status-wordmark">
+          <span class="technical-label">Human performance / Aura</span>
+          <strong>AURA</strong>
+        </div>
+        <div class="status-copy">
+          <p class="eyebrow">Product status / Coming soon</p>
+          <h2 id="status-title">Built to learn from every set.</h2>
+          <p>Motion Lab is building a more useful way to learn from your training. Aura is not publicly available yet.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell footer-row">
+      <span class="footer-brand">Motion Lab</span>
+      <span class="footer-meta">Aura / Product in development</span>
+      <nav class="footer-links" aria-label="Footer navigation">
+        <a href="/">Motion Lab</a>
+        <a href="/trends/">Trends</a>
+        <a href="/robotics/">Robotics</a>
+        <a href="/privacy-policy/">Privacy</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>
