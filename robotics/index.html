@@ -1,0 +1,1218 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta name="robots" content="noindex,follow">
+<title>Motion Lab | Physical-world data for embodied AI</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Icons -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script src="/assets/motionlab-menu.js"></script>
+<script src="/assets/motionlab-language.js"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-background": "#1a1c1d",
+              "outline-variant": "#c2c6d8",
+              "on-tertiary": "#ffffff",
+              "surface-container": "#eeeef0",
+              "secondary-container": "#645efb",
+              "on-secondary-container": "#fffbff",
+              "primary-fixed-dim": "#b3c5ff",
+              "error-container": "#ffdad6",
+              "tertiary-fixed": "#e5e2e1",
+              "surface-variant": "#e2e2e4",
+              "surface-tint": "#0054d6",
+              "tertiary-fixed-dim": "#c8c6c5",
+              "tertiary": "#5a5959",
+              "surface-container-high": "#e8e8ea",
+              "on-secondary-fixed-variant": "#3323cc",
+              "tertiary-container": "#737171",
+              "secondary-fixed": "#e2dfff",
+              "surface-container-low": "#f3f3f5",
+              "primary": "#0050cb",
+              "background": "#f9f9fb",
+              "on-tertiary-fixed-variant": "#474646",
+              "surface-container-lowest": "#ffffff",
+              "surface-dim": "#d9dadc",
+              "secondary": "#4b41e1",
+              "on-primary-container": "#f8f7ff",
+              "surface": "#f9f9fb",
+              "on-error": "#ffffff",
+              "on-primary-fixed-variant": "#003fa4",
+              "surface-bright": "#f9f9fb",
+              "surface-container-highest": "#e2e2e4",
+              "on-tertiary-fixed": "#1c1b1b",
+              "on-primary": "#ffffff",
+              "on-error-container": "#93000a",
+              "outline": "#727687",
+              "secondary-fixed-dim": "#c3c0ff",
+              "primary-fixed": "#dae1ff",
+              "on-surface-variant": "#424656",
+              "on-tertiary-container": "#faf7f6",
+              "on-primary-fixed": "#001849",
+              "on-secondary-fixed": "#0f0069",
+              "on-surface": "#1a1c1d",
+              "error": "#ba1a1a",
+              "on-secondary": "#ffffff",
+              "inverse-primary": "#b3c5ff",
+              "primary-container": "#0066ff",
+              "inverse-surface": "#2f3132",
+              "inverse-on-surface": "#f0f0f2",
+              "brazil-green": "#009739",
+              "brazil-yellow": "#fedd00"
+            },
+            fontFamily: {
+              "headline": ["Plus Jakarta Sans"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .grid-pattern {
+        background-image: radial-gradient(circle, #c2c6d8 1px, transparent 1px);
+        background-size: 40px 40px;
+        opacity: 0.15;
+      }
+      .blue-gradient-text {
+        background: linear-gradient(135deg, #0050cb, #0066ff);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .br-gradient-border {
+        position: relative;
+      }
+      .br-gradient-border::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 1px;
+        background: linear-gradient(90deg, #009739 0%, #fedd00 50%, #002776 100%);
+        opacity: 0.3;
+      }
+      .motion-canvas-shell {
+        position: relative;
+        min-height: min(650px, 62vw);
+        border-radius: 24px;
+        border: 1px solid rgba(15, 23, 42, 0.12);
+        background:
+          radial-gradient(circle at center, rgba(0,102,255,0.18), transparent 56%),
+          linear-gradient(135deg, #05070c 0%, #0b1220 48%, #07172d 100%);
+        overflow: hidden;
+        box-shadow: 0 40px 100px rgba(15, 23, 42, 0.24);
+      }
+      .motion-canvas-shell::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image: radial-gradient(rgba(255,255,255,0.18) 1px, transparent 1px);
+        background-size: 34px 34px;
+        opacity: 0.12;
+        pointer-events: none;
+        z-index: 1;
+      }
+      #motionThreeGlobe {
+        position: relative;
+        z-index: 2;
+        width: 100%;
+        height: 100%;
+        min-height: min(650px, 62vw);
+        display: block;
+        cursor: grab;
+      }
+      #motionThreeGlobe:active {
+        cursor: grabbing;
+      }
+      .motion-credit {
+        position: absolute;
+        top: 22px;
+        left: 24px;
+        color: rgba(255,255,255,0.46);
+        font-size: 10px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        pointer-events: none;
+        z-index: 5;
+      }
+      .motion-tooltip {
+        position: absolute;
+        top: 22px;
+        right: 24px;
+        padding: 10px 13px;
+        background: rgba(255,255,255,0.10);
+        border: 1px solid rgba(255,255,255,0.16);
+        border-radius: 999px;
+        color: rgba(255,255,255,0.72);
+        font-size: 11px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.10em;
+        backdrop-filter: blur(16px);
+        z-index: 5;
+        pointer-events: none;
+      }
+      .motion-hud {
+        position: absolute;
+        left: 24px;
+        right: 24px;
+        bottom: 24px;
+        z-index: 5;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        border: 1px solid rgba(255,255,255,0.14);
+        border-radius: 16px;
+        overflow: hidden;
+        background: rgba(5,7,12,0.52);
+        backdrop-filter: blur(18px);
+        pointer-events: none;
+      }
+      .motion-hud-item {
+        padding: 16px;
+        border-right: 1px solid rgba(255,255,255,0.12);
+      }
+      .motion-hud-item:last-child {
+        border-right: 0;
+      }
+      .motion-hud-item strong {
+        display: block;
+        font-size: 12px;
+        font-weight: 950;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        margin-bottom: 7px;
+        color: #ffffff;
+      }
+      .motion-hud-item span {
+        color: rgba(255,255,255,0.60);
+        line-height: 1.35;
+        font-size: 12px;
+      }
+      @media (max-width: 1024px) {
+        .motion-canvas-shell,
+        #motionThreeGlobe {
+          min-height: 520px;
+        }
+      }
+      @media (max-width: 640px) {
+        .motion-canvas-shell {
+          min-height: 500px;
+          border-radius: 18px;
+        }
+        #motionThreeGlobe {
+          min-height: 500px;
+        }
+        .motion-tooltip {
+          display: none;
+        }
+        .motion-hud {
+          left: 16px;
+          right: 16px;
+          bottom: 16px;
+          grid-template-columns: 1fr;
+        }
+        .motion-hud-item {
+          padding: 12px 14px;
+          border-right: 0;
+          border-bottom: 1px solid rgba(255,255,255,0.12);
+        }
+        .motion-hud-item:last-child {
+          border-bottom: 0;
+        }
+      }
+      .dataset-carousel {
+        position: relative;
+        overflow: hidden;
+        margin-inline: -2rem;
+        padding: 0 2rem;
+      }
+      .dataset-carousel::before,
+      .dataset-carousel::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: min(120px, 14vw);
+        z-index: 3;
+        pointer-events: none;
+      }
+      .dataset-carousel::before {
+        left: 0;
+        background: linear-gradient(90deg, #f3f3f5, transparent);
+      }
+      .dataset-carousel::after {
+        right: 0;
+        background: linear-gradient(270deg, #f3f3f5, transparent);
+      }
+      .dataset-track {
+        --dataset-loop-offset: 1rem;
+        display: flex;
+        width: max-content;
+        gap: 2rem;
+        animation: datasetScroll 42s linear infinite;
+      }
+      .dataset-carousel:hover .dataset-track,
+      .dataset-carousel:focus-within .dataset-track {
+        animation-play-state: paused;
+      }
+      .dataset-card {
+        width: min(420px, calc(100vw - 4rem));
+        flex: 0 0 auto;
+        background: #ffffff;
+        border-radius: 0.5rem;
+        padding: 0.25rem;
+        transition: transform 0.35s ease, box-shadow 0.35s ease;
+      }
+      .dataset-card:hover,
+      .dataset-card:focus-within {
+        transform: translateY(-8px);
+        box-shadow: 0 28px 70px rgba(0, 80, 203, 0.10);
+      }
+      .dataset-card img {
+        filter: grayscale(1);
+        opacity: 0.68;
+        transition: filter 0.7s ease, opacity 0.7s ease, transform 0.7s ease;
+      }
+      .dataset-card:hover img,
+      .dataset-card:focus-within img {
+        filter: grayscale(0);
+        opacity: 1;
+        transform: scale(1.05);
+      }
+      @keyframes datasetScroll {
+        from { transform: translateX(0); }
+        to { transform: translateX(calc(-50% - var(--dataset-loop-offset))); }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .dataset-track {
+          animation: none;
+        }
+      }
+      @media (max-width: 768px) {
+        .dataset-carousel {
+          overflow: hidden;
+          margin-inline: -1.25rem;
+          padding: 0 1.25rem 0.75rem;
+        }
+        .dataset-carousel::before,
+        .dataset-carousel::after {
+          display: none;
+        }
+        .dataset-track {
+          --dataset-loop-offset: 0.5rem;
+          width: max-content;
+          gap: 1rem;
+          animation-duration: 34s;
+        }
+        .dataset-card {
+          width: min(340px, calc(100vw - 2.5rem));
+        }
+      }
+      @media (hover: none) and (pointer: coarse) {
+        .dataset-carousel:hover .dataset-track,
+        .dataset-carousel:focus-within .dataset-track {
+          animation-play-state: running;
+        }
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      .scroll-pop {
+        opacity: 0;
+        transform: translate3d(0, 28px, 0) scale(0.985);
+        filter: blur(5px);
+        transition:
+          opacity 680ms ease,
+          transform 820ms cubic-bezier(0.16, 1, 0.3, 1),
+          filter 680ms ease;
+        transition-delay: var(--pop-delay, 0ms);
+        will-change: opacity, transform, filter;
+      }
+
+      .scroll-pop.scroll-pop-card {
+        transform: translate3d(0, 34px, 0) scale(0.97);
+        transform-origin: center bottom;
+      }
+
+      .scroll-pop.is-visible {
+        opacity: 1;
+        transform: translate3d(0, 0, 0) scale(1);
+        filter: blur(0);
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+
+        .scroll-pop,
+        .scroll-pop.scroll-pop-card {
+          opacity: 1;
+          transform: none;
+          filter: none;
+          transition: none;
+        }
+      }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-xl border-b border-zinc-900/10">
+  <div class="max-w-screen-2xl mx-auto px-5 md:px-8">
+    
+    <!-- Main row -->
+    <div class="flex justify-between items-center py-4">
+      <a href="/" class="flex items-center">
+        <img src="/assets/motion-lab-logo.svg" alt="Motion Lab" class="h-8 w-auto" />
+      </a>
+
+      <!-- Desktop nav -->
+      <div class="hidden md:flex items-center gap-8">
+        <a class="text-sm tracking-[0.05em] uppercase font-bold text-zinc-900 border-b-2 border-zinc-900 pb-1" href="/">Home</a>
+        <a class="text-sm tracking-[0.05em] uppercase font-bold text-zinc-500 hover:text-zinc-900 transition-colors duration-300" href="/trampoapp/">App Brazil</a>
+        <a class="text-sm tracking-[0.05em] uppercase font-bold text-zinc-500 hover:text-zinc-900 transition-colors duration-300" href="/about-us/">About Us</a>
+      </div>
+
+      <a class="scale-95 active:scale-90 transition-transform bg-primary px-4 md:px-5 py-2.5 rounded-lg text-white font-bold text-[10px] md:text-xs uppercase tracking-widest shadow-lg shadow-primary/20" href="/trampoapp/">
+        APP Beta
+      </a>
+    </div>
+
+    <!-- Mobile nav -->
+    <div class="flex md:hidden items-center justify-center gap-6 pb-3 overflow-x-auto">
+      <a class="text-xs tracking-[0.08em] uppercase font-bold text-zinc-900 border-b-2 border-zinc-900 pb-1 whitespace-nowrap" href="/">Home</a>
+      <a class="text-xs tracking-[0.08em] uppercase font-bold text-zinc-500 whitespace-nowrap" href="/trampoapp/">App Brazil</a>
+      <a class="text-xs tracking-[0.08em] uppercase font-bold text-zinc-500 whitespace-nowrap" href="/about-us/">About Us</a>
+    </div>
+
+  </div>
+</nav>
+<main class="pt-32 md:pt-24">
+<!-- Hero Section -->
+<section class="relative min-h-[921px] flex items-center overflow-hidden bg-surface">
+<div class="absolute inset-0 grid-pattern pointer-events-none"></div>
+<div class="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-surface-container-low to-transparent"></div>
+<div class="relative z-10 max-w-screen-2xl mx-auto px-8 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+<div class="space-y-8">
+<div class="inline-flex items-center gap-3 px-5 py-2.5 bg-emerald-50 border border-emerald-200 shadow-sm text-emerald-900 rounded-full text-xs md:text-sm font-extrabold tracking-[0.12em] uppercase">
+  <span class="text-base md:text-lg leading-none">🇧🇷</span>
+  <span>Building in Brazil for physical AI</span>
+</div>
+<h1 class="text-5xl lg:text-7xl font-headline font-extrabold tracking-tight leading-[1.1] text-on-background">
+                        Physical-world data <br/>
+<span class="blue-gradient-text">for embodied AI</span> <br/>
+                        in Latin America.
+                    </h1>
+<p class="max-w-md text-lg text-on-surface-variant leading-relaxed">
+                        Motion Lab builds mobile data collection infrastructure to generate localized POV datasets for robotics, AI, and multimodal model companies.
+                    </p>
+<div class="flex flex-wrap gap-4 pt-4">
+<a class="bg-on-background text-surface px-8 py-4 font-bold tracking-wide flex items-center gap-3 hover:scale-[0.98] transition-transform" href="mailto:gabrielgil@motionlab.com.br?subject=Motion%20Lab%20-%20B2B%20Conversation">
+                            Talk to Motion Lab
+                            <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+<a class="border border-outline-variant/30 px-8 py-4 font-bold text-on-surface-variant hover:bg-surface-container-low transition-colors" href="/trampoapp/">
+                            View Trampo Beta
+                        </a>
+</div>
+</div>
+<div class="relative block mt-12 lg:mt-0">
+<div class="motion-canvas-shell" aria-label="Interactive globe showing Brazil data routes to global AI and robotics hubs">
+<div class="motion-credit">Three.js Earth data network</div>
+<div class="motion-tooltip">Drag to rotate</div>
+<canvas id="motionThreeGlobe"></canvas>
+<div class="motion-hud">
+<div class="motion-hud-item"><strong>Sao Paulo node</strong><span>Brazilian physical-world data acquisition.</span></div>
+<div class="motion-hud-item"><strong>Global delivery</strong><span>Structured datasets for AI and robotics teams.</span></div>
+<div class="motion-hud-item"><strong>Consent-first</strong><span>Collector screening, task approval, and validation.</span></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Dataset Section (Bento Grid) -->
+<section class="py-32 px-8 bg-surface-container-low">
+<div class="max-w-screen-2xl mx-auto">
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+<div class="space-y-4">
+<span class="label-sm text-primary font-bold uppercase tracking-widest flex items-center gap-2">
+                            Data Layer
+                            <span class="w-4 h-[1px] bg-outline-variant"></span>
+<span class="text-zinc-400">Brazilian Context</span>
+</span>
+<h2 class="headline-md text-on-background">Physical-world datasets we are building</h2>
+</div>
+<p class="max-w-xs text-on-surface-variant body-md">
+                        Localized egocentric data from everyday Brazilian environments, designed for AI, robotics, and multimodal model development.
+                    </p>
+</div>
+<div class="dataset-carousel">
+<div class="dataset-track">
+<article class="group dataset-card">
+<div class="relative overflow-hidden aspect-[4/5] bg-surface-container mb-6 rounded-md">
+<img class="w-full h-full object-cover" alt="POV shot of human hands washing a white ceramic plate in a Brazilian kitchen" src="/assets/washing-dishes-ai.png"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+<div class="absolute top-4 left-4">
+<span class="bg-white/90 backdrop-blur px-3 py-1 text-[10px] font-bold rounded-sm uppercase tracking-tighter flex items-center gap-2">
+                                    Kitchen_BR_01
+                                    <span class="w-1.5 h-1.5 rounded-full bg-brazil-green"></span>
+</span>
+</div>
+</div>
+<div class="px-6 pb-8 space-y-3">
+<h3 class="text-xl font-bold">Washing Dishes</h3>
+<p class="text-sm text-on-surface-variant leading-relaxed">Multi-object manipulation including glassware, cutlery, and local ceramic textures under varying suds conditions.</p>
+<div class="pt-4 flex items-center justify-between">
+<span class="text-[10px] font-mono text-zinc-400">BETA DATA CATEGORY</span>
+<span class="material-symbols-outlined text-zinc-300 group-hover:text-primary transition-colors">add_circle</span>
+</div>
+</div>
+</article>
+
+<article class="group dataset-card">
+<div class="relative overflow-hidden aspect-[4/5] bg-surface-container mb-6 rounded-md">
+<img class="w-full h-full object-cover" alt="POV close-up of hands folding a soft shirt in a Brazilian apartment" src="/assets/folding-clothes-ai.png"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+<div class="absolute top-4 left-4">
+<span class="bg-white/90 backdrop-blur px-3 py-1 text-[10px] font-bold rounded-sm uppercase tracking-tighter flex items-center gap-2">
+                                    Laundry_BR_04
+                                    <span class="w-1.5 h-1.5 rounded-full bg-brazil-yellow"></span>
+</span>
+</div>
+</div>
+<div class="px-6 pb-8 space-y-3">
+<h3 class="text-xl font-bold">Folding Clothes</h3>
+<p class="text-sm text-on-surface-variant leading-relaxed">Deformable object manipulation focusing on edge alignment and textile interaction physics in domestic settings.</p>
+<div class="pt-4 flex items-center justify-between">
+<span class="text-[10px] font-mono text-zinc-400">BETA DATA CATEGORY</span>
+<span class="material-symbols-outlined text-zinc-300 group-hover:text-primary transition-colors">add_circle</span>
+</div>
+</div>
+</article>
+
+<article class="group dataset-card">
+<div class="relative overflow-hidden aspect-[4/5] bg-surface-container mb-6 rounded-md">
+<img class="w-full h-full object-cover" alt="Action view of someone sweeping dust on a Brazilian apartment floor with a broom" src="/assets/sweep-the-floor-ai.png"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+<div class="absolute top-4 left-4">
+<span class="bg-white/90 backdrop-blur px-3 py-1 text-[10px] font-bold rounded-sm uppercase tracking-tighter flex items-center gap-2">
+                                    Surface_BR_02
+                                    <span class="w-1.5 h-1.5 rounded-full bg-blue-600"></span>
+</span>
+</div>
+</div>
+<div class="px-6 pb-8 space-y-3">
+<h3 class="text-xl font-bold">Sweeping the Floor</h3>
+<p class="text-sm text-on-surface-variant leading-relaxed">Large-scale workspace interaction and reach-trajectory data across common Brazilian floor materials.</p>
+<div class="pt-4 flex items-center justify-between">
+<span class="text-[10px] font-mono text-zinc-400">BETA DATA CATEGORY</span>
+<span class="material-symbols-outlined text-zinc-300 group-hover:text-primary transition-colors">add_circle</span>
+</div>
+</div>
+</article>
+
+<article class="group dataset-card">
+<div class="relative overflow-hidden aspect-[4/5] bg-surface-container mb-6 rounded-md">
+<img class="w-full h-full object-cover" alt="POV hands arranging everyday household objects on a clean table" src="/assets/arranging-objects.png"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+<div class="absolute top-4 left-4">
+<span class="bg-white/90 backdrop-blur px-3 py-1 text-[10px] font-bold rounded-sm uppercase tracking-tighter flex items-center gap-2">
+                                    Objects_BR_07
+                                    <span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+</span>
+</div>
+</div>
+<div class="px-6 pb-8 space-y-3">
+<h3 class="text-xl font-bold">Arranging Objects</h3>
+<p class="text-sm text-on-surface-variant leading-relaxed">Spatial reasoning data from sorting, grouping, aligning, and repositioning everyday household objects.</p>
+<div class="pt-4 flex items-center justify-between">
+<span class="text-[10px] font-mono text-zinc-400">BETA DATA CATEGORY</span>
+<span class="material-symbols-outlined text-zinc-300 group-hover:text-primary transition-colors">add_circle</span>
+</div>
+</div>
+</article>
+
+<article class="group dataset-card">
+<div class="relative overflow-hidden aspect-[4/5] bg-surface-container mb-6 rounded-md">
+<img class="w-full h-full object-cover" alt="First-person conversation scene at a home table for AI training data" src="/assets/conversation-training-ai.png"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+<div class="absolute top-4 left-4">
+<span class="bg-white/90 backdrop-blur px-3 py-1 text-[10px] font-bold rounded-sm uppercase tracking-tighter flex items-center gap-2">
+                                    Social_BR_03
+                                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
+</span>
+</div>
+</div>
+<div class="px-6 pb-8 space-y-3">
+<h3 class="text-xl font-bold">Conversation Data</h3>
+<p class="text-sm text-on-surface-variant leading-relaxed">Multimodal interaction data for speech, gestures, turn-taking, gaze, and real domestic social context.</p>
+<div class="pt-4 flex items-center justify-between">
+<span class="text-[10px] font-mono text-zinc-400">BETA DATA CATEGORY</span>
+<span class="material-symbols-outlined text-zinc-300 group-hover:text-primary transition-colors">add_circle</span>
+</div>
+</div>
+</article>
+
+<article class="group dataset-card" aria-hidden="true">
+<div class="relative overflow-hidden aspect-[4/5] bg-surface-container mb-6 rounded-md">
+<img class="w-full h-full object-cover" alt="" src="/assets/washing-dishes-ai.png"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+<div class="absolute top-4 left-4"><span class="bg-white/90 backdrop-blur px-3 py-1 text-[10px] font-bold rounded-sm uppercase tracking-tighter flex items-center gap-2">Kitchen_BR_01<span class="w-1.5 h-1.5 rounded-full bg-brazil-green"></span></span></div>
+</div>
+<div class="px-6 pb-8 space-y-3"><h3 class="text-xl font-bold">Washing Dishes</h3><p class="text-sm text-on-surface-variant leading-relaxed">Multi-object manipulation including glassware, cutlery, and local ceramic textures under varying suds conditions.</p><div class="pt-4 flex items-center justify-between"><span class="text-[10px] font-mono text-zinc-400">BETA DATA CATEGORY</span><span class="material-symbols-outlined text-zinc-300 group-hover:text-primary transition-colors">add_circle</span></div></div>
+</article>
+<article class="group dataset-card" aria-hidden="true">
+<div class="relative overflow-hidden aspect-[4/5] bg-surface-container mb-6 rounded-md">
+<img class="w-full h-full object-cover" alt="" src="/assets/folding-clothes-ai.png"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+<div class="absolute top-4 left-4"><span class="bg-white/90 backdrop-blur px-3 py-1 text-[10px] font-bold rounded-sm uppercase tracking-tighter flex items-center gap-2">Laundry_BR_04<span class="w-1.5 h-1.5 rounded-full bg-brazil-yellow"></span></span></div>
+</div>
+<div class="px-6 pb-8 space-y-3"><h3 class="text-xl font-bold">Folding Clothes</h3><p class="text-sm text-on-surface-variant leading-relaxed">Deformable object manipulation focusing on edge alignment and textile interaction physics in domestic settings.</p><div class="pt-4 flex items-center justify-between"><span class="text-[10px] font-mono text-zinc-400">BETA DATA CATEGORY</span><span class="material-symbols-outlined text-zinc-300 group-hover:text-primary transition-colors">add_circle</span></div></div>
+</article>
+<article class="group dataset-card" aria-hidden="true">
+<div class="relative overflow-hidden aspect-[4/5] bg-surface-container mb-6 rounded-md">
+<img class="w-full h-full object-cover" alt="" src="/assets/sweep-the-floor-ai.png"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+<div class="absolute top-4 left-4"><span class="bg-white/90 backdrop-blur px-3 py-1 text-[10px] font-bold rounded-sm uppercase tracking-tighter flex items-center gap-2">Surface_BR_02<span class="w-1.5 h-1.5 rounded-full bg-blue-600"></span></span></div>
+</div>
+<div class="px-6 pb-8 space-y-3"><h3 class="text-xl font-bold">Sweeping the Floor</h3><p class="text-sm text-on-surface-variant leading-relaxed">Large-scale workspace interaction and reach-trajectory data across common Brazilian floor materials.</p><div class="pt-4 flex items-center justify-between"><span class="text-[10px] font-mono text-zinc-400">BETA DATA CATEGORY</span><span class="material-symbols-outlined text-zinc-300 group-hover:text-primary transition-colors">add_circle</span></div></div>
+</article>
+<article class="group dataset-card" aria-hidden="true">
+<div class="relative overflow-hidden aspect-[4/5] bg-surface-container mb-6 rounded-md">
+<img class="w-full h-full object-cover" alt="" src="/assets/arranging-objects.png"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+<div class="absolute top-4 left-4"><span class="bg-white/90 backdrop-blur px-3 py-1 text-[10px] font-bold rounded-sm uppercase tracking-tighter flex items-center gap-2">Objects_BR_07<span class="w-1.5 h-1.5 rounded-full bg-primary"></span></span></div>
+</div>
+<div class="px-6 pb-8 space-y-3"><h3 class="text-xl font-bold">Arranging Objects</h3><p class="text-sm text-on-surface-variant leading-relaxed">Spatial reasoning data from sorting, grouping, aligning, and repositioning everyday household objects.</p><div class="pt-4 flex items-center justify-between"><span class="text-[10px] font-mono text-zinc-400">BETA DATA CATEGORY</span><span class="material-symbols-outlined text-zinc-300 group-hover:text-primary transition-colors">add_circle</span></div></div>
+</article>
+<article class="group dataset-card" aria-hidden="true">
+<div class="relative overflow-hidden aspect-[4/5] bg-surface-container mb-6 rounded-md">
+<img class="w-full h-full object-cover" alt="" src="/assets/conversation-training-ai.png"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+<div class="absolute top-4 left-4"><span class="bg-white/90 backdrop-blur px-3 py-1 text-[10px] font-bold rounded-sm uppercase tracking-tighter flex items-center gap-2">Social_BR_03<span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span></span></div>
+</div>
+<div class="px-6 pb-8 space-y-3"><h3 class="text-xl font-bold">Conversation Data</h3><p class="text-sm text-on-surface-variant leading-relaxed">Multimodal interaction data for speech, gestures, turn-taking, gaze, and real domestic social context.</p><div class="pt-4 flex items-center justify-between"><span class="text-[10px] font-mono text-zinc-400">BETA DATA CATEGORY</span><span class="material-symbols-outlined text-zinc-300 group-hover:text-primary transition-colors">add_circle</span></div></div>
+</article>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Value Prop Section -->
+<section class="py-32 px-8 bg-surface">
+<div class="max-w-screen-2xl mx-auto">
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-16">
+<div class="space-y-6">
+<div class="w-12 h-12 bg-brazil-green/5 flex items-center justify-center rounded-lg">
+<span class="material-symbols-outlined text-brazil-green">south_america</span>
+</div>
+<h3 class="text-2xl font-bold">Geographic Diversity</h3>
+<p class="text-on-surface-variant leading-relaxed">Built to capture regional variation across Brazilian households, objects, lighting, surfaces, routines, and physical environments.</p>
+</div>
+<div class="space-y-6">
+<div class="w-12 h-12 bg-primary/5 flex items-center justify-center rounded-lg">
+<span class="material-symbols-outlined text-primary">high_quality</span>
+</div>
+<h3 class="text-2xl font-bold">Neural Precision</h3>
+<p class="text-on-surface-variant leading-relaxed">POV video and structured metadata designed to support higher-quality training, evaluation, and validation workflows for physical AI.</p>
+</div>
+<div class="space-y-6">
+<div class="w-12 h-12 bg-brazil-yellow/10 flex items-center justify-center rounded-lg">
+<span class="material-symbols-outlined text-zinc-800">verified_user</span>
+</div>
+<h3 class="text-2xl font-bold">Ethically Sourced</h3>
+<p class="text-on-surface-variant leading-relaxed">Collector participation is designed around consent, quality validation, task approval, and fair compensation for accepted missions.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Pipeline Section -->
+<section class="py-32 px-8 bg-surface-container-low border-y border-outline-variant/10">
+<div class="max-w-screen-2xl mx-auto">
+<div class="mb-20 text-center max-w-2xl mx-auto space-y-4">
+<h2 class="headline-md">Our Systematic Pipeline</h2>
+<p class="text-on-surface-variant">From task design to validated physical-world datasets for AI and robotics teams.</p>
+</div>
+<div class="relative">
+<!-- Progress Line -->
+<div class="absolute top-1/2 left-0 w-full h-[1px] bg-outline-variant/30 hidden md:block"></div>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-4">
+<!-- Step 1 -->
+<div class="relative flex flex-col items-center md:items-start group">
+<div class="w-8 h-8 rounded-full bg-white border border-outline-variant flex items-center justify-center relative z-10 mb-8 group-hover:border-primary transition-colors">
+<span class="text-xs font-bold">01</span>
+</div>
+<div class="space-y-3">
+<h4 class="font-bold text-lg">Task Definition</h4>
+<p class="text-sm text-on-surface-variant leading-relaxed">Defining useful real-world interactions based on robotics needs and Latin American environmental context.</p>
+</div>
+</div>
+<!-- Step 2 -->
+<div class="relative flex flex-col items-center md:items-start group">
+<div class="w-8 h-8 rounded-full bg-white border border-outline-variant flex items-center justify-center relative z-10 mb-8 group-hover:border-primary transition-colors">
+<span class="text-xs font-bold">02</span>
+</div>
+<div class="space-y-3">
+<h4 class="font-bold text-lg">BR Network Record</h4>
+<p class="text-sm text-on-surface-variant leading-relaxed">Brazilian contributors receive guided missions through Trampo and record POV interactions with everyday objects and spaces.</p>
+</div>
+</div>
+<!-- Step 3 -->
+<div class="relative flex flex-col items-center md:items-start group">
+<div class="w-8 h-8 rounded-full bg-white border border-outline-variant flex items-center justify-center relative z-10 mb-8 group-hover:border-primary transition-colors">
+<span class="text-xs font-bold">03</span>
+</div>
+<div class="space-y-3">
+<h4 class="font-bold text-lg">Neural Audit</h4>
+<p class="text-sm text-on-surface-variant leading-relaxed">Quality checks review instruction adherence, visual clarity, safety, and dataset usefulness before approval.</p>
+</div>
+</div>
+<!-- Step 4 -->
+<div class="relative flex flex-col items-center md:items-start group">
+<div class="w-8 h-8 rounded-full bg-primary text-white border border-primary flex items-center justify-center relative z-10 mb-8">
+<span class="text-xs font-bold">04</span>
+</div>
+<div class="space-y-3">
+<h4 class="font-bold text-lg">Global Delivery</h4>
+<p class="text-sm text-on-surface-variant leading-relaxed">Approved data can be structured, labeled, and delivered to AI, robotics, and multimodal model companies.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Final CTA -->
+<section class="py-40 px-8 bg-surface">
+<div class="max-w-screen-xl mx-auto text-center space-y-12">
+<div class="flex flex-col items-center gap-4">
+<span class="text-xs font-bold tracking-[0.3em] uppercase text-brazil-green">Brasil • Inovação • IA</span>
+<h2 class="text-4xl md:text-6xl font-headline font-extrabold tracking-tight">The Future of Robotics is <br/> Trained in Brazil.</h2>
+</div>
+<div class="flex justify-center gap-6">
+<a class="bg-primary text-white px-10 py-5 font-bold uppercase tracking-widest hover:bg-primary-container transition-colors" href="mailto:gabrielgil@motionlab.com.br?subject=Motion%20Lab%20-%20B2B%20Conversation">
+                        Talk to Gabriel
+                    </a>
+<a class="px-10 py-5 font-bold uppercase tracking-widest border border-outline-variant hover:bg-surface-container-low transition-colors" href="/trampoapp/">
+                        View Trampo Beta
+                    </a>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full py-16 px-5 md:px-8 bg-zinc-50 border-t border-zinc-200">
+<div class="max-w-screen-xl mx-auto">
+
+<div class="grid grid-cols-1 md:grid-cols-4 gap-10 md:gap-12">
+
+<!-- Brand -->
+<div class="md:col-span-1">
+<div class="font-headline font-extrabold text-zinc-900 mb-4 text-xl">Motion Lab</div>
+<p class="text-sm text-zinc-500 leading-relaxed">
+Motion Lab is building the physical-world data acquisition layer for embodied AI in Latin America.
+</p>
+</div>
+
+<!-- Pages -->
+<div>
+<h6 class="text-zinc-900 font-bold mb-4 text-xs uppercase tracking-widest">Pages</h6>
+<ul class="space-y-3">
+<li>
+<a class="text-zinc-500 hover:text-primary transition-colors text-sm" href="/">Home</a>
+</li>
+<li>
+<a class="text-zinc-500 hover:text-primary transition-colors text-sm" href="/trampoapp/">App Brazil</a>
+</li>
+<li>
+<a class="text-zinc-500 hover:text-primary transition-colors text-sm" href="/about-us/">About Us</a>
+</li>
+</ul>
+</div>
+
+<!-- Legal -->
+<div>
+<h6 class="text-zinc-900 font-bold mb-4 text-xs uppercase tracking-widest">Legal</h6>
+<ul class="space-y-3">
+<li>
+<a class="text-zinc-500 hover:text-primary transition-colors text-sm" href="/privacy-policy/">Privacy Policy</a>
+</li>
+<li>
+<a class="text-zinc-500 hover:text-primary transition-colors text-sm" href="/terms/">Terms of Use</a>
+</li>
+<li>
+<a class="text-zinc-500 hover:text-primary transition-colors text-sm" href="/lgpd-consent/">LGPD & Data Consent</a>
+</li>
+</ul>
+</div>
+
+<!-- Contact -->
+<div>
+<h6 class="text-zinc-900 font-bold mb-4 text-xs uppercase tracking-widest">Contact</h6>
+<ul class="space-y-3">
+<li>
+<a class="text-zinc-500 hover:text-primary transition-colors text-sm" href="mailto:contato@motionlab.com.br">contato@motionlab.com.br</a>
+</li>
+<li>
+<a class="text-zinc-500 hover:text-primary transition-colors text-sm" href="https://wa.me/5548988405089?text=Ol%C3%A1%20Gabriel%2C%20vi%20a%20landing%20page%20da%20Motion%20Lab%20e%20quero%20saber%20mais." target="_blank">
+WhatsApp
+</a>
+</li>
+<li>
+<a class="text-zinc-500 hover:text-primary transition-colors text-sm" href="http://linkedin.com/company/motionlab-ai" target="_blank">
+LinkedIn
+</a>
+</li>
+</ul>
+</div>
+
+</div>
+
+<div class="mt-14 pt-8 border-t border-zinc-200 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+<p class="text-xs text-zinc-500">
+© 2026 Motion Lab. Built in Brazil for the future of physical AI.
+</p>
+
+<div class="flex flex-wrap gap-4 text-xs text-zinc-500">
+<span>Closed beta</span>
+<span>•</span>
+<span>Physical AI data</span>
+<span>•</span>
+<span>Web Summit Rio 2026</span>
+</div>
+</div>
+
+</div>
+</footer>
+<script>
+(() => {
+  const main = document.querySelector('main');
+  if (!main) return;
+
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const animated = new Map();
+
+  const add = (selector, type = 'text') => {
+    main.querySelectorAll(selector).forEach((element) => {
+      if (animated.get(element) === 'card') return;
+      animated.set(element, type);
+    });
+  };
+
+  add('section:first-of-type .space-y-8 > *');
+  add('.motion-canvas-shell, .dataset-carousel', 'card');
+  add('section:nth-of-type(2) .space-y-4 > *, section:nth-of-type(2) .flex > p, section:nth-of-type(4) .mb-20 > *, section:nth-of-type(5) .max-w-screen-xl > *');
+  add('section:nth-of-type(3) .grid > div, section:nth-of-type(4) .grid > div', 'card');
+
+  const counters = new WeakMap();
+  const revealItems = [...animated.entries()].map(([element, type]) => {
+    const section = element.closest('section') || main;
+    const order = counters.get(section) || 0;
+    counters.set(section, order + 1);
+    const delay = Math.min(order * 85, type === 'card' ? 260 : 210);
+
+    return { element, type, delay };
+  });
+
+  if (prefersReducedMotion) {
+    revealItems.forEach(({ element }) => element.classList.add('is-visible'));
+    return;
+  }
+
+  revealItems.forEach(({ element, type, delay }) => {
+    element.style.setProperty('--pop-delay', `${delay}ms`);
+    element.classList.add('scroll-pop');
+    if (type === 'card') element.classList.add('scroll-pop-card');
+  });
+
+  const reveal = ({ element, delay }) => {
+    requestAnimationFrame(() => {
+      element.classList.add('is-visible');
+
+      window.setTimeout(() => {
+        element.classList.remove('scroll-pop', 'scroll-pop-card', 'is-visible');
+        element.style.removeProperty('--pop-delay');
+      }, delay + 950);
+    });
+  };
+
+  if (!('IntersectionObserver' in window)) {
+    revealItems.forEach(reveal);
+    return;
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+
+      const item = revealItems.find(({ element }) => element === entry.target);
+      if (item) reveal(item);
+      observer.unobserve(entry.target);
+    });
+  }, {
+    rootMargin: '0px 0px -12% 0px',
+    threshold: 0.12,
+  });
+
+  revealItems.forEach(({ element }) => observer.observe(element));
+})();
+</script>
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+const canvas = document.getElementById('motionThreeGlobe');
+
+if (canvas) {
+  const shell = canvas.closest('.motion-canvas-shell');
+  const scene = new THREE.Scene();
+  scene.fog = new THREE.FogExp2(0x05070c, 0.035);
+
+  const camera = new THREE.PerspectiveCamera(42, 1, 0.1, 100);
+  camera.position.set(0, 1.05, 6.2);
+
+  const renderer = new THREE.WebGLRenderer({
+    canvas,
+    antialias: true,
+    alpha: true,
+    powerPreference: 'high-performance'
+  });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
+  renderer.outputColorSpace = THREE.SRGBColorSpace;
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 1.12;
+
+  const controls = new OrbitControls(camera, renderer.domElement);
+  controls.enableDamping = true;
+  controls.dampingFactor = 0.055;
+  controls.enablePan = false;
+  controls.minDistance = 4.3;
+  controls.maxDistance = 8.2;
+  controls.rotateSpeed = 0.42;
+  controls.autoRotate = true;
+  controls.autoRotateSpeed = 0.45;
+
+  scene.add(new THREE.AmbientLight(0xb6d4ff, 0.45));
+
+  const keyLight = new THREE.DirectionalLight(0xffffff, 2.4);
+  keyLight.position.set(4.5, 2.8, 4.4);
+  scene.add(keyLight);
+
+  const rimLight = new THREE.DirectionalLight(0x0066ff, 1.6);
+  rimLight.position.set(-4.5, 2.0, -2.6);
+  scene.add(rimLight);
+
+  const earthGroup = new THREE.Group();
+  earthGroup.rotation.set(0.08, -0.15, -0.03);
+  scene.add(earthGroup);
+
+  const radius = 2.15;
+  const textureLoader = new THREE.TextureLoader();
+  textureLoader.setCrossOrigin('anonymous');
+
+  const earthMap = textureLoader.load('https://cdn.jsdelivr.net/gh/mrdoob/three.js@r160/examples/textures/planets/earth_atmos_2048.jpg');
+  earthMap.colorSpace = THREE.SRGBColorSpace;
+  earthMap.anisotropy = 8;
+
+  const normalMap = textureLoader.load('https://cdn.jsdelivr.net/gh/mrdoob/three.js@r160/examples/textures/planets/earth_normal_2048.jpg');
+  normalMap.anisotropy = 8;
+
+  const specMap = textureLoader.load('https://cdn.jsdelivr.net/gh/mrdoob/three.js@r160/examples/textures/planets/earth_specular_2048.jpg');
+  specMap.anisotropy = 8;
+
+  const cloudMap = textureLoader.load('https://cdn.jsdelivr.net/gh/mrdoob/three.js@r160/examples/textures/planets/earth_clouds_1024.png');
+  cloudMap.colorSpace = THREE.SRGBColorSpace;
+  cloudMap.anisotropy = 8;
+
+  const earth = new THREE.Mesh(
+    new THREE.SphereGeometry(radius, 112, 112),
+    new THREE.MeshPhongMaterial({
+      map: earthMap,
+      normalMap,
+      normalScale: new THREE.Vector2(0.55, 0.55),
+      specularMap: specMap,
+      specular: new THREE.Color(0x244566),
+      shininess: 22
+    })
+  );
+  earthGroup.add(earth);
+
+  const clouds = new THREE.Mesh(
+    new THREE.SphereGeometry(radius * 1.012, 96, 96),
+    new THREE.MeshLambertMaterial({
+      map: cloudMap,
+      transparent: true,
+      opacity: 0.30,
+      depthWrite: false
+    })
+  );
+  earthGroup.add(clouds);
+
+  const wire = new THREE.Mesh(
+    new THREE.SphereGeometry(radius * 1.018, 40, 20),
+    new THREE.MeshBasicMaterial({
+      color: 0x56a8ff,
+      wireframe: true,
+      transparent: true,
+      opacity: 0.055
+    })
+  );
+  earthGroup.add(wire);
+
+  const atmosphere = new THREE.Mesh(
+    new THREE.SphereGeometry(radius * 1.09, 96, 96),
+    new THREE.ShaderMaterial({
+      transparent: true,
+      blending: THREE.AdditiveBlending,
+      side: THREE.BackSide,
+      vertexShader: `
+        varying vec3 vNormal;
+        void main() {
+          vNormal = normalize(normalMatrix * normal);
+          gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+        }
+      `,
+      fragmentShader: `
+        varying vec3 vNormal;
+        void main() {
+          float intensity = pow(0.72 - dot(vNormal, vec3(0.0, 0.0, 1.0)), 2.4);
+          gl_FragColor = vec4(0.0, 0.42, 1.0, intensity * 0.56);
+        }
+      `
+    })
+  );
+  earthGroup.add(atmosphere);
+
+  const starGeometry = new THREE.BufferGeometry();
+  const starCount = 900;
+  const positions = new Float32Array(starCount * 3);
+  for (let i = 0; i < starCount; i += 1) {
+    const starRadius = 18 + Math.random() * 18;
+    const theta = Math.random() * Math.PI * 2;
+    const phi = Math.acos(2 * Math.random() - 1);
+    positions[i * 3] = starRadius * Math.sin(phi) * Math.cos(theta);
+    positions[i * 3 + 1] = starRadius * Math.cos(phi);
+    positions[i * 3 + 2] = starRadius * Math.sin(phi) * Math.sin(theta);
+  }
+  starGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+  scene.add(new THREE.Points(
+    starGeometry,
+    new THREE.PointsMaterial({ color: 0xffffff, size: 0.018, transparent: true, opacity: 0.42 })
+  ));
+
+  function latLonToVector3(lat, lon, pointRadius = radius) {
+    const phi = THREE.MathUtils.degToRad(90 - lat);
+    const theta = THREE.MathUtils.degToRad(lon + 180);
+    return new THREE.Vector3(
+      -pointRadius * Math.sin(phi) * Math.cos(theta),
+      pointRadius * Math.cos(phi),
+      pointRadius * Math.sin(phi) * Math.sin(theta)
+    );
+  }
+
+  const hubs = [
+    { name: 'Sao Paulo', lat: -22.9, lon: -47.2, brazil: true },
+    { name: 'San Francisco', lat: 37.77, lon: -122.42 },
+    { name: 'Boston', lat: 42.36, lon: -71.05 },
+    { name: 'London', lat: 51.50, lon: -0.12 },
+    { name: 'Tokyo', lat: 35.68, lon: 139.69 },
+    { name: 'Shenzhen', lat: 22.54, lon: 114.06 },
+    { name: 'Seoul', lat: 37.56, lon: 126.97 },
+    { name: 'Munich', lat: 48.13, lon: 11.58 }
+  ];
+
+  const brazil = hubs[0];
+
+  function sphericalPointBetween(a, b, t) {
+    const dot = THREE.MathUtils.clamp(a.dot(b), -1, 1);
+    const theta = Math.acos(dot) * t;
+    const relative = b.clone().sub(a.clone().multiplyScalar(dot)).normalize();
+
+    return a.clone()
+      .multiplyScalar(Math.cos(theta))
+      .add(relative.multiplyScalar(Math.sin(theta)))
+      .normalize();
+  }
+
+  function makeArc(from, to, color = 0x00e676) {
+    const startNormal = latLonToVector3(from.lat, from.lon, 1).normalize();
+    const endNormal = latLonToVector3(to.lat, to.lon, 1).normalize();
+    const distanceAngle = startNormal.angleTo(endNormal);
+    const arcHeight = THREE.MathUtils.clamp(distanceAngle * 0.42, 0.55, 1.22);
+    const points = [];
+    const segments = 128;
+
+    for (let i = 0; i <= segments; i += 1) {
+      const progress = i / segments;
+      const normal = sphericalPointBetween(startNormal, endNormal, progress);
+      const lift = Math.sin(Math.PI * progress) * arcHeight;
+      points.push(normal.multiplyScalar(radius * 1.07 + lift));
+    }
+
+    const curve = new THREE.CatmullRomCurve3(points);
+    const line = new THREE.Line(
+      new THREE.BufferGeometry().setFromPoints(points),
+      new THREE.LineBasicMaterial({
+        color,
+        transparent: true,
+        opacity: 0.64,
+        depthTest: true,
+        depthWrite: false
+      })
+    );
+    earthGroup.add(line);
+
+    const pulse = new THREE.Mesh(
+      new THREE.SphereGeometry(0.027, 12, 12),
+      new THREE.MeshBasicMaterial({
+        color,
+        transparent: true,
+        opacity: 0.95,
+        depthTest: true,
+        depthWrite: false
+      })
+    );
+    earthGroup.add(pulse);
+
+    return { curve, pulse, speed: 0.0016 + Math.random() * 0.0012, offset: Math.random() };
+  }
+
+  const arcs = hubs.slice(1).map((hub, index) => makeArc(brazil, hub, index % 2 ? 0x0066ff : 0x00d26a));
+
+  function createMarker(isBrazil = false) {
+    const group = new THREE.Group();
+    const markerMaterial = new THREE.MeshStandardMaterial({
+      color: isBrazil ? 0x00d26a : 0x0066ff,
+      emissive: isBrazil ? 0x009739 : 0x003fa4,
+      emissiveIntensity: 0.45
+    });
+    group.add(new THREE.Mesh(new THREE.SphereGeometry(isBrazil ? 0.09 : 0.055, 24, 24), markerMaterial));
+    group.add(new THREE.Mesh(
+      new THREE.TorusGeometry(isBrazil ? 0.16 : 0.10, 0.006, 8, 48),
+      new THREE.MeshBasicMaterial({
+        color: isBrazil ? 0xfedd00 : 0xffffff,
+        transparent: true,
+        opacity: 0.72
+      })
+    ));
+    return group;
+  }
+
+  function roundRect(ctx, x, y, width, height, rectRadius) {
+    ctx.beginPath();
+    ctx.moveTo(x + rectRadius, y);
+    ctx.lineTo(x + width - rectRadius, y);
+    ctx.quadraticCurveTo(x + width, y, x + width, y + rectRadius);
+    ctx.lineTo(x + width, y + height - rectRadius);
+    ctx.quadraticCurveTo(x + width, y + height, x + width - rectRadius, y + height);
+    ctx.lineTo(x + rectRadius, y + height);
+    ctx.quadraticCurveTo(x, y + height, x, y + height - rectRadius);
+    ctx.lineTo(x, y + rectRadius);
+    ctx.quadraticCurveTo(x, y, x + rectRadius, y);
+    ctx.closePath();
+  }
+
+  function placeMarker(hub) {
+    const normal = latLonToVector3(hub.lat, hub.lon, 1).normalize();
+    const marker = createMarker(hub.brazil);
+    marker.position.copy(normal.clone().multiplyScalar(radius * 1.075));
+    marker.quaternion.setFromUnitVectors(new THREE.Vector3(0, 0, 1), normal);
+    marker.scale.setScalar(hub.brazil ? 1.55 : 0.92);
+    earthGroup.add(marker);
+
+    const labelCanvas = document.createElement('canvas');
+    labelCanvas.width = 512;
+    labelCanvas.height = 128;
+    const ctx = labelCanvas.getContext('2d');
+    ctx.clearRect(0, 0, 512, 128);
+    ctx.fillStyle = 'rgba(5,7,12,0.72)';
+    ctx.strokeStyle = hub.brazil ? 'rgba(254,221,0,0.8)' : 'rgba(255,255,255,0.22)';
+    ctx.lineWidth = 2;
+    roundRect(ctx, 12, 22, 488, 82, 18);
+    ctx.fill();
+    ctx.stroke();
+    ctx.fillStyle = hub.brazil ? '#fedd00' : '#ffffff';
+    ctx.font = '900 28px Inter, Arial';
+    ctx.fillText(hub.name, 36, 74);
+    ctx.fillStyle = 'rgba(255,255,255,0.58)';
+    ctx.font = '700 14px Inter, Arial';
+    ctx.fillText(hub.brazil ? 'MOTION LAB NODE' : 'AI / ROBOTICS HUB', 36, 98);
+
+    const texture = new THREE.CanvasTexture(labelCanvas);
+    texture.colorSpace = THREE.SRGBColorSpace;
+    const sprite = new THREE.Sprite(new THREE.SpriteMaterial({
+      map: texture,
+      transparent: true,
+      opacity: hub.brazil ? 1 : 0.76
+    }));
+    sprite.position.copy(normal.clone().multiplyScalar(radius * (hub.brazil ? 1.42 : 1.32)));
+    sprite.scale.set(hub.brazil ? 0.88 : 0.62, hub.brazil ? 0.22 : 0.16, 1);
+    earthGroup.add(sprite);
+  }
+
+  hubs.forEach(placeMarker);
+
+  function resize() {
+    const rect = shell.getBoundingClientRect();
+    renderer.setSize(rect.width, rect.height, false);
+    camera.aspect = rect.width / rect.height;
+    camera.updateProjectionMatrix();
+  }
+
+  window.addEventListener('resize', resize);
+  resize();
+
+  let isInteracting = false;
+  controls.addEventListener('start', () => {
+    isInteracting = true;
+  });
+  controls.addEventListener('end', () => {
+    isInteracting = false;
+  });
+
+  function animate() {
+    requestAnimationFrame(animate);
+
+    if (!isInteracting) {
+      earthGroup.rotation.y += 0.00065;
+    }
+
+    clouds.rotation.y += 0.00022;
+    arcs.forEach((arc) => {
+      arc.offset = (arc.offset + arc.speed) % 1;
+      arc.pulse.position.copy(arc.curve.getPoint(arc.offset));
+    });
+
+    controls.update();
+    renderer.render(scene, camera);
+  }
+
+  animate();
+}
+</script>
+</body></html>

@@ -24,6 +24,11 @@
       "source": "/lgpd-consent",
       "destination": "/lgpd-consent/",
       "permanent": true
+    },
+    {
+      "source": "/robotics",
+      "destination": "/robotics/",
+      "permanent": true
     }
   ],
   "rewrites": [
