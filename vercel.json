@@ -29,6 +29,11 @@
       "source": "/robotics",
       "destination": "/robotics/",
       "permanent": true
+    },
+    {
+      "source": "/trends",
+      "destination": "/trends/",
+      "permanent": true
     }
   ],
   "rewrites": [
