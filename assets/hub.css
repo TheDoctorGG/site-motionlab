@@ -71,9 +71,9 @@ h1, h2, p { margin-top: 0; }
   letter-spacing: -.07em;
 }
 
-.home-intro { max-width: 520px; margin-bottom: 36px; color: #686d78; font-size: clamp(16px, 1.5vw, 19px); line-height: 1.55; }
+.home-title { margin-bottom: 38px; }
 
-.project-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.project-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
 
 .project-card {
   position: relative;
@@ -121,17 +121,21 @@ h1, h2, p { margin-top: 0; }
 .project-card:hover::before { transform: translate(-15px, 10px) rotate(10deg); }
 .project-card:focus-visible, .brand:focus-visible, .back-link:focus-visible { outline: 3px solid #1e6fff; outline-offset: 4px; }
 
-.project-top, .project-bottom { display: flex; align-items: flex-start; justify-content: space-between; gap: 20px; }
+.project-top, .project-bottom { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px 20px; }
+.project-bottom { flex-wrap: wrap; }
 .project-index { opacity: .72; }
 .project-arrow { font-size: 28px; line-height: .7; font-weight: 400; transition: transform .25s ease; }
 .project-card:hover .project-arrow { transform: translate(4px, -4px); }
 .project-name { display: block; margin-bottom: 13px; font-family: "Plus Jakarta Sans", Inter, sans-serif; font-size: clamp(35px, 3vw, 49px); line-height: 1; letter-spacing: -.055em; }
 .project-status { display: block; margin-bottom: 0; opacity: .72; }
-.project-link { align-self: flex-end; opacity: .82; white-space: nowrap; }
+.project-link { align-self: flex-end; margin-left: auto; opacity: .82; white-space: nowrap; }
 
 .project-onda { color: #fff; background: linear-gradient(145deg, #122ca7 0%, #385dff 66%, #7890ff 100%); }
 .project-aura { color: #292048; background: linear-gradient(145deg, #e0d7fb 0%, #c8b4f4 70%, #a98ce8 100%); }
 .project-trampo { color: #e9faff; background: linear-gradient(145deg, #101e2f 0%, #153c54 70%, #19646d 100%); }
+.project-studio { color: #172c38; background: linear-gradient(145deg, #f0f1ea 0%, #dde7df 62%, #cadad6 100%); border: 1px solid #cbd8d3; }
+.project-studio::before, .project-studio::after { border-radius: 24px; transform: rotate(24deg); }
+.project-studio .project-name { max-width: 12ch; }
 
 .site-footer { display: flex; justify-content: space-between; gap: 20px; padding: 26px 0 36px; border-top: 1px solid #d8d9d7; color: #858995; }
 
@@ -143,10 +147,13 @@ h1, h2, p { margin-top: 0; }
 .back-link:hover { background: #fff; }
 
 @media (max-width: 850px) {
-  .project-grid { grid-template-columns: 1fr; }
   .project-card { min-height: 230px; }
   .project-name { font-size: 42px; }
   .home-main { padding-top: 65px; }
+}
+
+@media (max-width: 640px) {
+  .project-grid { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 540px) {
@@ -156,7 +163,7 @@ h1, h2, p { margin-top: 0; }
   .header-note { display: none; }
   .home-main { padding: 56px 0 52px; }
   .home-title { font-size: clamp(45px, 12vw, 64px); }
-  .home-intro { margin-bottom: 35px; }
+  .home-title { margin-bottom: 34px; }
   .project-card { min-height: 205px; padding: 25px; }
   .project-name { font-size: 38px; }
   .project-link { font-size: 9px; }

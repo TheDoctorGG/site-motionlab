@@ -481,7 +481,10 @@
       logoImg.classList.add("motion-logo-img");
 
       const logoLink = logoImg.closest("a");
-      if (logoLink) logoLink.classList.add("motion-logo-link");
+      if (logoLink) {
+        logoLink.classList.add("motion-logo-link");
+        logoLink.setAttribute("href", "/");
+      }
     }
 
     const allRows = Array.from(topNav.querySelectorAll("div"));

@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+
+<html class="light" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sobre a Motion Lab</title>
+<meta name="description" content="Conheça a Motion Lab, estúdio digital independente e os projetos que fazem parte do seu universo.">
+<link rel="canonical" href="https://www.motionlab.com.br/sobre-nos/">
+<link rel="icon" href="/assets/motion-lab-logo.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Sobre a Motion Lab">
+<meta property="og:description" content="Conheça a Motion Lab, estúdio digital independente e os projetos que fazem parte do seu universo.">
+<meta property="og:url" content="https://www.motionlab.com.br/sobre-nos/">
+
+
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .blueprint-bg {
+            background-image: radial-gradient(circle at 2px 2px, #c2c6d8 1px, transparent 0);
+            background-size: 40px 40px;
+            background-color: #f9f9fb;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .ai-entity-panel {
+            position: relative;
+            min-height: 360px;
+            height: min(620px, 58vw);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transform-style: preserve-3d;
+        }
+        .ai-orb-stage {
+            position: relative;
+            width: min(620px, 100%);
+            aspect-ratio: 1;
+            display: grid;
+            place-items: center;
+            isolation: isolate;
+            transform: translate3d(var(--orb-x, 0px), var(--orb-y, 0px), 0);
+            transition: transform 0.15s ease-out;
+        }
+        .ai-orb-stage canvas {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 4;
+            opacity: 0.76;
+            mix-blend-mode: multiply;
+        }
+        .orb-outer-ring,
+        .orb-middle-ring,
+        .orb-data-ring,
+        .orb-scan-ring {
+            position: absolute;
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        .orb-outer-ring {
+            width: 94%;
+            height: 94%;
+            border: 1px solid rgba(11, 87, 208, 0.16);
+            animation: slowSpin 28s linear infinite;
+        }
+        .orb-middle-ring {
+            width: 78%;
+            height: 78%;
+            border: 1px solid rgba(15, 23, 42, 0.12);
+            box-shadow: inset 0 0 60px rgba(11, 87, 208, 0.08);
+            animation: reverseSpin 22s linear infinite;
+        }
+        .orb-data-ring {
+            width: 66%;
+            height: 66%;
+            border: 1px dashed rgba(17, 19, 23, 0.2);
+            animation: slowSpin 17s linear infinite;
+        }
+        .orb-scan-ring {
+            width: 52%;
+            height: 52%;
+            border: 1px solid rgba(255,255,255,0.36);
+            background: conic-gradient(from 0deg, transparent 0 68%, rgba(11,87,208,.28), transparent 82% 100%);
+            filter: blur(.1px);
+            animation: scanSpin 6s linear infinite;
+            opacity: 0.92;
+            z-index: 5;
+        }
+        .orb-core {
+            position: relative;
+            width: 46%;
+            height: 46%;
+            border-radius: 50%;
+            z-index: 3;
+            background:
+                radial-gradient(circle at 42% 38%, rgba(255,255,255,0.92) 0 4%, rgba(210,228,255,.62) 5% 9%, transparent 10%),
+                radial-gradient(circle at 50% 52%, rgba(11,87,208,0.82) 0 5%, rgba(16,31,54,0.92) 6% 18%, rgba(12,14,18,1) 19% 47%, rgba(0,0,0,1) 48% 100%);
+            box-shadow:
+                inset 0 0 24px rgba(255,255,255,.16),
+                inset -22px -28px 42px rgba(0,0,0,.58),
+                inset 18px 16px 44px rgba(69,105,155,.32),
+                0 0 0 10px rgba(17,19,23,.06),
+                0 0 60px rgba(11,87,208,.24),
+                0 42px 80px rgba(15,23,42,.24);
+            animation: breathe 4.8s ease-in-out infinite;
+        }
+        .orb-core::before {
+            content: "";
+            position: absolute;
+            inset: 12%;
+            border-radius: 50%;
+            background:
+                radial-gradient(circle, rgba(11,87,208,.72) 0 7%, transparent 8%),
+                repeating-radial-gradient(circle, rgba(255,255,255,.18) 0 1px, transparent 1px 7px);
+            opacity: 0.6;
+            animation: slowSpin 18s linear infinite;
+        }
+        .orb-core::after {
+            content: "";
+            position: absolute;
+            inset: -18%;
+            border-radius: 50%;
+            border: 1px solid rgba(255,255,255,.42);
+            background: radial-gradient(circle at 50% 50%, transparent 42%, rgba(255,255,255,.16) 43%, transparent 52%);
+            filter: blur(.2px);
+            opacity: 0.84;
+            animation: breatheHalo 4.8s ease-in-out infinite;
+        }
+        .orb-halo {
+            position: absolute;
+            width: 54%;
+            height: 54%;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(11,87,208,.26), rgba(11,87,208,.10) 35%, transparent 68%);
+            filter: blur(12px);
+            z-index: 1;
+            animation: haloPulse 4.8s ease-in-out infinite;
+        }
+        .orb-shadow {
+            position: absolute;
+            bottom: 11%;
+            width: 45%;
+            height: 9%;
+            background: radial-gradient(ellipse, rgba(15,23,42,.22), transparent 68%);
+            filter: blur(14px);
+            z-index: 0;
+            animation: shadowPulse 4.8s ease-in-out infinite;
+        }
+        .orb-tag {
+            position: absolute;
+            z-index: 7;
+            padding: 10px 13px;
+            border: 1px solid rgba(15,23,42,.1);
+            border-radius: 8px;
+            background: rgba(255,255,255,.74);
+            backdrop-filter: blur(18px);
+            box-shadow: 0 18px 38px rgba(15,23,42,.08);
+            font-size: 10px;
+            font-weight: 900;
+            letter-spacing: .13em;
+            text-transform: uppercase;
+            color: #111317;
+        }
+        .orb-tag span {
+            display: block;
+            margin-top: 4px;
+            color: #0050cb;
+            font-size: 13px;
+            letter-spacing: 0;
+        }
+        .orb-tag.top { top: 14%; right: 8%; }
+        .orb-tag.bottom { bottom: 15%; left: 7%; }
+        .orb-line {
+            position: absolute;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(11,87,208,.42), transparent);
+            transform-origin: center;
+            opacity: .62;
+            z-index: 2;
+        }
+        .orb-line.one { width: 72%; transform: rotate(18deg); }
+        .orb-line.two { width: 66%; transform: rotate(-32deg); }
+        .orb-line.three { width: 54%; transform: rotate(74deg); }
+        @keyframes breathe {
+            0%, 100% { transform: scale(1); filter: brightness(1); }
+            50% { transform: scale(1.045); filter: brightness(1.12); }
+        }
+        @keyframes breatheHalo {
+            0%, 100% { transform: scale(1); opacity: 0.62; }
+            50% { transform: scale(1.14); opacity: 0.92; }
+        }
+        @keyframes haloPulse {
+            0%, 100% { transform: scale(1); opacity: 0.7; }
+            50% { transform: scale(1.22); opacity: 1; }
+        }
+        @keyframes shadowPulse {
+            0%, 100% { transform: scaleX(1); opacity: .55; }
+            50% { transform: scaleX(1.18); opacity: .32; }
+        }
+        @keyframes slowSpin { to { transform: rotate(360deg); } }
+        @keyframes reverseSpin { to { transform: rotate(-360deg); } }
+        @keyframes scanSpin { to { transform: rotate(360deg); } }
+        @media (max-width: 960px) {
+            .ai-entity-panel {
+                min-height: 340px;
+                height: auto;
+                margin-top: 18px;
+            }
+            .orb-tag { display: none; }
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        .scroll-pop {
+            opacity: 0;
+            transform: translate3d(0, 28px, 0) scale(0.985);
+            filter: blur(5px);
+            transition:
+                opacity 680ms ease,
+                transform 820ms cubic-bezier(0.16, 1, 0.3, 1),
+                filter 680ms ease;
+            transition-delay: var(--pop-delay, 0ms);
+            will-change: opacity, transform, filter;
+        }
+        .scroll-pop.scroll-pop-card {
+            transform: translate3d(0, 34px, 0) scale(0.97);
+            transform-origin: center bottom;
+        }
+        .scroll-pop.is-visible {
+            opacity: 1;
+            transform: translate3d(0, 0, 0) scale(1);
+            filter: blur(0);
+        }
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            .scroll-pop,
+            .scroll-pop.scroll-pop-card {
+                opacity: 1;
+                transform: none;
+                filter: none;
+                transition: none;
+            }
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              colors: {
+                "on-background": "#1a1c1d",
+                "outline-variant": "#c2c6d8",
+                "on-tertiary": "#ffffff",
+                "surface-container": "#eeeef0",
+                "secondary-container": "#645efb",
+                "on-secondary-container": "#fffbff",
+                "primary-fixed-dim": "#b3c5ff",
+                "error-container": "#ffdad6",
+                "tertiary-fixed": "#e5e2e1",
+                "surface-variant": "#e2e2e4",
+                "surface-tint": "#0054d6",
+                "tertiary-fixed-dim": "#c8c6c5",
+                "tertiary": "#5a5959",
+                "surface-container-high": "#e8e8ea",
+                "on-secondary-fixed-variant": "#3323cc",
+                "tertiary-container": "#737171",
+                "secondary-fixed": "#e2dfff",
+                "surface-container-low": "#f3f3f5",
+                "primary": "#0050cb",
+                "background": "#f9f9fb",
+                "on-tertiary-fixed-variant": "#474646",
+                "surface-container-lowest": "#ffffff",
+                "surface-dim": "#d9dadc",
+                "secondary": "#4b41e1",
+                "on-primary-container": "#f8f7ff",
+                "surface": "#f9f9fb",
+                "on-error": "#ffffff",
+                "on-primary-fixed-variant": "#003fa4",
+                "surface-bright": "#f9f9fb",
+                "surface-container-highest": "#e2e2e4",
+                "on-tertiary-fixed": "#1c1b1b",
+                "on-primary": "#ffffff",
+                "on-error-container": "#93000a",
+                "outline": "#727687",
+                "secondary-fixed-dim": "#c3c0ff",
+                "primary-fixed": "#dae1ff",
+                "on-surface-variant": "#424656",
+                "on-tertiary-container": "#faf7f6",
+                "on-primary-fixed": "#001849",
+                "on-secondary-fixed": "#0f0069",
+                "on-surface": "#1a1c1d",
+                "error": "#ba1a1a",
+                "on-secondary": "#ffffff",
+                "inverse-primary": "#b3c5ff",
+                "primary-container": "#0066ff",
+                "inverse-surface": "#2f3132",
+                "inverse-on-surface": "#f0f0f2"
+              },
+              fontFamily: {
+                "headline": ["Plus Jakarta Sans"],
+                "body": ["Inter"],
+                "label": ["Inter"]
+              },
+              borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+            },
+          },
+        }
+      </script>
+</head>
+<body class="bg-surface font-body text-on-surface antialiased">
+<nav class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-xl border-b border-zinc-900/10" aria-label="Navegação principal">
+  <div class="max-w-screen-2xl mx-auto px-5 md:px-8">
+    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-5 py-4">
+      <a href="/" class="flex items-center" aria-label="Motion Lab — início"><img src="/assets/motion-lab-logo.svg" alt="Motion Lab" class="h-8 w-auto"></a>
+      <div class="flex items-center gap-4 md:gap-8">
+        <a href="/" class="text-xs md:text-sm tracking-[0.05em] uppercase font-bold text-zinc-500 hover:text-zinc-900 transition-colors">Início</a>
+        <a href="/#projetos" class="text-xs md:text-sm tracking-[0.05em] uppercase font-bold text-zinc-500 hover:text-zinc-900 transition-colors">Projetos</a>
+        <a href="/sobre-nos/" aria-current="page" class="text-xs md:text-sm tracking-[0.05em] uppercase font-bold text-zinc-900 border-b-2 border-zinc-900 pb-1">Sobre</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<main>
+  <section class="blueprint-bg min-h-screen flex flex-col justify-center px-5 md:px-8 pt-32 pb-16 overflow-hidden">
+    <div class="max-w-screen-xl mx-auto w-full grid grid-cols-1 lg:grid-cols-[minmax(0,0.95fr)_minmax(420px,1.05fr)] gap-8 lg:gap-16 items-center">
+      <div>
+        <div class="mb-8">
+          <span class="inline-block h-[2px] w-12 bg-primary mb-4"></span>
+          <p class="font-label text-xs uppercase tracking-[0.24em] text-on-surface-variant font-bold">O estúdio por trás dos projetos</p>
+        </div>
+        <h1 class="font-headline text-[clamp(2.6rem,7vw,5.1rem)] font-extrabold leading-[1.05] tracking-tight max-w-4xl mb-10">Sobre a Motion Lab.</h1>
+        <p class="text-lg md:text-xl text-on-surface-variant leading-relaxed max-w-xl mb-8">A Motion Lab é um estúdio digital independente. Criamos produtos e experiências com identidade própria, reunidos aqui para você conhecer cada projeto.</p>
+        <a class="inline-flex items-center gap-3 bg-on-background text-white px-8 py-4 font-bold tracking-wide hover:scale-[0.98] transition-transform" href="/#projetos">Ver projetos <span class="material-symbols-outlined text-sm" aria-hidden="true">arrow_forward</span></a>
+      </div>
+      <div class="ai-entity-panel" aria-hidden="true">
+        <div class="ai-orb-stage">
+          <div class="orb-line one"></div><div class="orb-line two"></div><div class="orb-line three"></div>
+          <div class="orb-outer-ring"></div><div class="orb-middle-ring"></div><div class="orb-data-ring"></div>
+          <div class="orb-halo"></div><div class="orb-scan-ring"></div><div class="orb-core"></div><div class="orb-shadow"></div>
+          <div class="orb-tag top">Motion Lab <span>Estúdio digital</span></div>
+          <div class="orb-tag bottom">Origem <span>Brasil</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-surface py-20 md:py-28 px-5 md:px-8 border-y border-outline-variant/10">
+    <div class="max-w-screen-xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+      <div class="lg:col-span-4">
+        <span class="inline-block h-[2px] w-12 bg-primary mb-4"></span>
+        <p class="text-primary font-bold text-xs uppercase tracking-[0.2em] mb-4">Motion Lab</p>
+        <h2 class="font-headline text-3xl md:text-5xl font-extrabold tracking-tight leading-tight">Um estúdio. Projetos com caminhos próprios.</h2>
+      </div>
+      <div class="lg:col-span-8 bg-white rounded-3xl border border-zinc-200 p-8 md:p-12 shadow-sm">
+        <h3 class="font-headline text-2xl md:text-4xl font-extrabold tracking-tight mb-6">Ideias reunidas em um só lugar.</h3>
+        <p class="text-on-surface-variant text-lg leading-relaxed">Onda Viral, Aura e Trampo são projetos apresentados pela Motion Lab. Cada um tem seu próprio espaço; esta página é sobre o estúdio que os reúne.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-surface-container-low py-20 md:py-28 px-5 md:px-8">
+    <div class="max-w-screen-xl mx-auto">
+      <p class="text-xs uppercase tracking-[0.2em] text-primary font-bold mb-4">Nossos projetos</p>
+      <h2 class="font-headline text-4xl md:text-5xl font-extrabold tracking-tight mb-12">Conheça o universo Motion Lab.</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <a href="https://ondaviral.com.br/" class="block bg-white p-8 rounded-2xl border border-outline-variant/10 hover:border-primary transition-colors">
+          <span class="text-primary text-xs font-bold tracking-widest">01 / PROJETO</span>
+          <h3 class="font-headline font-bold text-2xl mt-6 mb-3">Onda Viral</h3>
+          <p class="text-on-surface-variant leading-relaxed">Conhecer projeto ↗</p>
+        </a>
+        <a href="/aura/" class="block bg-white p-8 rounded-2xl border border-outline-variant/10 hover:border-primary transition-colors">
+          <span class="text-primary text-xs font-bold tracking-widest">02 / EM BREVE</span>
+          <h3 class="font-headline font-bold text-2xl mt-6 mb-3">Aura</h3>
+          <p class="text-on-surface-variant leading-relaxed">Explorar ↗</p>
+        </a>
+        <a href="/trampo/" class="block bg-white p-8 rounded-2xl border border-outline-variant/10 hover:border-primary transition-colors">
+          <span class="text-primary text-xs font-bold tracking-widest">03 / PROJETO</span>
+          <h3 class="font-headline font-bold text-2xl mt-6 mb-3">Trampo</h3>
+          <p class="text-on-surface-variant leading-relaxed">Explorar ↗</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-surface py-20 md:py-28 px-5 md:px-8">
+    <div class="max-w-screen-xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-6">
+      <div class="lg:col-span-7 bg-zinc-100 rounded-3xl p-8 md:p-12 border border-zinc-200">
+        <p class="text-xs uppercase tracking-[0.2em] text-primary font-bold mb-5">Contato</p>
+        <h2 class="font-headline text-4xl md:text-5xl font-extrabold tracking-tight mb-6">Vamos conversar?</h2>
+        <p class="text-on-surface-variant text-lg leading-relaxed mb-8">Entre em contato para saber mais sobre a Motion Lab e seus projetos.</p>
+        <a class="inline-flex items-center gap-3 bg-primary text-white px-7 py-4 rounded-lg font-bold text-sm tracking-widest uppercase" href="mailto:contato@motionlab.com.br">Enviar e-mail <span class="material-symbols-outlined text-sm" aria-hidden="true">arrow_forward</span></a>
+      </div>
+      <div class="lg:col-span-5 bg-primary text-white rounded-3xl p-8 md:p-12 flex flex-col justify-between">
+        <div>
+          <span class="material-symbols-outlined text-5xl mb-8" aria-hidden="true">home</span>
+          <h3 class="font-headline text-3xl md:text-4xl font-extrabold tracking-tight mb-6">Volte ao início.</h3>
+          <p class="text-white/80 leading-relaxed">Explore os projetos no site principal da Motion Lab.</p>
+        </div>
+        <a href="/" class="mt-10 inline-flex items-center gap-2 font-bold text-sm uppercase tracking-widest border-b-2 border-white pb-1 w-fit">Página inicial <span class="material-symbols-outlined text-sm" aria-hidden="true">arrow_forward</span></a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="w-full py-10 px-5 md:px-8 bg-zinc-50 border-t border-zinc-200">
+  <div class="max-w-screen-xl mx-auto flex flex-col md:flex-row justify-between gap-5 text-sm text-zinc-500">
+    <span>© 2026 Motion Lab · Feito no Brasil</span>
+    <div class="flex gap-6"><a href="/" class="hover:text-primary">Início</a><a href="/#projetos" class="hover:text-primary">Projetos</a><a href="/sobre-nos/" aria-current="page" class="hover:text-primary">Sobre a Motion Lab</a></div>
+  </div>
+</footer>
+</body>
+</html>
