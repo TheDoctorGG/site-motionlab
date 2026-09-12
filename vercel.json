@@ -1,33 +1,16 @@
 {
   "redirects": [
-    {
-      "source": "/trampoapp",
-      "destination": "/trampoapp/",
-      "permanent": true
-    },
-    {
-      "source": "/about-us",
-      "destination": "/about-us/",
-      "permanent": true
-    },
-    {
-      "source": "/privacy-policy",
-      "destination": "/privacy-policy/",
-      "permanent": true
-    },
-    {
-      "source": "/terms",
-      "destination": "/terms/",
-      "permanent": true
-    },
-    {
-      "source": "/lgpd-consent",
-      "destination": "/lgpd-consent/",
-      "permanent": true
-    }
-  ],
-  "rewrites": [
-    { "source": "/trampoapp", "destination": "/trampoapp/index.html" },
-    { "source": "/about-us", "destination": "/about-us/index.html" }
+    { "source": "/trampo", "destination": "/trampo/", "permanent": true },
+    { "source": "/aura", "destination": "/aura/", "permanent": true },
+    { "source": "/trampoapp", "destination": "/trampo/app/", "permanent": true },
+    { "source": "/trampoapp/", "destination": "/trampo/app/", "permanent": true },
+    { "source": "/about-us", "destination": "/trampo/about-us/", "permanent": true },
+    { "source": "/about-us/", "destination": "/trampo/about-us/", "permanent": true },
+    { "source": "/privacy-policy", "destination": "/trampo/privacy-policy/", "permanent": true },
+    { "source": "/privacy-policy/", "destination": "/trampo/privacy-policy/", "permanent": true },
+    { "source": "/terms", "destination": "/trampo/terms/", "permanent": true },
+    { "source": "/terms/", "destination": "/trampo/terms/", "permanent": true },
+    { "source": "/lgpd-consent", "destination": "/trampo/lgpd-consent/", "permanent": true },
+    { "source": "/lgpd-consent/", "destination": "/trampo/lgpd-consent/", "permanent": true }
   ]
 }

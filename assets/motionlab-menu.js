@@ -1,20 +1,20 @@
 (function () {
   const MENU_ITEMS = {
     en: [
-      { key: "nav.home", label: "Home", href: "/" },
-      { key: "nav.trampo", label: "App Brazil", href: "/trampoapp/" },
-      { key: "nav.about", label: "About Us", href: "/about-us/" },
-      { key: "nav.privacy", label: "Privacy Policy", href: "/privacy-policy/" },
-      { key: "nav.terms", label: "Terms of Use", href: "/terms/" },
-      { key: "nav.lgpd", label: "LGPD & Data Consent", href: "/lgpd-consent/" }
+      { key: "nav.home", label: "Home", href: "/trampo/" },
+      { key: "nav.trampo", label: "App Brazil", href: "/trampo/app/" },
+      { key: "nav.about", label: "About Us", href: "/trampo/about-us/" },
+      { key: "nav.privacy", label: "Privacy Policy", href: "/trampo/privacy-policy/" },
+      { key: "nav.terms", label: "Terms of Use", href: "/trampo/terms/" },
+      { key: "nav.lgpd", label: "LGPD & Data Consent", href: "/trampo/lgpd-consent/" }
     ],
     pt: [
-      { key: "nav.home", label: "Início", href: "/" },
-      { key: "nav.trampo", label: "App Brasil", href: "/trampoapp/" },
-      { key: "nav.about", label: "Sobre nós", href: "/about-us/" },
-      { key: "nav.privacy", label: "Política de Privacidade", href: "/privacy-policy/" },
-      { key: "nav.terms", label: "Termos de Uso", href: "/terms/" },
-      { key: "nav.lgpd", label: "LGPD e Consentimento de Dados", href: "/lgpd-consent/" }
+      { key: "nav.home", label: "Início", href: "/trampo/" },
+      { key: "nav.trampo", label: "App Brasil", href: "/trampo/app/" },
+      { key: "nav.about", label: "Sobre nós", href: "/trampo/about-us/" },
+      { key: "nav.privacy", label: "Política de Privacidade", href: "/trampo/privacy-policy/" },
+      { key: "nav.terms", label: "Termos de Uso", href: "/trampo/terms/" },
+      { key: "nav.lgpd", label: "LGPD e Consentimento de Dados", href: "/trampo/lgpd-consent/" }
     ]
   };
 
@@ -33,9 +33,9 @@
   function getPageKind() {
     const path = window.location.pathname.replace(/\/index\.html$/, "/");
 
-    if (path === "/" || path === "/about-us/") return "b2b";
-    if (path === "/trampoapp/") return "trampo";
-    if (path === "/privacy-policy/" || path === "/terms/" || path === "/lgpd-consent/") return "legal";
+    if (path === "/trampo/" || path === "/trampo/about-us/") return "b2b";
+    if (path === "/trampo/app/") return "trampo";
+    if (path === "/trampo/privacy-policy/" || path === "/trampo/terms/" || path === "/trampo/lgpd-consent/") return "legal";
 
     return "b2b";
   }
@@ -77,10 +77,10 @@
   function getCtaHref() {
     const pageKind = getPageKind();
 
-    if (pageKind === "b2b") return "/trampoapp/";
+    if (pageKind === "b2b") return "/trampo/app/";
     if (pageKind === "trampo") return "#collector-form";
 
-    return "/trampoapp/#collector-form";
+    return "/trampo/app/#collector-form";
   }
 
   function injectStyles() {

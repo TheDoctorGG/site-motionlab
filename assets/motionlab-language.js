@@ -546,12 +546,12 @@
   function pageKind() {
     const path = normalizedPath();
 
-    if (path === "/") return "b2bHome";
-    if (path === "/about-us/") return "b2bAbout";
-    if (path === "/trampoapp/") return "trampo";
-    if (path === "/privacy-policy/") return "legalPrivacy";
-    if (path === "/terms/") return "legalTerms";
-    if (path === "/lgpd-consent/") return "legalLgpd";
+    if (path === "/trampo/") return "b2bHome";
+    if (path === "/trampo/about-us/") return "b2bAbout";
+    if (path === "/trampo/app/") return "trampo";
+    if (path === "/trampo/privacy-policy/") return "legalPrivacy";
+    if (path === "/trampo/terms/") return "legalTerms";
+    if (path === "/trampo/lgpd-consent/") return "legalLgpd";
 
     return "b2bHome";
   }
@@ -670,10 +670,10 @@
   function ctaHref() {
     const type = pageType();
 
-    if (type === "b2b") return "/trampoapp/";
+    if (type === "b2b") return "/trampo/app/";
     if (type === "trampo") return "#collector-form";
 
-    return "/trampoapp/#collector-form";
+    return "/trampo/app/#collector-form";
   }
 
   function updateCtas(language) {
@@ -699,12 +699,12 @@
 
   function updateCommonLinks(language) {
     const labels = {
-      "/": "nav.home",
-      "/trampoapp/": "nav.trampo",
-      "/about-us/": "nav.about",
-      "/privacy-policy/": "nav.privacy",
-      "/terms/": "nav.terms",
-      "/lgpd-consent/": "nav.lgpd"
+      "/trampo/": "nav.home",
+      "/trampo/app/": "nav.trampo",
+      "/trampo/about-us/": "nav.about",
+      "/trampo/privacy-policy/": "nav.privacy",
+      "/trampo/terms/": "nav.terms",
+      "/trampo/lgpd-consent/": "nav.lgpd"
     };
 
     document.querySelectorAll("nav a, footer a, .motion-sidebar-nav a").forEach((link) => {
