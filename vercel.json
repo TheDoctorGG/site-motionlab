@@ -1,5 +1,6 @@
 {
   "redirects": [
+    { "source": "/games", "destination": "/games/", "permanent": true },
     { "source": "/trampo", "destination": "/trampo/", "permanent": true },
     { "source": "/aura", "destination": "/aura/", "permanent": true },
     { "source": "/trampoapp", "destination": "/trampo/app/", "permanent": true },
