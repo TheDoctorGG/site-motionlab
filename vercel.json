@@ -1,7 +1,7 @@
 {
   "rewrites": [
-    { "source": "/projectj", "destination": "https://projectj-web-git-codex-projectj-foundation-thedoctorggs-projects.vercel.app/projectj" },
-    { "source": "/projectj/:path*", "destination": "https://projectj-web-git-codex-projectj-foundation-thedoctorggs-projects.vercel.app/projectj/:path*" }
+    { "source": "/projectj", "destination": "https://projectj-qdsevgnle-thedoctorggs-projects.vercel.app/projectj" },
+    { "source": "/projectj/:path*", "destination": "https://projectj-qdsevgnle-thedoctorggs-projects.vercel.app/projectj/:path*" }
   ],
   "headers": [
     {
