@@ -1,4 +1,18 @@
 {
+  "rewrites": [
+    { "source": "/projectj", "destination": "https://projectj-web-git-codex-projectj-foundation-thedoctorggs-projects.vercel.app/projectj" },
+    { "source": "/projectj/:path*", "destination": "https://projectj-web-git-codex-projectj-foundation-thedoctorggs-projects.vercel.app/projectj/:path*" }
+  ],
+  "headers": [
+    {
+      "source": "/projectj/:section(login|register|checkout|my-game|admin|api|payment)/:path*",
+      "headers": [
+        { "key": "Cache-Control", "value": "private, no-store, max-age=0" },
+        { "key": "CDN-Cache-Control", "value": "no-store" },
+        { "key": "Vercel-CDN-Cache-Control", "value": "no-store" }
+      ]
+    }
+  ],
   "redirects": [
     { "source": "/games", "destination": "/games/", "permanent": true },
     { "source": "/trampo", "destination": "/trampo/", "permanent": true },
