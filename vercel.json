@@ -1,11 +1,11 @@
 {
   "rewrites": [
-    { "source": "/projectj", "destination": "https://projectj-p05nmyfi4-thedoctorggs-projects.vercel.app/projectj" },
-    { "source": "/projectj/:path*", "destination": "https://projectj-p05nmyfi4-thedoctorggs-projects.vercel.app/projectj/:path*" }
+    { "source": "/projectj", "destination": "https://projectj-auth-preview-thedoctorggs-projects.vercel.app/projectj" },
+    { "source": "/projectj/:path*", "destination": "https://projectj-auth-preview-thedoctorggs-projects.vercel.app/projectj/:path*" }
   ],
   "headers": [
     {
-      "source": "/projectj/:section(login|register|checkout|my-game|admin|api|payment)/:path*",
+      "source": "/projectj/:section(login|register|reset-password|checkout|my-game|admin|api|payment)/:path*",
       "headers": [
         { "key": "Cache-Control", "value": "private, no-store, max-age=0" },
         { "key": "CDN-Cache-Control", "value": "no-store" },
